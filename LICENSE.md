@@ -65,7 +65,7 @@ All provisions written under this license must follow the requirements below.
 
 ## Developer or Author Requirements
 
-Copyright (c) `year` `copyright holders`
+Copyright (c) `2026` `Ali Lafi`
 
 ```none
     conditions
