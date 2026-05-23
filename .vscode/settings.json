@@ -1,0 +1,28 @@
+{
+    // Java source paths
+    "java.project.sourcePaths": ["JLite"],
+
+    // Disable Maven/Gradle (we use custom build system)
+    "java.import.maven.enabled": false,
+    "java.import.gradle.enabled": false,
+
+    // JDK path (عدّل هذا حسب نسخة Java عندك)
+    // "java.jdt.ls.java.home": "C:\\Program Files\\Java\\jdk-XX",
+
+    // File associations
+    "files.associations": {
+        "*.h":   "c",
+        "*.hpp": "cpp",
+        "*.py":  "python"
+    },
+
+    // Exclude unnecessary folders from search
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/*.class":     true
+    },
+
+    // Editor settings
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true
+}
