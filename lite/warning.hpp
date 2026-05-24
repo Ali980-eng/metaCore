@@ -7,7 +7,7 @@
  * The functions are intended to be used throughout the MetaCore library to help developers identify and address potential issues in their code.
  * @note This header is part of the MetaCore library and is intended for use in C++ projects that utilize this library.
  * @author Ali Lafi
- * @date 2024-06
+ * @date 2025 / 9 / 25
  * @see Lite/UnitTest.hpp for related testing functions and structures.
  */
 

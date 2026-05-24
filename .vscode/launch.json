@@ -1,16 +1,6 @@
 {
     "version": "0.2.0",
     "configurations": [
-
-        // ─── Java ───────────────────────────────────────────────
-        {
-            "name": "Java: Run Current File",
-            "type": "java",
-            "request": "launch",
-            "mainClass": "${fileBasenameNoExtension}",
-            "classPaths": ["${workspaceFolder}/JLite"]
-        },
-
         // ─── Python (build system) ───────────────────────────────
         {
             "name": "Python: build.py",

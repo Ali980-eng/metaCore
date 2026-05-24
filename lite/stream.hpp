@@ -6,7 +6,7 @@
  * The stream_t, stream_tp, stream__tp, and stream__t_p classes provide safe execution of function objects with built-in error handling.
  * @note All operations are designed to be noexcept where applicable, ensuring that exceptions are handled gracefully without propagating.
  * @author Ali Lafi
- * @date 2024-06
+ * @date 2025 / 9 / 25
  * @details This file is part of the MetaCore library, which provides various utilities for C++ programming.
  * - vstream: A stream-like interface for managing a vector of type T, supporting insertion, extraction, and utility functions.
  * - benchmark_stream: A class for benchmarking function execution time with configurable time units and result printing.
@@ -24,30 +24,18 @@
 #include <vector>
 #include <functional>
 #include <stdexcept>
-#include <deque>
 #include <queue>
 #include <type_traits>
 #include <string>
 #include <cerrno>
 #include <stack>
 
-// local headers
-#include "io.hpp"
-#include "benchmark.hpp"
-#include "warning.hpp"
-#include "error.hpp"
-
 #pragma once
 #ifndef METACORE___LITE_STREAM_HPP
 #define METACORE___LITE_STREAM_HPP
 
 namespace lite
-{
-    
-    typedef std::queue<warning> wstream;
-    
-    typedef std::queue<error> errstream;
-
+{    
     /**
      * @class vstream
      * @brief A class that provides stream-like operations for a vector of type T.
@@ -239,6 +227,7 @@ namespace lite
 
     namespace function
     {
+        #ifdef METACORE___LITE_BENCHMARK_HPP
         /**
          * @brief A template class for benchmarking function execution time.
          *       The benchmark_stream class allows users to measure the execution time
@@ -372,7 +361,7 @@ namespace lite
                 min_time = std::min(min_time, current_time);
                 max_time = std::max(max_time, current_time);
                 if (print_result)
-                    CXXLite::io::println(
+                     io::println(
                         "execution time for unit test " +
                         std::to_string(count) + ": " +
                         std::to_string(current_time) + s);
@@ -426,23 +415,26 @@ namespace lite
             {
                 if (time_v.empty())
                 {
-                    CXXLite::io::println("No benchmark data available");
+                    io::println("No benchmark data available");
                     return;
                 }
-                CXXLite::io::println("=== Benchmark Summary ===");
-                CXXLite::io::println("Total tests: " + std::to_string(time_v.size()));
-                CXXLite::io::println("Average time: " + std::to_string(get_average_time()) + s);
-                CXXLite::io::println("Min time: " + std::to_string(min_time) + s);
-                CXXLite::io::println("Max time: " + std::to_string(max_time) + s);
+                io::println("=== Benchmark Summary ===");
+                io::println("Total tests: " + std::to_string(time_v.size()));
+                io::println("Average time: " + std::to_string(get_average_time()) + s);
+                io::println("Min time: " + std::to_string(min_time) + s);
+                io::println("Max time: " + std::to_string(max_time) + s);
             }
         };
+        #endif // METACORE___LITE_BENCHMARK_HPP
 
+        #ifdef METACORE___LITE_UNITTEST_HPP
         /**
          * @brief A class that aggregates boolean test results with exception handling.
          */
         class test_stream
         {
         private:
+            std::vector<TEST> container;
             bool result_ts = true;
             size_t total_tests = 0;
             size_t passed_tests = 0;
@@ -533,11 +525,97 @@ namespace lite
                     passed_tests++;
                 else
                     failed_tests++;
+                container.push_back(TEST{fx()});
+            }
+
+            void operator<<(std::function<TEST()> fx) noexcept
+            {
+                total_tests++;
+                bool test_result = false;
+                if (std::is_nothrow_invocable_r_v<bool, std::function<bool()>, bool>)
+                {
+                    test_result = fx().get();
+                    result_ts &= test_result;
+                }
+                else
+                {
+                    try
+                    {
+                        test_result = fx().get();
+                        result_ts &= test_result;
+                    }
+                    catch (const std::invalid_argument &e)
+                    {
+                        std::string err_msg = "invalid argument: " + std::string(e.what());
+                        std::cerr << err_msg << std::endl;
+                        error_log.push_back(err_msg);
+                        test_result = false;
+                        result_ts = false;
+                    }
+                    catch (const std::length_error &e)
+                    {
+                        std::string err_msg = "length error: " + std::string(e.what());
+                        std::cerr << err_msg << std::endl;
+                        error_log.push_back(err_msg);
+                        test_result = false;
+                        result_ts = false;
+                    }
+                    catch (const std::exception &e)
+                    {
+                        std::string err_msg = "Exception: " + std::string(e.what());
+                        std::cerr << err_msg << "\n";
+                        error_log.push_back(err_msg);
+                        test_result = false;
+                        result_ts = false;
+                    }
+                    catch (const char *msg)
+                    {
+                        std::string err_msg = "Error: " + std::string(msg);
+                        std::cerr << err_msg << "\n";
+                        error_log.push_back(err_msg);
+                        test_result = false;
+                        result_ts = false;
+                    }
+                    catch (...)
+                    {
+                        std::string err_msg = "Unknown error occurred";
+                        std::cerr << err_msg << "\n";
+                        error_log.push_back(err_msg);
+                        test_result = false;
+                        result_ts = false;
+                    }
+                }
+                if (test_result)
+                    passed_tests++;
+                else
+                    failed_tests++;
+                container.push_back(fx());
+            }
+
+            void operator<<(TEST& testResult) noexcept {
+                total_tests++;
+                if(testResult.get()) {
+                    passed_tests++;
+                } else {
+                    failed_tests++;
+                }
+                result_ts &= testResult.get();
+                container.push_back(testResult);
             }
 
             /// @brief Overloaded operator>> to retrieve the aggregated test result
             /// @param value Reference to a boolean variable to store the aggregated result
             void operator>>(bool &value) noexcept { value = result_ts; }
+
+            void operator>>(TEST& value) noexcept {
+                value = TEST{"stream",
+                        "the result of all tests in test stream",
+                        result_ts};
+            }
+
+            TEST operator[](size_t index) noexcept {
+                return container[index];
+            }
 
             /**
              * @brief Retrieves the total number of tests executed
@@ -583,7 +661,32 @@ namespace lite
                 passed_tests = 0;
                 failed_tests = 0;
                 error_log.clear();
+                container.clear();
                 result_ts = true;
+            }
+
+            std::vector<size_t> findIndex(bool isFailed) noexcept {
+                std::vector<size_t> result;
+                for(size_t i = 0; i < container.size(); i++) {
+                    if(!isFailed && container[i].get()) {
+                        result.push_back(i);
+                    } else if(isFailed && !container[i].get()) {
+                        result.push_back(i);
+                    }
+                    return result;
+                }
+            }
+
+            void find(bool isFailed) noexcept {
+                for(size_t i = 0; i < container.size(); i++) {
+                    if(!isFailed && container[i].get()) {
+                        io::print_test(container[i].get(true), 
+                        container[i].get(false), i, container[i].get());
+                    } else if(isFailed && !container[i].get()) {
+                        io::print_test(container[i].get(true),
+                        container[i].get(false), i, container[i].get());
+                    }
+                }
             }
 
             /**
@@ -604,7 +707,8 @@ namespace lite
                 }
             }
         };
-
+        #endif // METACORE___LITE_UNITTEST_HPP
+        
         /**
          * @brief A template class that wraps a function object and provides
          *        safe execution with built-in error handling.

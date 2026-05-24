@@ -21,22 +21,6 @@
             }
         },
 
-        // ─── Compile Java manually ───────────────────────────────
-        {
-            "label": "Java: Compile JLite",
-            "type": "shell",
-            "command": "javac",
-            "args": [
-                "-cp", "${workspaceFolder}/JLite",
-                "${workspaceFolder}/JLite/*.java"
-            ],
-            "group": "build",
-            "presentation": {
-                "reveal": "always",
-                "panel": "shared"
-            }
-        },
-
         // ─── PowerShell build ────────────────────────────────────
         {
             "label": "PowerShell: PowerBuild",

@@ -7,7 +7,7 @@
  *          efficient storage of multiple boolean flags.
  *
  * @author Ali Lafi
- * @date 2024
+ * @date 2025 / 9 / 25
  * 
  * @note Position 0 represents the least significant bit (LSB) and position 7 the most significant bit (MSB).
  * @note All functions preserve the original value and return new structures (immutable design).

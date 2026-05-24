@@ -10,7 +10,7 @@
  * Finally, it offers functions to calculate the size of an object in bytes and to measure additional memory usage caused by executing functions.
  * Overall, this library is designed to help developers easily measure and analyze the performance of their code in terms of execution time and memory usage.
  * @author developed by: Ali Lafi.
- * @date February 20, 2026
+ * @date 2025 / 9 / 25
  * @details This library is designed to help developers easily measure and analyze the performance of their code in terms of execution time and memory usage.
  * It provides a simple interface for timing code execution and estimating time complexity, making it a useful tool for benchmarking and optimizing C++ code.
  * The `code_timer` class can be used in both RAII and manual modes, allowing for flexible timing of code blocks or specific function calls.
@@ -23,7 +23,7 @@
  * - heap_data: Overloaded functions to calculate the heap memory used by vectors and strings.
  * - function_data and function__data: Functions to measure additional memory usage caused by executing callables.
  * @note This library is designed for benchmarking code performance in C++23 and is part of
- * it's a part of the CXXLite library, specifically within the CXXLite module, and is intended for benchmarking code performance in C++23.
+ * it's a part of the lite library, specifically within the lite module, and is intended for benchmarking code performance in C++23.
  */
 
 // std headers

@@ -2,16 +2,16 @@
     "version": 4,
     "configurations": [
 
-        // ─── C (CLite) ───────────────────────────────────────────
+        // ─── C (clite) ───────────────────────────────────────────
         {
-            "name": "CLite",
+            "name": "clite",
             "compilerPath": "C:/msys64/ucrt64/bin/gcc.exe",
             "cStandard": "c17",
             "cppStandard": "c++20",
             "intelliSenseMode": "windows-gcc-x64",
 
             "includePath": [
-                "E:/Projects/MetaCore",
+                "C:\\Users\\User\\OneDrive\\Documents\\GitHub",
                 "C:/msys64/ucrt64/include"
             ],
 
@@ -24,16 +24,16 @@
 
         },
 
-        // ─── C++ (CXXLite) ──────────────────────────────────────
+        // ─── C++ (lite) ──────────────────────────────────────
         {
-            "name": "CXXLite",
+            "name": "lite",
             "compilerPath": "C:/msys64/ucrt64/bin/g++.exe",
             "cStandard": "c17",
             "cppStandard": "c++20",
             "intelliSenseMode": "windows-gcc-x64",
 
             "includePath": [
-                "E:/Projects/MetaCore",
+                "C:\\Users\\User\\OneDrive\\Documents\\GitHub",
                 "C:/msys64/ucrt64/include",
                 "C:/msys64/ucrt64/include/c++/15.2.0"
             ],

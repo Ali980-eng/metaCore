@@ -7,7 +7,7 @@
  * @note The type() function has a default implementation that returns "***" for any type that is not specialized.
  * @note The is_*() functions have a default implementation that returns false for any type that is not specialized.
  * @author Ali Lafi
- * @date 2024-06
+ * @date 2025 / 9 / 25
  * @details This file is part of the MetaCore library, which provides various utilities for C++ programming.
  * - MetaCore/Lite/type.hpp: This header file declares the functions for type name retrieval and type checking.
  * - MetaCore/Lite/imp/type.tpp: This implementation

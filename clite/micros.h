@@ -9,9 +9,9 @@
 #define METACORE___CLITE_MICROS_H
 
     #ifdef ALL_MICROS
-        #define TESTING_MICROS
-        #define UTILITYS_FORMAT
-        #define STRING_MICROS
+        #define CTESTING_MICROS
+        #define CUTILITYS_FORMAT
+        #define CSTRING_MICROS
     #endif // ALL_MICROS
 
     #ifdef OBJECT_DATA
@@ -128,7 +128,7 @@
     
     #endif // OBJECT_DATA
     
-    #if defined(TESTING_MICROS) && !defined(OBJECT_DATA)
+    #if defined(CTESTING_MICROS) && !defined(OBJECT_DATA)
 
         size_t cttn = 0;
 
@@ -137,7 +137,7 @@
             char* description;
             size_t num;
             bool result;
-        } ctt;
+        } CTEST;
 
         #define INIT_TEST(name)        \
             double tests_passed = 0.0; \
@@ -179,22 +179,20 @@
                 return (int)tests_failed; \
             }
 
-        #define TEST ctt
-
-        TEST creatNew(TEST current, char* name, char* des, bool value) {
-            current.name = (name != NULL) ? name : "";
-            current.description = (des != NULL) ? des : "";
+        CTEST creatNew(CTEST current, char* name, char* des, bool value) {
+            current.name = (name != NULL) ? name : strdup("");
+            current.description = (des != NULL) ? des : strdup("");
             current.num = cttn;
             cttn++;
             current.result = value;
             return current;
         }
 
-        bool catchValue(TEST current) {
+        bool catchValue(CTEST current) {
             return current.result;
         }
 
-        void printTest(TEST current) {
+        void printTest(CTEST current) {
             printf("\n");
             printf("------------\n");
             printf("<<< TEST >>>\n");
@@ -254,7 +252,7 @@
 
     #endif // TESTING_MICROS
 
-    #if defined(UTILITYS_FORMAT) && !defined(OBJECT_DATA)
+    #if defined(CUTILITYS_FORMAT) && !defined(OBJECT_DATA)
 
         #define MAIN   \
             int main() \
@@ -273,7 +271,7 @@
         
     #endif // UTILITYS_FORMAT
     
-    #if defined(STRING_MICROS) && !defined(OBJECT_DATA)
+    #if defined(CSTRING_MICROS) && !defined(OBJECT_DATA)
 
         #define cstr char*
 
@@ -295,9 +293,17 @@
             return (value == NULL || strlen(value) == 0) ? true : false;
         }
 
-        void* empty(const cstr value) {
-            if(value == NULL || is_empty(value)) return NULL;
+        void* empty(cstr value) {
+            if(is_empty(value)) return NULL;
             return realloc(value, 1);
+        }
+
+        void free(cstr value) {
+            if(is_empty(value)) {
+                printf("Error: can't free NULL or empty strings.\n");
+                return;
+            }
+            free(value);
         }
 
         bool exist(const cstr value, char c) {

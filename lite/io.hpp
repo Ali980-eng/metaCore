@@ -2,7 +2,7 @@
  * @file io.hpp
  * @brief A simple I/O utility class for handling standard input and output operations.
  * @author Ali Lafi
- * @date 2023
+ * @date 2025 / 9 / 25
  * @details This library provides a simple I/O utility class for handling standard input and output operations.
  * The `io` class encapsulates various functions for printing to the console, taking user input, and formatting output.
  * It includes methods for printing values with or without newlines, printing error messages, and taking user input for different types of variables and vectors.
@@ -25,7 +25,7 @@
  * - print (3D vector overload): Prints a 3D vector to the standard output in a formatted manner.
  * - println (2D vector overload): Prints a 2D vector to the standard output in a formatted manner.
  * - println (3D vector overload): Prints a 3D vector to the standard output in a formatted manner.
- * @note This library is designed for C++23 and is part of the CXXETL library, specifically within the CXXLite module, and is intended for simplifying I/O operations in C++.
+ * @note This library is designed for C++23 and is part of the metaCore library, specifically within the CXXLite module, and is intended for simplifying I/O operations in C++.
  */
 
 // std headers
@@ -38,7 +38,6 @@
 #include <type_traits>
 #include <climits>
 #include <stdexcept>
-
 #include "micros.hpp"
 
 #pragma once
@@ -252,6 +251,27 @@ namespace lite
             std::cout << "Test(" 
             << testNum << "): " 
             << nl;
+        }
+
+        void print_test(const std::string& name,
+            const std::string& description,
+            bool result, size_t testNum,
+            size_t whiteSpace = 2,
+            size_t seplen = 25,
+            size_t sepch = '-') noexcept {
+            NewLines(whiteSpace);
+            separator(seplen, sepch);
+            println("<<< TEST >>>");
+            separator(seplen, sepch);
+            if(name.length() != 0) {
+                println("NAME: ", name);
+            }
+            if(description.length() != 0) {
+                println("DESCRIPTION: ", description);
+            }
+            println("NUMBER: ", testNum);
+            println("RESULT: ", result ? "PASSED" : "FAILED");
+            separator(seplen, sepch);
         }
 
         /**
@@ -627,7 +647,7 @@ namespace lite
          * @details This function evaluates the provided value using the given function pointer (or lambda). If the function returns true for the provided data, the value is printed to standard output followed by a newline. If the function returns false, nothing is printed.
          */
         template<typename T>
-        void print_if(std::function<bool(T)> Fp, const T& data) noexcept {
+        constexpr void print_if(std::function<bool(T)> Fp, const T& data) noexcept {
             if(Fp(data)) print(data);
         }
 
@@ -639,8 +659,18 @@ namespace lite
          * @details This function evaluates the provided value using the given function pointer (or lambda). If the function returns true for the provided data, the value is printed to standard output followed by a newline. If the function returns false, nothing is printed.
          */
         template<typename T>
-        void println_if(std::function<bool(T)> Fp, const T& data) noexcept {
+        constexpr void println_if(std::function<bool(T)> Fp, const T& data) noexcept {
             if(Fp(data)) println(data);
+        }
+
+        template<typename T>
+        constexpr void print_if(bool result, const T& data) noexcept {
+            if constexpr (result) print(data);
+        }
+
+        template<typename T>
+        constexpr void println_if(bool result, const T& data) noexcept {
+            if constexpr (result) print(data);
         }
     };
 };

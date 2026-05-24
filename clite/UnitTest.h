@@ -9,11 +9,12 @@
  *          - Test statistics tracking and reporting (success/failure rates)
  *          - Customizable separator characters and formatting
  * @author Ali Lafi
- * @date 2024-06
+ * @date 2025 / 9 / 25
  * @see IOUtilitys.h for I/O utility functions
  */
 
 #include "IOUtilitys.h"
+#include "micros.h"
 
 #include <string.h>
 #include <math.h>
@@ -202,6 +203,82 @@ bool string_test(const char *real, const char *expected, bool details, unsigned 
         print_test_string(real, expected, seplen, sepch, true);
     return true;
 }
+
+#ifdef METACORE___CLITE_MICROS_H
+
+CTEST ctest_bool(bool real, bool expected, cstr name, cstr description)
+{
+    CTEST newVal;
+    return creatNew(newVal, name, description, real == expected);
+}
+
+CTEST ctest_char(char real, char expected, cstr name, cstr description)
+{
+    CTEST newVal;
+    return creatNew(newVal, name, description, real == expected);
+}
+
+CTEST ctest_short(short real, short expected, cstr name, cstr description)
+{
+    CTEST newVal;
+    return creatNew(newVal, name, description, real == expected);
+}
+
+CTEST ctest_int(int real, int expected, cstr name, cstr description)
+{
+    CTEST newVal;
+    return creatNew(newVal, name, description, real == expected);
+}
+
+CTEST ctest_size(size_t real, size_t expected, cstr name, cstr description)
+{
+    CTEST newVal;
+    return creatNew(newVal, name, description, real == expected);
+}
+
+CTEST ctest_long(long real, long expected, cstr name, cstr description)
+{
+    CTEST newVal;
+    return creatNew(newVal, name, description, real == expected);
+}
+
+CTEST ctest_float(float real, float expected, float resolution, cstr name, cstr description)
+{
+    if (resolution >= 5.0f)
+    {
+        printf("Warning[bad input]: high-resolution input.\n");
+        resolution = 0.01f;
+    }
+    CTEST newVal;
+    return creatNew(newVal, name, description, 100 * (fabs(expected - real) / fabs(expected)) <= resolution);
+}
+
+CTEST ctest_double(double real, double expected, double resolution, cstr name, cstr description)
+{
+    if (resolution >= 5.0)
+    {
+        printf("Warning[bad input]: high-resolution input.\n");
+        resolution = 0.01;
+    }
+    CTEST newVal;
+    return creatNew(newVal, name, description, 100 * (fabs(expected - real) / fabs(expected)) <= resolution);
+}
+
+
+CTEST string_ctest(const cstr real, const cstr expected, cstr name, cstr description)
+{
+    CTEST newVal;
+    if (strlen(real) != strlen(expected))
+        return creatNew(newVal, name, description, false);
+    for (size_t i = 0; i < strlen(real); i++)
+    {
+        if (real[i] != expected[i])
+            return creatNew(newVal, name, description, false);
+    }
+    return creatNew(newVal, name, description, true);
+}
+
+#endif // METACORE___CLITE_MICROS_H
 
 #ifdef OPENUDT___CUDT_CSTRING_H
 bool string_test(cstring real, cstring expected, bool details, unsigned int seplen, char sepch)

@@ -1,5 +1,5 @@
-#include "CLite/CBit.h"
-#include "CLite/CMicros.h"
+#include "metaCore/clite/bitUtilitys.h"
+#include "metaCore/clite/micros.h"
 
 MAIN_TEST("CBit")
 

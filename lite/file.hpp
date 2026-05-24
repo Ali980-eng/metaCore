@@ -3,7 +3,7 @@
  * @brief A simple text file manager class for creating, reading, appending, checking existence
  * @brief This library provides a simple text file manager class for creating, reading, appending, checking existence, and removing text files in a specified directory.
  * @author Ali Lafi.
- * @date 2023
+ * @date 2025 / 9 / 25
  * @details This library provides a simple text file manager class for creating, reading, appending, checking existence, and removing text files in a specified directory.
  * The `txtfile_manager` class encapsulates these functionalities, allowing users to easily manage text files without dealing with low-level file handling operations.
  * It ensures that the specified directory exists and provides methods for common file operations, making it a convenient tool for handling text files in C++.

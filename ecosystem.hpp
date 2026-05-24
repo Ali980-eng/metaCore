@@ -3,7 +3,8 @@
 #include <string>
 #include "clite/micros.h"
 #include "lite/micros.hpp"
-#include "lite/stream.hpp"
+#include "lite/warning.hpp"
+#include "lite/error.hpp"
 
 #pragma once
 #ifndef METACORE___LITE_ECOSYSTEM_HPP
@@ -27,23 +28,23 @@ namespace metaCore {
      */
     object eco_system {
         private:
-        lite::wstream _sys_w;
+        std::queue<lite::warning> _sys_w;
         lite::error _sys_err;
-        std::vector<TEST> _sys_test;
+        std::vector<CTEST> _sys_test;
         bool retval;
         protected:
         const str wm = "meta ecosystem warning",
         em = "meta ecosystem error";
         public:
 
-        void add(const TEST& value, bool PTS) {
+        void add(const CTEST& value, bool PTS) {
             _sys_test.push_back(value);
             if(PTS) printTest(value);
         }
         
         void print_sys_test() {
             INIT_TEST("meta ecosystem test")
-            for(TEST T : _sys_test) {
+            for(CTEST T : _sys_test) {
                 if(T.result) tests_passed++;
                 else tests_failed++;
                 total_tests++;

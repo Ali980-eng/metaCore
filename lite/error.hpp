@@ -8,7 +8,9 @@
 #define METACORE___LITE_ERROR_HPP
 
 namespace lite {
+    
     benchmark::code_timer<true> errTimer;
+    
     /**
      * @brief Error class for storing and managing error information.
      * 

@@ -1,7 +1,5 @@
 {
     "recommendations": [
-        // Java
-        "vscjava.vscode-java-pack",
 
         // C / C++
         "ms-vscode.cpptools",
