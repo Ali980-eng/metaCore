@@ -189,188 +189,190 @@ namespace lite
         return os;
     }
 
-    /**
-     * @brief Factory function to create a 'Wrong Indexing' warning.
-     * 
-     * @return A new warning object with the name 'Wrong Indexing'.
-     * @note This overload creates a warning without a description.
-     * @note This function is marked noexcept.
-     */
-    warning wrong_indexing() noexcept {
-        return warning{"Wrong Indexing"};
-    }
+    namespace Warning {
+        /**
+         * @brief Factory function to create a 'Wrong Indexing' warning.
+         * 
+         * @return A new warning object with the name 'Wrong Indexing'.
+         * @note This overload creates a warning without a description.
+         * @note This function is marked noexcept.
+         */
+        warning wrong_indexing() noexcept {
+            return warning{"Wrong Indexing"};
+        }
 
-    /**
-     * @brief Factory function to create a 'Wrong Indexing' warning with description.
-     * 
-     * @param description A custom description for the warning.
-     * @return A new warning object with the name 'Wrong Indexing' and the provided description.
-     * @note This overload creates a warning with a custom description.
-     * @note This function is marked noexcept.
-     */
-    warning wrong_indexing(const std::string &description) noexcept {
-        return warning{"Wrong Indexing", description};
-    }
+        /**
+         * @brief Factory function to create a 'Wrong Indexing' warning with description.
+         * 
+         * @param description A custom description for the warning.
+         * @return A new warning object with the name 'Wrong Indexing' and the provided description.
+         * @note This overload creates a warning with a custom description.
+         * @note This function is marked noexcept.
+         */
+        warning wrong_indexing(const std::string &description) noexcept {
+            return warning{"Wrong Indexing", description};
+        }
 
-    /**
-     * @brief Factory function to create a 'Wrong Declaration' warning.
-     * 
-     * @return A new warning object with the name 'Wrong declaration'.
-     * @note This overload creates a warning without a description.
-     * @note This function is marked noexcept.
-     */
-    warning wrong_declaration() noexcept {
-        return warning{"Wrong declaration"};
-    }
+        /**
+         * @brief Factory function to create a 'Wrong Declaration' warning.
+         * 
+         * @return A new warning object with the name 'Wrong declaration'.
+         * @note This overload creates a warning without a description.
+         * @note This function is marked noexcept.
+         */
+        warning wrong_declaration() noexcept {
+            return warning{"Wrong declaration"};
+        }
 
-    /**
-     * @brief Factory function to create a 'Wrong Declaration' warning with description.
-     * 
-     * @param description A custom description for the warning.
-     * @return A new warning object with the name 'Wrong declaration' and the provided description.
-     * @note This overload creates a warning with a custom description.
-     * @note This function is marked noexcept.
-     */
-    warning wrong_declaration(const std::string &description) noexcept {
-        return warning{"Wrong declaration", description};
-    }
+        /**
+         * @brief Factory function to create a 'Wrong Declaration' warning with description.
+         * 
+         * @param description A custom description for the warning.
+         * @return A new warning object with the name 'Wrong declaration' and the provided description.
+         * @note This overload creates a warning with a custom description.
+         * @note This function is marked noexcept.
+         */
+        warning wrong_declaration(const std::string &description) noexcept {
+            return warning{"Wrong declaration", description};
+        }
 
-    /**
-     * @brief Factory function to create a 'Wrong Construction' warning.
-     * 
-     * @return A new warning object with the name 'Wrong Construction'.
-     * @note This overload creates a warning without a description.
-     * @note This function is marked noexcept.
-     */
-    warning wrong_construction() noexcept {
-        return warning{"Wrong Construction"};
-    }
+        /**
+         * @brief Factory function to create a 'Wrong Construction' warning.
+         * 
+         * @return A new warning object with the name 'Wrong Construction'.
+         * @note This overload creates a warning without a description.
+         * @note This function is marked noexcept.
+         */
+        warning wrong_construction() noexcept {
+            return warning{"Wrong Construction"};
+        }
 
-    /**
-     * @brief Factory function to create a 'Wrong Construction' warning with description.
-     * 
-     * @param description A custom description for the warning.
-     * @return A new warning object with the name 'Wrong Construction' and the provided description.
-     * @note This overload creates a warning with a custom description.
-     * @note This function is marked noexcept.
-     */
-    warning wrong_construction(const std::string &description) noexcept {
-        return warning{"Wrong Construction", description};
-    }
+        /**
+         * @brief Factory function to create a 'Wrong Construction' warning with description.
+         * 
+         * @param description A custom description for the warning.
+         * @return A new warning object with the name 'Wrong Construction' and the provided description.
+         * @note This overload creates a warning with a custom description.
+         * @note This function is marked noexcept.
+         */
+        warning wrong_construction(const std::string &description) noexcept {
+            return warning{"Wrong Construction", description};
+        }
 
-    /**
-     * @brief Factory function to create a 'Bad Input' warning.
-     * 
-     * @return A new warning object with the name 'Bad Input'.
-     * @note This overload creates a warning without a description.
-     * @note This function is marked noexcept.
-     */
-    warning bad_input() noexcept {
-        return warning{"Bad Input"};
-    }
+        /**
+         * @brief Factory function to create a 'Bad Input' warning.
+         * 
+         * @return A new warning object with the name 'Bad Input'.
+         * @note This overload creates a warning without a description.
+         * @note This function is marked noexcept.
+         */
+        warning bad_input() noexcept {
+            return warning{"Bad Input"};
+        }
 
-    /**
-     * @brief Factory function to create a 'Bad Input' warning with description.
-     * 
-     * @param description A custom description for the warning.
-     * @return A new warning object with the name 'Bad Input' and the provided description.
-     * @note This overload creates a warning with a custom description.
-     * @note This function is marked noexcept.
-     */
-    warning bad_input(const std::string &description) noexcept {
-        return warning{"Bad Input", description};
-    }
+        /**
+         * @brief Factory function to create a 'Bad Input' warning with description.
+         * 
+         * @param description A custom description for the warning.
+         * @return A new warning object with the name 'Bad Input' and the provided description.
+         * @note This overload creates a warning with a custom description.
+         * @note This function is marked noexcept.
+         */
+        warning bad_input(const std::string &description) noexcept {
+            return warning{"Bad Input", description};
+        }
 
-    /**
-     * @brief Factory function to create an 'Undefined Behavior' warning.
-     * 
-     * @return A new warning object with the name 'Undefined Behavior'.
-     * @note This overload creates a warning without a description.
-     * @note This function is marked noexcept.
-     */
-    warning undefined_behavior() noexcept {
-        return warning{"Undefined Behavior"};
-    }
+        /**
+         * @brief Factory function to create an 'Undefined Behavior' warning.
+         * 
+         * @return A new warning object with the name 'Undefined Behavior'.
+         * @note This overload creates a warning without a description.
+         * @note This function is marked noexcept.
+         */
+        warning undefined_behavior() noexcept {
+            return warning{"Undefined Behavior"};
+        }
 
-    /**
-     * @brief Factory function to create an 'Undefined Behavior' warning with description.
-     * 
-     * @param description A custom description for the warning.
-     * @return A new warning object with the name 'Undefined Behavior' and the provided description.
-     * @note This overload creates a warning with a custom description.
-     * @note This function is marked noexcept.
-     */
-    warning undefined_behavior(const std::string &description) noexcept {
-        return warning{"Undefined Behavior", description};
-    }
+        /**
+         * @brief Factory function to create an 'Undefined Behavior' warning with description.
+         * 
+         * @param description A custom description for the warning.
+         * @return A new warning object with the name 'Undefined Behavior' and the provided description.
+         * @note This overload creates a warning with a custom description.
+         * @note This function is marked noexcept.
+         */
+        warning undefined_behavior(const std::string &description) noexcept {
+            return warning{"Undefined Behavior", description};
+        }
 
-    /**
-     * @brief Factory function to create an 'Invalid Argument' warning.
-     * 
-     * @return A new warning object with the name 'Invalid Argument'.
-     * @note This overload creates a warning without a description.
-     * @note This function is marked noexcept.
-     */
-    warning invalid_argument() noexcept {
-        return warning{"Invalid Argument"};
-    }
+        /**
+         * @brief Factory function to create an 'Invalid Argument' warning.
+         * 
+         * @return A new warning object with the name 'Invalid Argument'.
+         * @note This overload creates a warning without a description.
+         * @note This function is marked noexcept.
+         */
+        warning invalid_argument() noexcept {
+            return warning{"Invalid Argument"};
+        }
 
-    /**
-     * @brief Factory function to create an 'Invalid Argument' warning with description.
-     * 
-     * @param description A custom description for the warning.
-     * @return A new warning object with the name 'Invalid Argument' and the provided description.
-     * @note This overload creates a warning with a custom description.
-     * @note This function is marked noexcept.
-     */
-    warning invalid_argument(const std::string &description) noexcept {
-        return warning{"Invalid Argument", description};
-    }
+        /**
+         * @brief Factory function to create an 'Invalid Argument' warning with description.
+         * 
+         * @param description A custom description for the warning.
+         * @return A new warning object with the name 'Invalid Argument' and the provided description.
+         * @note This overload creates a warning with a custom description.
+         * @note This function is marked noexcept.
+         */
+        warning invalid_argument(const std::string &description) noexcept {
+            return warning{"Invalid Argument", description};
+        }
 
-    /**
-     * @brief Factory function to create an 'Out Of Range' warning.
-     * 
-     * @return A new warning object with the name 'Out Of Range'.
-     * @note This overload creates a warning without a description.
-     * @note This function is marked noexcept.
-     */
-    warning OutOfRange() noexcept {
-        return warning{"Out Of Range"};
-    }
+        /**
+         * @brief Factory function to create an 'Out Of Range' warning.
+         * 
+         * @return A new warning object with the name 'Out Of Range'.
+         * @note This overload creates a warning without a description.
+         * @note This function is marked noexcept.
+         */
+        warning OutOfRange() noexcept {
+            return warning{"Out Of Range"};
+        }
 
-    /**
-     * @brief Factory function to create an 'Out Of Range' warning with description.
-     * 
-     * @param description A custom description for the warning.
-     * @return A new warning object with the name 'Out Of Range' and the provided description.
-     * @note This overload creates a warning with a custom description.
-     * @note This function is marked noexcept.
-     */
-    warning OutOfRange(const std::string &description) noexcept {
-        return warning{"Out Of Range", description};
-    }
+        /**
+         * @brief Factory function to create an 'Out Of Range' warning with description.
+         * 
+         * @param description A custom description for the warning.
+         * @return A new warning object with the name 'Out Of Range' and the provided description.
+         * @note This overload creates a warning with a custom description.
+         * @note This function is marked noexcept.
+         */
+        warning OutOfRange(const std::string &description) noexcept {
+            return warning{"Out Of Range", description};
+        }
 
-    /**
-     * @brief Factory function to create an 'Internal Problem' warning.
-     * 
-     * @return A new warning object with the name 'Internal Problem'.
-     * @note This overload creates a warning without a description.
-     * @note This function is marked noexcept.
-     */
-    warning internal_problem() noexcept {
-        return warning{"Internal Problem"};
-    }
+        /**
+         * @brief Factory function to create an 'Internal Problem' warning.
+         * 
+         * @return A new warning object with the name 'Internal Problem'.
+         * @note This overload creates a warning without a description.
+         * @note This function is marked noexcept.
+         */
+        warning internal_problem() noexcept {
+            return warning{"Internal Problem"};
+        }
 
-    /**
-     * @brief Factory function to create an 'Internal Problem' warning with description.
-     * 
-     * @param description A custom description for the warning.
-     * @return A new warning object with the name 'Internal Problem' and the provided description.
-     * @note This overload creates a warning with a custom description.
-     * @note This function is marked noexcept.
-     */
-    warning internal_problem(const std::string &description) noexcept {
-        return warning{"Internal Problem", description};
+        /**
+         * @brief Factory function to create an 'Internal Problem' warning with description.
+         * 
+         * @param description A custom description for the warning.
+         * @return A new warning object with the name 'Internal Problem' and the provided description.
+         * @note This overload creates a warning with a custom description.
+         * @note This function is marked noexcept.
+         */
+        warning internal_problem(const std::string &description) noexcept {
+            return warning{"Internal Problem", description};
+        }
     }
 }
 

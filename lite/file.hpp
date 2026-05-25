@@ -298,4 +298,5 @@ namespace lite
         }
     }
 }
+
 #endif // METACORE___LITE_FILE_HPP

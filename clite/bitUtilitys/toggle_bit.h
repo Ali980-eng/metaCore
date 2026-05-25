@@ -1,3 +1,29 @@
+/**
+ * @file toggle_bit.h
+ * @brief Bit Toggle Utilities
+ * @author MetaCore Development Team
+ * @date May 25, 2026
+ * 
+ * @details
+ * This file provides functions to toggle (flip) bits at specified positions in various integer types.
+ * Toggle operation performs XOR with a bitmask to flip the bit from 0 to 1 or 1 to 0.
+ * Supports 8-bit, 16-bit, 32-bit, and 64-bit signed and unsigned integers.
+ * 
+ * @functions
+ * - toggle_u8bit()      : Toggle bit in uint8_t
+ * - toggle_u16bit()     : Toggle bit in uint16_t
+ * - toggle_u32bit()     : Toggle bit in uint32_t
+ * - toggle_u64bit()     : Toggle bit in uint64_t
+ * - toggle_8bit()       : Toggle bit in int8_t
+ * - toggle_16bit()      : Toggle bit in int16_t
+ * - toggle_32bit()      : Toggle bit in int32_t
+ * - toggle_64bit()      : Toggle bit in int64_t
+ * - toggle_char_bit()   : Toggle bit in character
+ * - toggle_short_bit()  : Toggle bit in short integer
+ * - toggle_int_bit()    : Toggle bit in integer
+ * - toggle_long_bit()   : Toggle bit in long integer
+ */
+
 #include <stdint.h>
 #include <stdio.h>
 #include <stdbool.h>

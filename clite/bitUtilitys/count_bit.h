@@ -1,3 +1,29 @@
+/**
+ * @file count_bit.h
+ * @brief Bit Count Utilities
+ * @author MetaCore Development Team
+ * @date May 25, 2026
+ * 
+ * @details
+ * This file provides functions to count set (1) or unset (0) bits in various integer types.
+ * These utilities are useful for analyzing bit patterns and determining bit populations.
+ * Supports 8-bit, 16-bit, 32-bit, and 64-bit signed and unsigned integers.
+ * 
+ * @functions
+ * - count_u8bit()      : Count bits in uint8_t
+ * - count_u16bit()     : Count bits in uint16_t
+ * - count_u32bit()     : Count bits in uint32_t
+ * - count_u64bit()     : Count bits in uint64_t
+ * - count_8bit()       : Count bits in int8_t
+ * - count_16bit()      : Count bits in int16_t
+ * - count_32bit()      : Count bits in int32_t
+ * - count_64bit()      : Count bits in int64_t
+ * - count_char_bit()   : Count bits in character
+ * - count_short_bit()  : Count bits in short integer
+ * - count_int_bit()    : Count bits in integer
+ * - count_long_bit()   : Count bits in long integer
+ */
+
 #include <stdint.h>
 #include <stdio.h>
 #include <stdbool.h>

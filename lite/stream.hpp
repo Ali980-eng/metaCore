@@ -30,6 +30,10 @@
 #include <cerrno>
 #include <stack>
 
+#include "io.hpp"
+#include "benchmark.hpp"
+#include "UnitTest.hpp"
+
 #pragma once
 #ifndef METACORE___LITE_STREAM_HPP
 #define METACORE___LITE_STREAM_HPP

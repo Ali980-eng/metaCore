@@ -1,3 +1,38 @@
+/**
+ * @file binaryFormat.h
+ * @brief Binary Format Conversion Utilities
+ * @author MetaCore Development Team
+ * @date May 25, 2026
+ * 
+ * @details
+ * This file provides functions to convert various integer types to their binary string representation.
+ * It includes utilities for converting 8-bit, 16-bit, 32-bit, and 64-bit signed and unsigned integers,
+ * as well as functions to print binary representations directly to output.
+ * 
+ * @functions
+ * - bool2char()      : Convert boolean to character ('0' or '1')
+ * - bit_str_char()   : Convert char to binary string
+ * - bit_str_short()  : Convert short to binary string
+ * - bit_str_int()    : Convert int to binary string
+ * - bit_str_long()   : Convert long to binary string
+ * - bit8_str()       : Convert int8_t to binary string
+ * - bit16_str()      : Convert int16_t to binary string
+ * - bit32_str()      : Convert int32_t to binary string
+ * - bit64_str()      : Convert int64_t to binary string
+ * - ubit8_str()      : Convert uint8_t to binary string
+ * - ubit16_str()     : Convert uint16_t to binary string
+ * - ubit32_str()     : Convert uint32_t to binary string
+ * - ubit64_str()     : Convert uint64_t to binary string
+ * - print8bit()      : Print binary representation of int8_t
+ * - print16bit()     : Print binary representation of int16_t
+ * - print32bit()     : Print binary representation of int32_t
+ * - print64bit()     : Print binary representation of int64_t
+ * - print_u8bit()    : Print binary representation of uint8_t
+ * - print_u16bit()   : Print binary representation of uint16_t
+ * - print_u32bit()   : Print binary representation of uint32_t
+ * - print_u64bit()   : Print binary representation of uint64_t
+ */
+
 #include "get_bit.h"
 #include <stdlib.h>
 

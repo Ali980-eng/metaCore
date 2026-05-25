@@ -1,20 +1,48 @@
+/**
+ * @file micros.h
+ * @brief Micro Definitions and Utility Macros
+ * @author MetaCore Development Team
+ * @date May 25, 2026
+ * 
+ * @details
+ * This file provides comprehensive macro definitions for constant declarations, object definitions,
+ * and testing utilities. It has two main modes controlled by COBJECT_DATA:
+ * 
+ * COBJECT_DATA Mode: Constant declaration macros
+ * - Macros for declaring typed constants (cbool, cchar, cint, cfloat, cdouble, etc.)
+ * - Array definition macros (carray_i32, carray_f64)
+ * - Section attribute for memory placement (DATA_SEC)
+ * - Type inference macros in non-strict mode (cauto, cdynamic)
+ * - Optional logic restriction macros when ALLOW_LOGIC_MODE is disabled
+ * 
+ * Standard Mode: Testing utilities and string operations
+ * - Test framework macros (INIT_TEST, MAIN_TEST, EXIT_TEST, TEST_0 through TEST_3)
+ * - Assertion macro (ASSERT)
+ * - Object/struct definition macro (cobject)
+ * - Character constants (cnl, ctab)
+ * - String type alias (cstr)
+ * 
+ * @functions (Standard Mode)
+ * - length()           : Get string length
+ * - equal()            : Compare two strings for equality
+ * - concatenate()      : Concatenate two strings
+ * - is_empty()         : Check if string is empty or NULL
+ * - empty()            : Clear string content
+ * - free()             : Free string memory
+ * - exist()            : Check if character exists in string
+ * - sub_exist()        : Check if substring exists in string
+ * - count()            : Count occurrences of character in string
+ */
+
 #include <string.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-#define ALL_MICROS
-
 #ifndef METACORE___CLITE_MICROS_H
 #define METACORE___CLITE_MICROS_H
 
-    #ifdef ALL_MICROS
-        #define CTESTING_MICROS
-        #define CUTILITYS_FORMAT
-        #define CSTRING_MICROS
-    #endif // ALL_MICROS
-
-    #ifdef OBJECT_DATA
+    #ifdef COBJECT_DATA
 
         #include <stdint.h>
 
@@ -126,18 +154,9 @@
 
         #endif // ALLOW_LOGIC_MODE
     
-    #endif // OBJECT_DATA
+    #endif // COBJECT_DATA
     
-    #if defined(CTESTING_MICROS) && !defined(OBJECT_DATA)
-
-        size_t cttn = 0;
-
-        typedef struct {
-            char* name;
-            char* description;
-            size_t num;
-            bool result;
-        } CTEST;
+    #ifndef COBJECT_DATA
 
         #define INIT_TEST(name)        \
             double tests_passed = 0.0; \
@@ -178,35 +197,6 @@
                 }                         \
                 return (int)tests_failed; \
             }
-
-        CTEST creatNew(CTEST current, char* name, char* des, bool value) {
-            current.name = (name != NULL) ? name : strdup("");
-            current.description = (des != NULL) ? des : strdup("");
-            current.num = cttn;
-            cttn++;
-            current.result = value;
-            return current;
-        }
-
-        bool catchValue(CTEST current) {
-            return current.result;
-        }
-
-        void printTest(CTEST current) {
-            printf("\n");
-            printf("------------\n");
-            printf("<<< TEST >>>\n");
-            printf("------------\n");
-            if(current.name != NULL && strlen(current.name) != 0) {
-                printf("NAME: %s \n", current.name);
-            }
-            if(current.description != NULL && strlen(current.description) != 0) {
-                printf("DESCRIPTION: %s \n", current.description);
-            }
-            printf("NUMBER: %d \n", current.num);
-            printf("RESULT: %s \n", current.result ? "PASSED" : "FAILED");
-            printf("------------\n");
-        }
 
         #define TEST_0(cond)                            \
             total_tests++;                              \
@@ -250,10 +240,6 @@
                 printf("FAILED: %s", cond); \
             }
 
-    #endif // TESTING_MICROS
-
-    #if defined(CUTILITYS_FORMAT) && !defined(OBJECT_DATA)
-
         #define MAIN   \
             int main() \
             {
@@ -268,10 +254,6 @@
         #define cnl '\n'
         
         #define ctab '\t'
-        
-    #endif // UTILITYS_FORMAT
-    
-    #if defined(CSTRING_MICROS) && !defined(OBJECT_DATA)
 
         #define cstr char*
 
@@ -350,6 +332,6 @@
             return result;
         }
 
-    #endif // STRING_MICROS
+    #endif // COBJECT_DATA
 
 #endif // METACORE___CLITE_CMICROS_H

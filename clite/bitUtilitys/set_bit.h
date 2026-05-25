@@ -1,3 +1,29 @@
+/**
+ * @file set_bit.h
+ * @brief Bit Set Utilities
+ * @author MetaCore Development Team
+ * @date May 25, 2026
+ * 
+ * @details
+ * This file provides functions to set (set to 1) bits at specified positions in various integer types.
+ * Set operation performs OR with a bitmask to ensure the bit is set to 1.
+ * Supports 8-bit, 16-bit, 32-bit, and 64-bit signed and unsigned integers.
+ * 
+ * @functions
+ * - set_u8bit()       : Set bit to 1 in uint8_t
+ * - set_u16bit()      : Set bit to 1 in uint16_t
+ * - set_u32bit()      : Set bit to 1 in uint32_t
+ * - set_u64bit()      : Set bit to 1 in uint64_t
+ * - set_8bit()        : Set bit to 1 in int8_t
+ * - set_16bit()       : Set bit to 1 in int16_t
+ * - set_32bit()       : Set bit to 1 in int32_t
+ * - set_64bit()       : Set bit to 1 in int64_t
+ * - set_char_bit()    : Set bit to 1 in character
+ * - set_short_bit()   : Set bit to 1 in short integer
+ * - set_int_bit()     : Set bit to 1 in integer
+ * - set_long_bit()    : Set bit to 1 in long integer
+ */
+
 #include <stdint.h>
 #include <stdio.h>
 #include <stdbool.h>

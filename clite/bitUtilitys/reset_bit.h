@@ -1,3 +1,29 @@
+/**
+ * @file reset_bit.h
+ * @brief Bit Reset Utilities
+ * @author MetaCore Development Team
+ * @date May 25, 2026
+ * 
+ * @details
+ * This file provides functions to reset (clear to 0) bits at specified positions in various integer types.
+ * Reset operation performs AND with an inverted bitmask to ensure the bit is set to 0.
+ * Supports 8-bit, 16-bit, 32-bit, and 64-bit signed and unsigned integers.
+ * 
+ * @functions
+ * - reset_u8bit()      : Reset bit to 0 in uint8_t
+ * - reset_u16bit()     : Reset bit to 0 in uint16_t
+ * - reset_u32bit()     : Reset bit to 0 in uint32_t
+ * - reset_u64bit()     : Reset bit to 0 in uint64_t
+ * - reset_8bit()       : Reset bit to 0 in int8_t
+ * - reset_16bit()      : Reset bit to 0 in int16_t
+ * - reset_32bit()      : Reset bit to 0 in int32_t
+ * - reset_64bit()      : Reset bit to 0 in int64_t
+ * - reset_char_bit()   : Reset bit to 0 in character
+ * - reset_short_bit()  : Reset bit to 0 in short integer
+ * - reset_int_bit()    : Reset bit to 0 in integer
+ * - reset_long_bit()   : Reset bit to 0 in long integer
+ */
+
 #include <stdint.h>
 #include <stdio.h>
 #include <stdbool.h>

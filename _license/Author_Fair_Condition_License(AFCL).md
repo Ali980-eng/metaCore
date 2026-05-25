@@ -1,8 +1,16 @@
 # Author Fair Conditions License (AFCL)
 
-**license author:** ali lafi - nickname ken roth
+## Notice on Ownership & Identity Separation
 
-**license version:** p0.1
+    This license framework (AFCL) is created and owned by the License Author (Ali Lafi).
+    The "License Author" is inherently distinct from the "Project/Work Author" (the developer applying this license to their software). 
+
+    The Project Author must explicitly state their identity and copyright notice only within the designated "Developer or Author Requirements" section below.
+    Removing, altering, obscuring, or omitting the name of the License Author (Ali Lafi) or the core text of this framework from any part of this document is strictly prohibited.
+
+**license author:** Ali Lafi (acting under the pseudonym "Ken Roth")
+
+**license version:** v1
 
 **creation data:** 2026 / 5 / 18
 
@@ -42,14 +50,11 @@ All provisions written under this license must follow the requirements below.
     Restrictions must not rely on undefined measurements.
 
 3. Interpretation Rule
-
-    Where a provision may reasonably be interpreted in more than one way, the interpretation granting greater freedom to the user shall apply unless explicitly specified otherwise.
+    Where a developer-defined provision is ambiguous or can reasonably be interpreted in more than one way, the interpretation that imposes the least restriction on the user and grants them the maximum permitted relief shall apply.
 
 4. Unclear Provision Rule
-
-    Any provision that cannot be interpreted in a clear and objective manner shall not be used as a basis for legal action or enforcement.
-
-    The invalidity of such provision affects only that provision and does not invalidate the remaining provisions of this license.
+    Any provision that cannot be interpreted in a clear and objective manner shall be deemed null and void, and cannot be used by the author as a basis for legal action or enforcement against the user.
+    The invalidity of such an unclear provision affects only that specific clause and does not invalidate the remaining valid provisions of this license.
 
 5. License Supremacy Rule
 
@@ -67,9 +72,7 @@ All provisions written under this license must follow the requirements below.
 
 Copyright (c) `year` `copyright holders`
 
-```none
     conditions
-```
 
 The developer or author may define their own additional conditions, permissions, restrictions, or requirements provided that:
 
@@ -77,3 +80,11 @@ The developer or author may define their own additional conditions, permissions,
 * they remain objectively interpretable
 * they clearly specify permitted and prohibited actions
 * they do not invalidate the principles established by this license
+
+## Third-Party Legal Immunity & Limitation of Liability
+
+The License Author (Ali Lafi) provides this licensing framework solely as an objective tool to facilitate clear and fair licensing between developers and users.
+The License Author operates strictly as an independent third party and does not provide formal legal advice or representation.
+
+Under no circumstances shall the License Author be held liable, responsible, summoned, or subpoenaed in any legal actions, disputes, claims, or court proceedings arising from the use, misuse, implementation, interpretation, or enforcement of this license by any developer or user.
+This framework is provided "as-is" without any warranties, and all liabilities remain exclusively with the practicing parties.

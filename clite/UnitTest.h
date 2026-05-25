@@ -23,6 +23,45 @@
 #ifndef METACORE___CLITE_UNITTEST_H
 #define METACORE___CLITE_UNITTEST_H
 
+size_t cttn = 0;
+
+typedef struct {
+    char* name;
+    char* description;
+    size_t num;
+    bool result;
+} CTEST;
+
+
+CTEST creatNew(CTEST current, char* name, char* des, bool value) {
+    current.name = (name != NULL) ? name : strdup("");
+    current.description = (des != NULL) ? des : strdup("");
+    current.num = cttn;
+    cttn++;
+    current.result = value;
+    return current;
+}
+
+bool catchValue(CTEST current) {
+    return current.result;
+}
+
+void printTest(CTEST current) {
+    printf("\n");
+    printf("------------\n");
+    printf("<<< TEST >>>\n");
+    printf("------------\n");
+    if(current.name != NULL && strlen(current.name) != 0) {
+        printf("NAME: %s \n", current.name);
+    }
+    if(current.description != NULL && strlen(current.description) != 0) {
+        printf("DESCRIPTION: %s \n", current.description);
+    }
+    printf("NUMBER: %d \n", current.num);
+    printf("RESULT: %s \n", current.result ? "PASSED" : "FAILED");
+    printf("------------\n");
+}
+
 /**
  * @brief Tests boolean values for equality.
  * @param real The actual boolean value obtained from the test.

@@ -4,10 +4,10 @@
 #include "lite/micros.hpp"
 
 #pragma once
-#ifndef METACORE___METATOOL_ISYS_HPP
-#define METACORE___METATOOL_ISYS_HPP
+#ifndef METACORE___INFORMATIONSYSTEM_HPP
+#define METACORE___INFORMATIONSYSTEM_HPP
 
-namespace metaCore {
+namespace meta {
 
     using std::unordered_map;
 
@@ -94,6 +94,8 @@ namespace metaCore {
 
     typedef unordered_map<str, libInfo> dirInfo;
     typedef unordered_map<str, dirInfo> info_sys;
+
+    class system64 {};
 }
 
-#endif // METACORE___METATOOL_ISYS_HPP
+#endif // METACORE___INFORMATIONSYSTEM_HPP

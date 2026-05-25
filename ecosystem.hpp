@@ -1,32 +1,109 @@
 
+/**
+ * @file ecosystem.hpp
+ * @brief MetaCore ecosystem management system for centralized error and warning handling.
+ *
+ * This header provides a comprehensive ecosystem management system that centralizes
+ * error and warning handling for the MetaCore library. It integrates Windows-specific
+ * functionality (message boxes) with cross-platform console output, and includes
+ * comprehensive test result management.
+ *
+ * The system provides:
+ * - Centralized warning queue management with console and message box display options
+ * - Error handling with immediate program termination
+ * - Test result collection and summary reporting
+ * - Exit status tracking for proper program termination
+ * - String conversion utilities for Windows wide-character support
+ *
+ * Key Classes:
+ * - system65: The main ecosystem management object that handles all warnings, errors,
+ *   test collection, and program exit status.
+ *
+ * Features:
+ * - Warning Queue: Collects warnings for later processing
+ * - Error Handling: Catches errors and terminates program gracefully
+ * - Test Management: Collects and reports test results with pass/fail statistics
+ * - Windows Integration: Supports message box dialogs for user notification
+ * - Exit Status Tracking: Tracks whether warnings occurred for proper exit codes
+ *
+ * Usage Example:
+ * @code
+ * lite::warning w("Something unexpected happened");
+ * meta::metaSystem.Catch(w, true);  // Display as message box
+ *
+ * lite::error e("Critical failure");
+ * meta::metaSystem.Catch(e);  // Display and exit
+ *
+ * CTEST test("my_test", true);
+ * meta::metaSystem.add(test, true);  // Add and print test
+ *
+ * meta::metaSystem.system_exit();  // Exit with appropriate status
+ * @endcode
+ *
+ * @author MetaCore Development Team
+ * @date 2025/09/25
+ * @version 1.0
+ *
+ * @see lite/warning.hpp for warning class
+ * @see lite/error.hpp for error class
+ * @see clite/UnitTest.h for CTEST class
+ * @see lite/micros.hpp for macro definitions
+ */
+
 #include <windows.h>
 #include <string>
 #include "clite/micros.h"
 #include "lite/micros.hpp"
 #include "lite/warning.hpp"
 #include "lite/error.hpp"
+#include "clite/UnitTest.h"
+#include "clite/IOUtilitys.h"
 
 #pragma once
-#ifndef METACORE___LITE_ECOSYSTEM_HPP
-#define METACORE___LITE_ECOSYSTEM_HPP
+#ifndef METACORE___ECOSYSTEM_HPP
+#define METACORE___ECOSYSTEM_HPP
 
-namespace metaCore {
+namespace meta {
     /**
-     * @brief Converts a std::string to std::wstring.
-     * @param s The string to convert.
-     * @return A wide string representation of the input.
+     * @brief Converts a std::string to std::wstring for Windows API compatibility.
+     * 
+     * This function provides convenient conversion of narrow character strings
+     * to wide character strings, which is required for many Windows API functions
+     * like MessageBox().
+     *
+     * @param s The standard string to convert.
+     * @return A wide string representation of the input string with identical characters.
+     *
+     * @note Uses simple character-by-character iteration. For localized text with
+     *       multi-byte characters, consider using MultiByteToWideChar() instead.
+     *
+     * @example
+     * std::string narrow = "Hello";
+     * std::wstring wide = toWide(narrow);  // Returns L"Hello"
      */
     inline std::wstring toWide(const std::string& s) {
         return std::wstring(s.begin(), s.end());
     }
 
     /**
-     * @brief Ecosystem management object for handling warnings and errors.
+     * @class system65
+     * @brief Ecosystem management object for centralized error and warning handling.
      * 
-     * Provides centralized error and warning handling with support for message boxes
-     * on Windows and console output. Manages program exit status.
+     * This class provides a centralized management system for the MetaCore library's
+     * error handling, warning management, test collection, and program exit status.
+     * It integrates with the Windows API for message box display and supports
+     * comprehensive test result tracking.
+     *
+     * The system maintains:
+     * - A queue of warning objects for deferred processing
+     * - A single error object for immediate handling
+     * - A vector of test results for statistical reporting
+     * - A return value flag to track if warnings or errors occurred
+     *
+     * @note This class uses protected members to prevent direct access to internal state.
+     *       All interactions are through public member methods.
      */
-    object eco_system {
+    object system65 {
         private:
         std::queue<lite::warning> _sys_w;
         lite::error _sys_err;
@@ -37,11 +114,36 @@ namespace metaCore {
         em = "meta ecosystem error";
         public:
 
+        /**
+         * @brief Adds a test result to the ecosystem's test collection.
+         * 
+         * Appends a test result to the internal test vector and optionally
+         * prints the test result immediately.
+         *
+         * @param value The CTEST object containing test result information.
+         * @param PTS Print-To-Screen flag; if true, prints the test result immediately.
+         *
+         * @note The test result is always added to the collection regardless of PTS value.
+         *
+         * @see print_sys_test() for viewing all collected tests
+         */
         void add(const CTEST& value, bool PTS) {
             _sys_test.push_back(value);
             if(PTS) printTest(value);
         }
         
+        /**
+         * @brief Prints a summary of all collected test results.
+         * 
+         * Iterates through all collected test results and generates a comprehensive
+         * summary report including:
+         * - Total number of tests executed
+         * - Number of tests passed
+         * - Number of tests failed
+         *
+         * @note Uses TEST_0 macro pattern for summary generation.
+         * @see add() for adding tests to the collection
+         */
         void print_sys_test() {
             INIT_TEST("meta ecosystem test")
             for(CTEST T : _sys_test) {
@@ -53,9 +155,22 @@ namespace metaCore {
         }
 
         /**
-         * @brief Catches and displays a warning.
+         * @brief Catches and displays a warning with optional message box.
+         * 
+         * Processes a warning object by either displaying it in a Windows message box
+         * or printing it to standard output. Sets the return value flag to indicate
+         * that a warning occurred.
+         *
          * @param w The warning object to handle.
-         * @param msgbox If true, displays the warning in a message box; otherwise prints to console.
+         * @param msgbox Display mode flag:
+         *               - true: Display warning in a Windows message box
+         *               - false: Print warning to console output (default)
+         *
+         * @note This function is marked noexcept and will not throw exceptions.
+         *       The return value flag is always set to true after catching a warning.
+         *
+         * @see warning class in lite/warning.hpp
+         * @see exit_value() for checking accumulated warning status
          */
         void Catch(const lite::warning& w, bool msgbox = false) noexcept {
             const char* s1 = "lite ecosystem warning";
@@ -73,8 +188,22 @@ namespace metaCore {
 
         /**
          * @brief Catches and displays an error, then exits the program.
-         * @param e The error object to handle.
-         * @details Displays the error in a message box and terminates the program with EXIT_FAILURE.
+         * 
+         * Processes an error object by displaying it in a Windows message box
+         * and immediately terminating the program with EXIT_FAILURE. This is
+         * appropriate for critical errors that cannot be recovered from.
+         *
+         * @param e The error object to handle and display.
+         *
+         * @note This function is marked noexcept but will not return, as it calls
+         *       std::exit(EXIT_FAILURE) which terminates the program.
+         *       The return value flag is not updated since the program exits.
+         *
+         * @warning This function terminates program execution immediately.
+         *          Resources are not guaranteed to be cleaned up properly.
+         *
+         * @see error class in lite/error.hpp
+         * @see Catch(const lite::warning&, bool) for non-fatal warning handling
          */
         void Catch(lite::error& e) noexcept {
             MessageBox(NULL, 
@@ -85,8 +214,19 @@ namespace metaCore {
         }
 
         /**
-         * @brief Returns the exit status value.
-         * @return 1 if a warning was caught, 0 otherwise.
+         * @brief Returns the current exit status value.
+         * 
+         * Indicates whether any warnings or errors have been encountered by
+         * the ecosystem management system.
+         *
+         * @return Exit status code:
+         *         - 1 if warnings were caught (retval = true)
+         *         - 0 if no warnings occurred (retval = false)
+         *
+         * @note This value should be used as the exit code when terminating
+         *       the application to indicate success or warning conditions.
+         *
+         * @see system_exit() for automatic program termination with status code
          */
         int exit_value() noexcept {
             return retval ? 1 : 0;
@@ -94,13 +234,26 @@ namespace metaCore {
 
         /**
          * @brief Exits the system with appropriate status code.
-         * @details Terminates the program with EXIT_FAILURE if warnings were caught, otherwise EXIT_SUCCESS.
+         * 
+         * Terminates the program based on the accumulated return value flag.
+         * If warnings were caught, exits with EXIT_FAILURE; otherwise exits
+         * with EXIT_SUCCESS.
+         *
+         * @details This function uses std::exit() which may not properly
+         *          clean up local objects or run destructors in all cases.
+         *          Consider using return statements or other exit mechanisms
+         *          when possible.
+         *
+         * @note This function does not return; it always terminates program execution.
+         *
+         * @see exit_value() for checking status without exiting
+         * @see Catch() for handling warnings and errors
          */
         void system_exit() {
             if(retval) std::exit(EXIT_FAILURE);
             else std::exit(EXIT_SUCCESS);
         }
-    } ecoSys;
+    } metaSystem;
 }
 
-#endif // METACORE___LITE_ECOSYSTEM_HPP
+#endif // METACORE___ECOSYSTEM_HPP

@@ -1,3 +1,36 @@
+/**
+ * @file error.hpp
+ * @brief Error Management and Reporting System
+ * @author MetaCore Development Team
+ * @date May 25, 2026
+ * 
+ * @details
+ * This file provides a comprehensive error handling system with an error class that tracks
+ * error information including name, description, and occurrence time. It also provides
+ * helper functions for creating common error types through the err namespace.
+ * 
+ * @classes
+ * - error          : Main error class for storing and managing error information
+ * 
+ * @namespace err
+ * Helper functions for creating predefined error types:
+ * - wrong_indexing()         : Creates "Wrong Indexing" error
+ * - wrong_declaration()      : Creates "Wrong declaration" error
+ * - wrong_construction()     : Creates "Wrong Construction" error
+ * - bad_input()              : Creates "Bad Input" error
+ * - undefined_behavior()     : Creates "Undefined Behavior" error
+ * - invalid_argument()       : Creates "Invalid Argument" error
+ * - OutOfRange()             : Creates "Out Of Range" error
+ * - internal_problem()       : Creates "Internal Problem" error
+ * 
+ * @key_functions
+ * - error()                  : Multiple constructors for error initialization
+ * - empty()                  : Check if name or description is empty
+ * - length()                 : Get length of name or description
+ * - printingFormat()         : Generate formatted error string
+ * - operator<<()             : Stream output for error objects
+ */
+
 #include <string>
 #include <iostream>
 #include <cstdlib>
