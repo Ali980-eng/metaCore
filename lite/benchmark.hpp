@@ -585,4 +585,5 @@ namespace lite
         }
     }
 }
+
 #endif // METACORE___LITE_BENCHMARK_HPP

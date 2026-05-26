@@ -1,5 +1,4 @@
----
-# Global Settings / Default C++ Style
+# --- Global Settings / Default C++ Style ---
 BasedOnStyle: Microsoft
 Language: Cpp
 IndentWidth: 2
@@ -38,6 +37,7 @@ AlignTrailingComments: true
 ReflowComments: false
 
 ---
-# Specific Style for JSON
+# --- Specific Style for JSON (Optional) ---
 Language: Json
 IndentWidth: 4
+---

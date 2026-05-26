@@ -60,6 +60,8 @@
  * @note Requires C++23 or later for full compatibility.
  */
 
+#include <iostream>
+#include <vector>
 #include <string>
 #include <memory>
 
@@ -391,7 +393,7 @@ namespace lite
          * @note Increments the basic test counter
          */
         template <typename T>
-        bool basic(T realvalue, T expvalue) noexcept
+        bool basic(const T& realvalue, const T& expvalue) noexcept
         {
             index.basic++;
             return realvalue == expvalue;
@@ -409,7 +411,8 @@ namespace lite
          */
         template <typename T>
         TEST basic(
-            T realvalue, T expvalue,
+            const T& realvalue,
+            const T& expvalue,
             const std::string& name,
             const std::string& description) noexcept
         {
@@ -417,6 +420,19 @@ namespace lite
             return !(name.empty()) && !(description.empty()) ?
             TEST{name, description, realvalue == expvalue} :
             TEST{realvalue == expvalue};
+        }
+
+        template <typename T>
+        bool range(T realvalue, T uplimit, T downlimit) noexcept {
+            return realvalue < uplimit && realvalue > downlimit;
+        }
+
+        template <typename T>
+        TEST range(T realvalue, T uplimit, T downlimit,
+            const std::string& name, const std::string& description) noexcept {
+            return name.empty() && description.empty() ? 
+            TEST{range(realvalue, uplimit, downlimit)} : 
+            TEST{name, description, range(realvalue, uplimit, downlimit)};
         }
 
         /**
@@ -428,7 +444,7 @@ namespace lite
          * @note Increments the vector test counter
          */
         template <typename T>
-        bool vector(std::vector<T> real_v, std::vector<T> expected_v) noexcept
+        bool vector(const std::vector<T>& real_v, const std::vector<T>& expected_v) noexcept
         {
             index.vector++;
             if (real_v.size() != expected_v.size()) {
@@ -453,8 +469,8 @@ namespace lite
          */
         template <typename T>
         TEST vector(
-            std::vector<T> real_v,
-            std::vector<T> expected_v,
+            const std::vector<T>& real_v,
+            const std::vector<T>& expected_v,
             const std::string& name,
             const std::string& description) noexcept
         {
@@ -482,8 +498,8 @@ namespace lite
          * @note Increments the vector test counter
          */
         template <typename T>
-        bool vector_2d(std::vector<std::vector<T>> real_2dv,
-                       std::vector<std::vector<T>> expected_2dv) noexcept
+        bool vector_2d(const std::vector<std::vector<T>>& real_2dv,
+                       const std::vector<std::vector<T>>& expected_2dv) noexcept
         {
             index.vector++;
             if (real_2dv.size() != expected_2dv.size()) {
@@ -513,8 +529,8 @@ namespace lite
          * @note Increments the vector test counter
          */
         template <typename T>
-        TEST vector_2d(std::vector<std::vector<T>> real_2dv,
-                       std::vector<std::vector<T>> expected_2dv,
+        TEST vector_2d(const std::vector<std::vector<T>>& real_2dv,
+                       const std::vector<std::vector<T>>& expected_2dv,
                        const std::string& name,
                        const std::string& description) noexcept
         {
@@ -800,6 +816,7 @@ namespace lite
             reset_vector_count();
             reset_function_count();
         }
-    };
+    }
 }
+
 #endif // METACORE___LITE_UNITTEST_HPP

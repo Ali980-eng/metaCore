@@ -1,46 +1,39 @@
-cbit-check:
-	cppcheck CLite/CBit/*.h
+bitUtilitys-check:
+	cppcheck clite/bitUtilitys/*.h
 
-clite-check: cbit-check
-	cppcheck CLite/*.h
+clite-check: bitUtilitys-check
+	cppcheck clite/*.h
 
-cxxlite-check:
-	cppcheck CXXLite/*.hpp
+lite-check:
+	cppcheck lite/*.hpp
 
 static-check:
-	cppcheck CLite/CBit/*.h
-	cppcheck CLite/*.h
-	cppcheck CXXLite/*.hpp
+	cppcheck clite/bitUtilitys/*.h
+	cppcheck clite/*.h
+	cppcheck lite/*.hpp
 	
 clite-tests:
-	gcc -I. tests/CLiteUT.c -o tests/output/clut
-	./tests/output/clut
+	gcc -I. _tests/CLUT/*.c -o _tests/output/clut
+	./_tests/output/clut
 
-cxxlite-tests:
-	g++ -I. tests/CXXLiteUT.cpp -o tests/output/cxlut
-	./tests/output/cxlut
-
-jlite-tests:
-	javac -cp . -d tests/output tests/JLiteUT.java
-	java -cp tests/output JLiteUT
+lite-tests:
+	g++ -I. _tests/LUT/*.cpp -o _tests/output/lut
+	./_tests/output/lut
 
 compile-tests:
-	gcc -I. tests/CLiteUT.c -o tests/output/clut
-	g++ -I. tests/CXXLiteUT.cpp -o tests/output/cxlut
-	javac -cp . -d tests/output tests/JLiteUT.java
+	gcc -I. _tests/CLUT/*.c -o _tests/output/clut
+	g++ -I. _tests/LUT/*.cpp -o _tests/output/lut
 
 run-tests:
-	./tests/output/clut
-	./tests/output/cxlut
-	java -cp tests/output JLiteUT
+	./_tests/output/clut
+	./_tests/output/lut
 
 help:
-	echo "cbit-check: label will check all libraries in cbit using cppcheck"
+	echo "bitUtilitys-check: label will check all libraries in bitUtilitys using cppcheck"
 	echo "clite-check: label will check all libraries in clite using cppcheck"
-	ehco "cxxlite-check: label will check all libraries in cxxlite using cppcheck"
+	ehco "lite-check: label will check all libraries in lite using cppcheck"
 	echo "static-check: label will use the static-analysis tool cppcheck to check all the project libraries."
 	echo "clite-tests": label will compile and run clite tests"
-	echo "cxxlite-tests: label will compile and run cxxlite tests"
-	echo "jlite-tests: label will compile and run jlite tests"
+	echo "lite-tests: label will compile and run lite tests"
 	echo "compile-tests: label will compile all tests programs"
 	echo "run-tests: label will run all tests that have compiled"

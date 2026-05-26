@@ -280,8 +280,8 @@ char* ubit64_str(uint64_t value) {
  */
 void print8bit(int8_t value, bool pnl) {
     for(uint8_t i = 7; i >= 0; i--)
-        printf(bool2char(get_8bit(value, i)));
-    if(pnl) printf('\n');
+        printf("%c", bool2char(get_8bit(value, i)));
+    if(pnl) printf("%c", '\n');
 }
 
 /**
@@ -291,8 +291,8 @@ void print8bit(int8_t value, bool pnl) {
  */
 void print16bit(int16_t value, bool pnl) {
     for(uint8_t i = 15; i >= 0; i--)
-        printf(bool2char(get_16bit(value, i)));
-    if(pnl) printf('\n');
+        printf("%c", bool2char(get_16bit(value, i)));
+    if(pnl) printf("%c", '\n');
 }
 
 /**
@@ -302,8 +302,8 @@ void print16bit(int16_t value, bool pnl) {
  */
 void print32bit(int32_t value, bool pnl) {
     for(uint8_t i = 31; i >= 0; i--)
-        printf(bool2char(get_32bit(value, i)));
-    if(pnl) printf('\n');
+        printf("%c", bool2char(get_32bit(value, i)));
+    if(pnl) printf("%c", '\n');
 }
 
 /**
@@ -313,8 +313,8 @@ void print32bit(int32_t value, bool pnl) {
  */
 void print64bit(int64_t value, bool pnl) {
     for(uint8_t i = 63; i >= 0; i--)
-        printf(bool2char(get_64bit(value, i)));
-    if(pnl) printf('\n');
+        printf("%c", bool2char(get_64bit(value, i)));
+    if(pnl) printf("%c", '\n');
 }
 
 /**
@@ -324,8 +324,8 @@ void print64bit(int64_t value, bool pnl) {
  */
 void print_u8bit(uint8_t value, bool pnl) {
     for(uint8_t i = 7; i >= 0; i--)
-        printf(bool2char(get_u8bit(value, i)));
-    if(pnl) printf('\n');
+        printf("%c", bool2char(get_u8bit(value, i)));
+    if(pnl) printf("%c", '\n');
 }
 
 /**
@@ -335,8 +335,8 @@ void print_u8bit(uint8_t value, bool pnl) {
  */
 void print_u16bit(uint16_t value, bool pnl) {
     for(uint8_t i = 15; i >= 0; i--)
-        printf(bool2char(get_u16bit(value, i)));
-    if(pnl) printf('\n');
+        printf("%c", bool2char(get_u16bit(value, i)));
+    if(pnl) printf("%c", '\n');
 }
 
 /**
@@ -346,8 +346,8 @@ void print_u16bit(uint16_t value, bool pnl) {
  */
 void print_u32bit(uint32_t value, bool pnl) {
     for(uint8_t i = 31; i >= 0; i--)
-        printf(bool2char(get_u32bit(value, i)));
-    if(pnl) printf('\n');
+        printf("%c", bool2char(get_u32bit(value, i)));
+    if(pnl) printf("%c", '\n');
 }
 
 /**
@@ -357,8 +357,8 @@ void print_u32bit(uint32_t value, bool pnl) {
  */
 void print_u64bit(uint64_t value, bool pnl) {
     for(uint8_t i = 63; i >= 0; i--)
-        printf(bool2char(get_u64bit(value, i)));
-    if(pnl) printf('\n');
+        printf("%c", bool2char(get_u64bit(value, i)));
+    if(pnl) printf("%c", '\n');
 }
 
 #endif // METACORE___CLITE_BITUTILITYS_BINARYFORMAT_H

@@ -1,9 +1,8 @@
-#include "metaCore/clite/bitUtilitys.h"
-#include "metaCore/clite/micros.h"
+#include "clite/bitUtilitys.h"
+#include "clite/micros.h"
 
-MAIN_TEST("CBit")
+MAIN_TEST(bitUtilitys)
 
-  // UTEST[1]: 5 tests
   uint8_t value_1 = 8; // value_1: 0000-1000
   TEST_2(get_u8bit(value_1, 0), false)
   TEST_2(get_u8bit(value_1, 3), true)
@@ -12,8 +11,7 @@ MAIN_TEST("CBit")
   TEST_2(get_u8bit(value_1, 0), true)
   value_1 = set_u8bit(value_1, 7); // value_1: 1000-1001
   TEST_2(get_u8bit(value_1, 7), true)
-  
-  // UTEST[2]: 5 tests
+
   uint8_t value_2 = 99; // value_2: 0110-0011
   TEST_2(get_u8bit(value_2, 6), true)
   value_2 = reset_u8bit(value_2, 6);// value_2: 0010-0011
@@ -25,7 +23,6 @@ MAIN_TEST("CBit")
   value_2 = reset_u8bit(value_2, 1); // value_2: 1010-1001
   TEST_2(get_u8bit(value_2, 1), false)
 
-  // UTEST[3]: 5 tests
   uint8_t value_3 = 16; // value_3: 0001-0000
   TEST_2(get_u8bit(value_3, 0), false)
   TEST_2(get_u8bit(value_3, 4), true)
@@ -35,7 +32,6 @@ MAIN_TEST("CBit")
   value_3 = reset_u8bit(value_3, 0); // value_3: 0000-0000
   TEST_2(value_3, 0)
 
-  // UTEST[4]: 5 tests
   uint8_t value_4 = 35; // value_4: 0010-0011
   TEST_2(get_u8bit(value_4, 0), true)
   TEST_2(get_u8bit(value_4, 7), false)
@@ -46,14 +42,12 @@ MAIN_TEST("CBit")
   value_4 = xchg_u8bit(value_4, 5, 0); // value_4: 1000-0011
   TEST_2(get_u8bit(value_4, 5), false)
 
-  // UTEST[5]: 5 tests
   TEST_2(count_u8bit(value_1, true), 3)
   TEST_2(count_u8bit(value_2, true), 4)
   TEST_2(count_u8bit(value_3, true), 0)
   TEST_2(count_u8bit(value_3, false), 8)
   TEST_2(count_u8bit(value_4, false), 5)
 
-  // UTEST[6]: 5 tests
   int8_t value_5 = -2;
   TEST_2(get_8bit(value_5, 0), false)
   value_5 = set_8bit(value_5, 0);
@@ -63,7 +57,18 @@ MAIN_TEST("CBit")
   TEST_2(get_8bit(value_5, 5), false)
   TEST_2(count_8bit(value_5, true), 7)
 
-  // UTEST[7]:
-  int8_t value_6 = 88;
+  int8_t value_6 = 88; // value_6: 01011000
+  TEST_2(get_8bit(value_6, 3), true)
+  TEST_2(get_8bit(value_6, 4), true)
+  value_6 = xchg_8bit(value_6, 3, 1); // value_6: 01010010
+  TEST_2(get_8bit(value_6, 1), true)
+  TEST_2(get_8bit(value_6, 3), false)
+  value_6 = toggle_8bit(value_6, 4); // value_6: 01000010
+  TEST_2(get_8bit(value_6, 4), false)
+  value_6 = reset_8bit(value_6, 1);
+  TEST_2(get_8bit(value_6, 1), false)
+
+  uint16_t value_7 = 3380;
+  
 
 EXIT_TEST(true)

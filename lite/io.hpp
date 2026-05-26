@@ -672,7 +672,7 @@ namespace lite
         constexpr void println_if(bool result, const T& data) noexcept {
             if constexpr (result) print(data);
         }
-    };
-};
+    }
+}
 
 #endif // METACORE___LITE_IO_HPP

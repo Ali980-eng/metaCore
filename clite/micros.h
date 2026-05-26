@@ -162,7 +162,7 @@
             double tests_passed = 0.0; \
             double tests_failed = 0.0; \
             double total_tests = 0.0;  \
-            char testName[] = name;
+            char testName[] = #name;
 
         #define printSummary                                    \
             printf("\n-------------------------------");        \
@@ -189,7 +189,7 @@
                 double tests_passed = 0.0; \
                 double tests_failed = 0.0; \
                 double total_tests = 0.0;  \
-                char testName[] = name;
+                char testName[] = #name;
 
         #define EXIT_TEST(PS)             \
                 if(PS) {                  \
@@ -248,8 +248,8 @@
                 return (int)retval; \
             }
 
-        #define cobject(name, script) \
-            typedef struct { script } name;
+        #define cobject(name, elements) \
+            typedef struct { elements } name;
         
         #define cnl '\n'
         
@@ -275,12 +275,12 @@
             return (value == NULL || strlen(value) == 0) ? true : false;
         }
 
-        void* empty(cstr value) {
+        void* cstr_empty(cstr value) {
             if(is_empty(value)) return NULL;
             return realloc(value, 1);
         }
 
-        void free(cstr value) {
+        void cstr_free(cstr value) {
             if(is_empty(value)) {
                 printf("Error: can't free NULL or empty strings.\n");
                 return;
@@ -331,6 +331,11 @@
             }
             return result;
         }
+
+        #define jump goto
+
+        #define jump_if(condition, label) \ 
+            if(condition) goto label;
 
     #endif // COBJECT_DATA
 
