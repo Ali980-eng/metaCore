@@ -52,6 +52,7 @@
 
 #include <windows.h>
 #include <string>
+#include <queue>
 #include "clite/micros.h"
 #include "lite/micros.hpp"
 #include "lite/warning.hpp"

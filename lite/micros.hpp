@@ -19,4 +19,7 @@
 
 typedef std::string str;
 
+#define lambda(capture_clause, parameters, return_type, script) \
+    [capture_clause] parameters -> return_type { script }
+
 #endif // METACORE___LITE_MICROS_HPP

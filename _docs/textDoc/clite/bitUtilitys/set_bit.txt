@@ -1,0 +1,27 @@
+﻿## Set Bit Utilities
+This header file provides functions to set bits in various integer types.
+
+### Functions
+
+#### Set Bit at Specified Position to 1 in Various Integer Types
+
+* `set_u8bit`: Sets a bit at position 0-7 of an unsigned 8-bit integer.
+* `set_u16bit`, `set_u32bit`, `set_u64bit`: Sets bits at positions 0-15, 0-[2D[K
+0-31, and 0-63 respectively of an unsigned 16-bit, 32-bit, or 64-bit intege[6D[K
+integer.
+* `set_8bit`, `set_16bit`, `set_32bit`, `set_64bit`: Sets a bit at position[8D[K
+position 0-7 (unsigned), 0-15 (signed), 0-31 (signed), and 0-63 (signed) of[2D[K
+of an unsigned or signed integer respectively.
+* `set_char_bit` and `set_short_bit`: Sets bits at positions 0-7 and 0-15 ([1D[K
+(for short integers) of a character to 1.
+* `set_int_bit` and `set_long_bit`: Sets bits at positions 0-31 (unsigned),[11D[K
+(unsigned), 0-63 (signed), and 0-63 (signed) respectively of an integer to [K
+1.
+
+### Exceptions
+
+* If the specified position is out of range, an "OutOfRange Error" message [K
+is printed and the function returns the original value.
+* If the bit is already set, an "outOfRange Error" message is printed and t[1D[K
+the function returns the original value.
+

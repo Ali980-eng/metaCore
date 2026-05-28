@@ -1,0 +1,88 @@
+﻿Boolean Container Documentation
+
+	Overview
+
+		This is a compact boolean container designed to efficiently manage multiple boolean values in a single byte.
+		It provides a set of functions for setting and retrieving boolean values at specific positions, as creating an empty structure.
+
+	Functions
+
+		set()
+
+			Set or reset a boolean value at position 0
+
+			Parameters:
+				current: The current boolean structure to modify
+				value: The new boolean value to set (true sets bit, false resets bit)
+			Returns: A new boolean structure with the specified bit modified
+
+			boolean set(boolean current, bool value) {
+				return value ? (boolean){set_u8bit(current.value, 0)} 
+							: (boolean){reset_u8bit(current.value, 0)};
+			}
+
+		get()
+
+			Retrieve the boolean value at position 0
+
+			Parameters:
+				current: The current boolean structure to read from
+			Returns: The boolean value at position 0 (true for 1, false for 0)
+
+			bool get(boolean current) {
+				return get_u8bit(current.value, 0);
+			}
+
+		empty()
+
+			Create an empty boolean structure (all bits set to 0)
+
+			Returns: A new boolean structure with value 0 (all bits cleared)
+			
+			boolean empty() {
+				return (boolean){0};
+			}
+
+		get_in()
+
+			Retrieve the boolean value at a specified bit position
+
+			Parameters:
+				current: The boolean structure to read from
+				position: The bit position to read (07, where 0 is LSB)
+			Returns: The boolean value stored at the specified position
+
+			bool get_in(boolean current, uint8_t position) {
+				return get_u8bit(current.value, position);
+			}
+
+		set_in()
+
+			Set or reset a boolean bit at a specified position
+
+			Parameters:
+				current: The current boolean structure to modify
+				value: The new boolean value to set (true sets bit, false resets bit)
+				position: The bit position to modify (07, where 0 is LSB)
+			Returns: A new boolean structure with the specified bit modified
+
+			boolean set_in(boolean current, bool value, uint8_t position) {
+				return value ? (boolean){set_u8bit(current.value, position)} 
+							: (boolean){reset_u8bit(current.value, position)};
+			}
+
+		Usage Example
+
+			// Create an empty boolean structure
+			boolean flags = empty();
+
+			// Set bit 0 to true
+			flags = set(flags, true, 0);
+
+			// Get the value of bit 1
+			bool bit0 = get(flags, 1);
+
+			// Check if all bits are 0
+			bool isEmpty_check = isEmpty(flags);
+
+	Note: This documentation is based on the provided C+code and may not include any additional comments or documentation that may be included in future revisions.

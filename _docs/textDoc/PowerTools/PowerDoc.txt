@@ -1,0 +1,53 @@
+﻿Here is the plain text documentation for the provided PowerShell code:
+
+# Module PowerDoc.psm1
+
+This module generates documentation (TXT, MD, Doxygen, or All formats) for [K
+code files using Ollama.
+
+## Functions
+
+### Set-OllamaModel
+Set the Ollama model to use for documentation generation. This function cha[3D[K
+changes the global model name used by Invoke-AutoDoc.
+* Parameters:
+	+ Name: The name of the Ollama model (e.g., "phi3:mini", "llama3.2:3b")
+* Returns:
+	+ None
+
+### Invoke-AutoDoc
+Generate documentation for code files using Ollama. This function supports [K
+TXT, MD, Doxygen, or All formats and processes a single file or a folder.
+* Parameters:
+	+ Path: The path to a file or folder (optional)
+	+ OutputFormat: The format of the output (e.g., 'txt', 'md', 'doxygen', or [K
+'All' (generates all three))
+	+ OutputDir: The directory where generated documentation will be saved
+	+ Recurse: If Path is a folder, process all matching files recursively
+	+ Extensions: File extensions to include (default includes common languages[9D[K
+languages)
+	+ Force: Overwrite existing output files
+* Returns:
+	+ None
+
+### Document-File
+Document a single file using Ollama. This function generates Doxygen or Mar[3D[K
+Markdown output depending on the specified format.
+* Parameters:
+	+ FilePath: The path of the file to document
+	+ OutputFormat: The format of the output (e.g., 'doxygen', 'md', or 'All' ([1D[K
+(generates all three))
+	+ OutputDir: The directory where generated documentation will be saved
+	+ Force: Overwrite existing output files
+* Returns:
+	+ None
+
+### Document-File - Main Script Logic
+Check Ollama availability, check if the model exists and pull it if needed,[7D[K
+needed, create a base output directory, and resolve paths for single files [K
+or folders.
+
+## Global Configuration
+Set the default Ollama model to "phi3:mini". This can be changed with Set-O[5D[K
+Set-OllamaModel.
+

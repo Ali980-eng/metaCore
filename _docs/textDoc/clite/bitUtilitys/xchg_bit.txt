@@ -1,0 +1,61 @@
+﻿**xchg_bit.h**
+
+Bit exchange operations for integers of various sizes.
+
+This header file provides functions to exchange (swap) two bit positions in[2D[K
+in 8-bit, 16-bit, 32-bit, and 64-bit integers, both signed and unsigned var[3D[K
+variants. The exchange operation swaps the bits at two specified positions [K
+only if they differ.
+
+**Functions**
+
+### Unsigned Variants
+
+* `xchg_u8bit`: Exchange two bit positions in an 8-bit unsigned integer.
+* `xchg_u16bit`: Exchange two bit positions in a 16-bit unsigned integer.
+* `xchg_u32bit`: Exchange two bit positions in a 32-bit unsigned integer.
+* `xchg_u64bit`: Exchange two bit positions in a 64-bit unsigned integer.
+
+### Signed Variants
+
+* `xchg_8bit`: Wrapper function that converts signed value to unsigned, per[3D[K
+performs bit exchange, and then converts back to signed. Swaps bits at posi[4D[K
+positions pos1 and pos2.
+* `xchg_16bit`: Wrapper function that converts signed value to unsigned, pe[2D[K
+performs bit exchange, and then converts back to signed. Swaps bits at posi[4D[K
+positions pos1 and pos2.
+* `xchg_32bit`: Wrapper function that converts signed value to unsigned, pe[2D[K
+performs bit exchange, and then converts back to signed. Swaps bits at posi[4D[K
+positions pos1 and pos2.
+* `xchg_64bit`: Wrapper function that converts signed value to unsigned, pe[2D[K
+performs bit exchange, and then converts back to signed. Swaps bits at posi[4D[K
+positions pos1 and pos2.
+
+### Example Usage
+
+```c
+int8_t xchg_u8bit(int8_t value, uint8_t pos1, uint8_t pos2) {
+    return (int8_t)xchg_u8bit((uint8_t) value, pos1, pos2);
+}
+
+int16_t xchg_16bit(int16_t value, uint8_t pos1, uint8_t pos2) {
+    return (int16_t)xchg_u16bit((uint16_t) value, pos1, pos2);
+}
+```
+
+**Notes**
+
+* The exchange operation swaps the bits at two specified positions only if [K
+they differ.
+* If both bits have the same value (both 0 or both 1), no exchange occurs a[1D[K
+and the original value is returned.
+* Position 0 represents the least significant bit (LSB).
+* All functions validate input positions and return 0 if positions exceed v[1D[K
+valid range. Error messages are printed to console for invalid positions.
+* Position 0 in signed variants corresponds to the LSB, but does not affect[6D[K
+affect the sign bit of an integer.
+
+**Author**
+
+Ali Lafi
+

@@ -1,0 +1,74 @@
+﻿# AutoDoc.ps1
+A PowerShell script for generating documentation from source code.
+
+## Description
+AutoDoc.ps1 is a script that uses Ollama to generate documentation for C/C+[4D[K
+C/C++, Java, PowerShell, Python, C#, and JavaScript/TypeScript files. It su[2D[K
+supports multiple output formats including Doxygen, Markdown, and Plain Tex[3D[K
+Text.
+
+## Functions
+
+### Get-LanguageFromExtension
+Determines the programming language from a file extension.
+* Parameters:
+	+ $Extension (string)
+* Returns:
+	+ string (language code)
+
+### Document-File
+Documents a single file by processing its content, language, and output for[3D[K
+format.
+* Parameters:
+	+ $FilePath (string)
+	+ $OutputFormat (string)
+	+ $OutputDir (string)
+	+ $Force (bool)
+* Returns: None
+
+### Main Script
+Checks Ollama version, pulls a model, creates an output directory, and reso[4D[K
+resolves the input path. It then documents files in the specified folder or[2D[K
+or recursively through subfolders.
+
+## Parameters
+
+| Parameter | Description |
+| --- | --- |
+| Path | The file or folder path to document. Default: .\Main.cpp |
+| OutputFormat | The desired output format (doxygen, markdown, plain text).[6D[K
+text). Default: doxygen |
+| OutputDir | The base directory for the output files. Default: .Documentat[11D[K
+.Documentation |
+| Recurse | Recursively process subfolders in the input path. Default: Fals[4D[K
+False |
+| Extensions | An array of file extensions to consider when determining the[3D[K
+the language code. Default: (.cpp, .c, .h, .hpp, .java, .ps1, .psm1, .py, .[1D[K
+.cs, .js, .ts) |
+| Force | Overwrite existing output files if they already exist. Default: F[1D[K
+False |
+| Model | The name of the Ollama model to use. Default: llama3.2:1b |
+
+## Examples
+To document a single file, use:
+```powershell
+.\AutoDoc.ps1 -Path .\Main.cpp -OutputFormat doxygen
+```
+To document files in all folders recursively through subfolders, use:
+```powershell
+.\AutoDoc.ps1 -Path .\src -OutputFormat All -Recurse -Extensions @('.cpp', [K
+'.h')
+```
+Note: You need to install Ollama from its website: https://ollama.com
+
+## Usage
+To run the script, navigate to the AutoDoc.ps1 file and use it as a script.[7D[K
+script. You can specify the input path, output format, and other parameters[10D[K
+parameters using the parameters listed above.
+
+```powershell
+.\AutoDoc.ps1 -Path .\main.cpp -OutputFormat doxygen
+```
+This will document the `main.cpp` file in the specified output directory wi[2D[K
+with Doxygen format and language code for C++.
+

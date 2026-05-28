@@ -1,0 +1,93 @@
+﻿**warning.hpp**
+================
+
+A header file for warning messages in the MetaCore library.
+
+**Description**
+---------------
+
+This header file defines functions for displaying various warning messages [K
+related to indexing, deprecated features, bad input, and undefined behavior[8D[K
+behavior. The functions are designed to provide informative messages to dev[3D[K
+developers when certain conditions are met, such as using deprecated featur[6D[K
+features or encountering bad input.
+
+**Functions**
+-------------
+
+### Warning Class
+
+The `warning` class is the core of this header file. It provides a way to c[1D[K
+create custom warning messages with names, descriptions, and times associat[8D[K
+associated with them.
+
+#### Member Functions
+
+*   `get()`: Gets the string representation of the warning.
+*   `get_name()`: Gets the name of the warning.
+*   `get_time()`: Gets the time associated with the warning.
+*   `get_des()`: Gets the description of the warning.
+*   `replace(const std::string &name, const std::string &description)`: Rep[3D[K
+Replaces the name and description of the warning.
+*   `clear()`: Clears the name, description, and time of the warning.
+*   `SRV()`: Returns a default value of type `T` (template parameter).
+*   `operator=(const std::string& name)`: Assigns a string value to the war[3D[K
+warning's name and resets the description.
+*   `operator=(const warning& other)`: Copies another warning object to thi[3D[K
+this one.
+*   `operator=(const warning& other) noexcept`: Deep copies all attribute a[1D[K
+attributes of another warning object to this one.
+*   `printingFormat()`: Generates a formatted string representation of the [K
+warning.
+
+### Factory Functions
+
+The following factory functions are used to create custom warnings:
+
+#### Invalid Argument Warning
+
+*   `wrong_argument()`: Creates an invalid argument warning with the name "[1D[K
+"Invalid Argument".
+*   `invalid_argument(const std::string &description)`: Creates an invalid [K
+argument warning with the given description.
+
+#### Out Of Range Warning
+
+*   `OutOfRangeException()`: Creates an out of range warning with the name [K
+"Out Of Range" and the given description.
+*   `OutOfRange(const std::string &description)`: Creates an out of range w[1D[K
+warning with the given description.
+
+#### Internal Problem Warning
+
+*   `internal_problem()`: Creates an internal problem warning with the name[4D[K
+name "Internal Problem".
+*   `internal_problem(const std::string &description)`: Creates an internal[8D[K
+internal problem warning with the given description.
+
+#### Bad Input Warning
+
+*   `bad_input()`: Creates a bad input warning with the name "Bad Input".
+*   `bad_input(const std::string &description)`: Creates a bad input warnin[6D[K
+warning with the given description.
+
+#### Wrong Indexing Warning
+
+*   `wrong_indexing()`: Creates a wrong indexing warning without a descript[8D[K
+description.
+*   `wrong_indexing(const std::string &description)`: Creates a wrong index[5D[K
+indexing warning with the given description.
+
+### Other Functions
+
+The following functions are not related to warnings but can be used in conj[4D[K
+conjunction with them:
+
+#### printWarning()
+
+A function that prints the string representation of a warning to the standa[6D[K
+standard output stream.
+
+*   `printWarning(std::ostream& os, const warning w)`: Outputs the warning [K
+information to the provided output stream.
+

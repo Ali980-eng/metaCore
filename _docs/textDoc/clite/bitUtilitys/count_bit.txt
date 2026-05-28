@@ -1,0 +1,71 @@
+﻿Bit Count Utilities
+
+	This file provides functions to count set (1) or unset (0) bits in various integer types.
+
+	Functions
+
+		count_u8bit(uint8_t num, bool ones) Counts bits in an 8-bit value.
+			Parameters:
+				num: The value to analyze.
+				ones: If true counts 1-bits, else counts 0-bits.
+			Returns: Number of bits matching the criteria.
+		count_u16bit(uint16_t num, bool ones) Counts bits in a 16-bit value.
+			Parameters:
+				num: The value to analyze.
+				ones: If true counts 1-bits, else counts 0-bits.
+			Returns: Number of bits matching the criteria.
+		count_u32bit(uint32_t num, bool ones) Counts bits in a 32-bit value.
+			Parameters:
+				num: The value to analyze.
+				ones: If true counts 1-bits, else counts 0-bits.
+			Returns: Number of bits matching the criteria.
+		count_u64bit(uint64_t num, bool ones) Counts bits in a 64-bit value.
+			Parameters:
+				num: The value to analyze.
+				ones: If true counts 1-bits, else counts 0-bits.
+			Returns: Number of bits matching the criteria.
+		count_8bit(int8_t num, bool ones) Counts bits in a signed 8-bit value.
+			Parameters:
+				num: The value to analyze.
+				ones: If true counts 1-bits, else counts 0-bits.
+			Returns: Number of bits matching the criteria.
+		count_16bit(int16_t num, bool ones) Counts bits in a signed 16-bit value.
+			Parameters:
+				num: The value to analyze.
+				ones: If true counts 1-bits, else counts 0-bits.
+			Returns: Number of bits matching the criteria.
+		count_32bit(int32_t num, bool ones) Counts bits in a signed 32-bit value.
+			Parameters:
+				num: The value to analyze.
+				ones: If true counts 1-bits, else counts 0-bits.
+			Returns: Number of bits matching the criteria.
+		count_64bit(int64_t num, bool ones) Counts bits in a signed 64-bit value.
+			Parameters:
+				num: The value to analyze.
+				ones: If true counts 1-bits, else counts 0-bits.
+			Returns: Number of bits matching the criteria.
+		count_char_bit(char c, bool ones) Counts bits in a character and its corresponding 8-bit signed value.
+			Parameters:
+				c: The character to analyze.
+				ones: If true counts 1-bits, else counts 0-bits.
+			Returns: Number of bits matching the criteria.
+		count_short_bit(short num, bool ones) Counts bits in a signed 16-bit short integer value.
+			Parameters:
+				num: The value to analyze.
+				ones: If true counts 1-bits, else counts 0-bits.
+			Returns: Number of bits matching the criteria.
+		count_int_bit(int num, bool ones) Counts bits in a signed integer and its corresponding unsigned integer value.
+			Parameters:
+				num: The value to analyze.
+				ones: If true counts 1-bits, else counts 0-bits.
+			Returns: Number of bits matching the criteria.
+		count_long_bit(long num, bool ones) Counts bits in a signed long integer and its corresponding unsigned integer value.
+			Parameters:
+				num: The value to analyze.
+				ones: If true counts 1-bits, else counts 0-bits.
+			Returns: Number of bits matching the criteria.
+
+	Notes
+
+		This file provides functions for analyzing bit patterns and determining bit populations in various integer types.
+		It supports 8-bit, 16-bit, 32-bit, and 64-bit signed and unsigned integers.

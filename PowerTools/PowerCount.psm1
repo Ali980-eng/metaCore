@@ -34,7 +34,7 @@ function Resolve-TargetPath {
     Count-CodeLines -Paths @('lite', 'clite')
     Count-CodeLines -Paths @('C:\Project\lib1', 'C:\Project\lib2')
 #>
-function Count-CodeLines {
+function CountCodeLines {
     param(
         [Parameter(Mandatory=$true, ValueFromPipeline=$true)]
         [string[]]$Paths,
@@ -156,7 +156,7 @@ function Measure-CodeLines {
         [Parameter(Mandatory=$true)]
         [string]$Path,
         
-        [string[]]$Extensions = @('.cpp', '.c', '.h', '.hpp', '.ps1')
+        [string[]]$Extensions = @('.cpp', '.c', '.h', '.hpp', '.ps1', '.psm1', '.py')
     )
 
     $resolvedPath = Resolve-TargetPath $Path
@@ -412,4 +412,9 @@ New-Alias -Name Quick-CountLines -Value Measure-CodeLines -Force
 New-Alias -Name Count-FilesByExtension -Value Measure-FilesByExtension -Force
 
 # Export functions
-Export-ModuleMembers -Function @('Count-CodeLines', 'Measure-CodeLines', 'Measure-FilesByExtension', 'Get-FileSizeTotal', 'Resolve-TargetPath') -Alias @('Quick-CountLines', 'Count-FilesByExtension')
+# Create aliases for backward compatibility
+New-Alias -Name Quick-CountLines -Value Measure-CodeLines -Force
+New-Alias -Name Count-FilesByExtension -Value Measure-FilesByExtension -Force
+
+# Export functions
+Export-ModuleMember -Function @('CountCodeLines', 'Measure-CodeLines', 'Measure-FilesByExtension', 'Get-FileSizeTotal', 'Resolve-TargetPath') -Alias @('Quick-CountLines', 'Count-FilesByExtension')

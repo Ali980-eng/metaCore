@@ -1,0 +1,112 @@
+﻿**type.hpp**
+
+This is a header file that defines functions for getting type names as stri[4D[K
+strings and checking types. It includes the necessary headers and uses them[4D[K
+them to implement the various functions.
+
+### Functions
+
+#### type()
+
+* Returns the name of the given type as a string.
++ **Template Parameters:** `T`
+	+ Default implementation: returns "***" for any type
+* Example:
+```cpp
+std::string type<int>();
+```
+
+#### is_bool()
+
+* Returns true if the given value matches the checked type, false otherwise[9D[K
+otherwise.
++ **Template Parameter:** `T` (not used in this function)
+* Returns: `true` or `false`
+* Example:
+```cpp
+bool result = is_bool<short>();
+```
+
+#### is_char()
+
+* Returns true since the given value matches the checked type.
++ Template Parameters: `T` (not used in this function)
+* Returns: `true` or `false`
+* Example:
+```cpp
+std::string charName = is_char<char>();
+```
+
+#### is_short()
+
+* Returns true since the given value matches the checked type.
++ Template Parameters: `T` (not used in this function)
+* Returns: `true` or `false`
+* Example:
+```cpp
+std::string shortName = is_short<short>();
+```
+
+#### is_int()
+
+* Returns true since the given value matches the checked type.
++ Template Parameter: `T`
+* Returns: `true` or `false`
+* Example:
+```cpp
+bool result = is_int<int>();
+```
+
+#### is_float()
+
+* Returns true since the given value matches the checked type.
++ Template Parameters: `T`
+* Returns: `true` or `false`
+* Example:
+```cpp
+std::string floatName = is_float<float>();
+```
+
+#### is_double()
+
+* Returns true since the given value matches the checked type.
++ Template Parameters: `T`
+* Returns: `true` or `false`
+* Example:
+```cpp
+bool result = is_double<double>();
+```
+
+#### is_string()
+
+* Returns true if the given input matches the checked type, false otherwise[9D[K
+otherwise.
++ Template Parameter: `T`
+* Returns: `true` or `false`
+* Example:
+```cpp
+std::string stringName = is_string<std::string>();
+```
+
+#### is_numeric()
+
+* Returns true since the given value matches the checked type.
++ Template Parameters: `T`
+* Returns: `true` or `false`
+* Example:
+```cpp
+bool result = is_numeric<int>();
+```
+
+### Specializations
+
+The file also includes specializations for numeric types, such as short, in[2D[K
+int, float, and double.
+
+Note that this header file does not include any implementation of the funct[5D[K
+functions. The actual implementation would be in a separate source file (e.[3D[K
+(e.g., `type.cpp`).
+
+Also, note that the boolean conversion function `boolean_msg` is defined se[2D[K
+separately from the type checking functions.
+

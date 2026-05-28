@@ -1,0 +1,124 @@
+﻿Bit Utility S Functions
+====================
+
+### Description
+
+This header file provides a collection of functions for working with bits i[1D[K
+in the Metacore::Clite framework.
+
+### Functions
+
+#### `count_bit()`
+
+Counts the number of 1s in an integer.
+
+* Returns: An unsigned integer representing the count of 1s.
+* Parameters:
+	+ `x`: The input integer to check.
+* Examples:
+
+    ```cpp
+int x = 5;
+unsigned int count = count_bit(x);
+std::cout << "Number of 1s: " << count << std::endl;
+```
+
+#### `get_bit()`
+
+Gets the value of a specific bit in an integer.
+
+* Returns: The value of the specified bit (0 for all bits, 1 for the specif[6D[K
+specified bit).
+* Parameters:
+	+ `x`: The input integer to check.
+	+ `bit`: The position of the bit to retrieve (starting from 0).
+* Examples:
+
+    ```cpp
+int x = 5;
+unsigned int value = get_bit(x, 2);
+std::cout << "Value of bit 2: " << value << std::endl;
+```
+
+#### `reset_bit()`
+
+Resets a specific bit in an integer to 0.
+
+* Returns: None (does not modify the input integer)
+* Parameters:
+	+ `x`: The input integer.
+* Examples:
+
+    ```cpp
+int x = 5;
+reset_bit(x, 2);
+std::cout << "Value of bit 2 after reset: " << get_bit(x, 2) << std::endl;
+```
+
+#### `set_bit()`
+
+Sets a specific bit in an integer to 1.
+
+* Returns: None (does not modify the input integer)
+* Parameters:
+	+ `x`: The input integer.
+	+ `bit`: The position of the bit to set (starting from 0).
+* Examples:
+
+    ```cpp
+int x = 5;
+set_bit(x, 2);
+std::cout << "Value of bit 2 after setting: " << get_bit(x, 2) << std::endl[9D[K
+std::endl;
+```
+
+#### `toggle_bit()`
+
+Toggles the value of a specific bit in an integer.
+
+* Returns: None (does not modify the input integer)
+* Parameters:
+	+ `x`: The input integer.
+	+ `bit`: The position of the bit to toggle (starting from 0).
+* Examples:
+
+    ```cpp
+int x = 5;
+toggle_bit(x, 2);
+std::cout << "Value of bit 2 after toggling: " << get_bit(x, 2) << std::end[8D[K
+std::endl;
+```
+
+#### `boolean()`
+
+Converts an integer into a boolean value.
+
+* Returns: A boolean (true if the input is non-zero, false otherwise)
+* Parameters:
+	+ `x`: The input integer
+* Examples:
+
+    ```cpp
+int x = 5; // true
+bool result = boolean(x);
+std::cout << "Result: " << std::boolalpha << result << std::endl;
+```
+
+#### `xchg_bit()`
+
+Exchanges the value of two bits in an integer.
+
+* Returns: None (does not modify the input integer)
+* Parameters:
+	+ `x`: The input integer.
+	+ `bit1`: The position of the first bit to exchange (starting from 0).
+	+ `bit2`: The position of the second bit to exchange (starting from 0).
+* Examples:
+
+    ```cpp
+int x = 5;
+xchg_bit(x, 1, 2);
+std::cout << "Value of bit 2 after exchange: " << get_bit(x, 2) << std::end[8D[K
+std::endl;
+```
+

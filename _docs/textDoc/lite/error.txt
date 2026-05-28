@@ -1,0 +1,83 @@
+﻿error Management and Reporting System
+================================
+
+### Overview
+
+This file provides a comprehensive error handling system with an error clas[4D[K
+class that tracks error information including name, description, and occurr[6D[K
+occurrence time. It also provides helper functions for creating common erro[4D[K
+error types through the err namespace.
+
+### Classes
+
+*   `error`: Main error class for storing and managing error information.
+*   `err`: Helper functions for creating predefined error types.
+
+### Functions
+
+#### Constructors
+
+*   `error()`: Default constructor that creates an unknown error.
+*   `error(const std::string& name) noexcept`: Constructor that creates an [K
+error with a name.
+*   `error(const std::string& name, const std::string& description) noexcep[7D[K
+noexcept`: Constructor that creates an error with name and description.
+
+#### Accessor Functions
+
+*   `empty(bool isName) noexcept`: Checks if the error name or description [K
+is empty.
+*   `length(bool isName) noexcept`: Returns the length of the error name or[2D[K
+or description.
+
+#### Output Functions
+
+*   `operator<<(std::ostream& os, const error& e) noexcept`: Stream output [K
+operator for the error class.
+*   `std::ostream& operator<<(std::ostream& os, const error& e) noexcept`: [K
+Stream output operator for the error class.
+
+#### Error Creation Functions
+
+*   `errTimer`: Benchmark code timer for measuring execution time.
+*   `wrong_indexing()`, `wrong_declaration()`, `wrong_construction()`, `bad[4D[K
+`bad_input()`, `undefined_behavior()`, `invalid_argument()`, `OutOfRange()`[14D[K
+`OutOfRange()`, `internal_problem()`: Helper functions for creating predefi[7D[K
+predefined error types.
+
+### Key Functions
+
+#### Error Class Methods
+
+*   `printingFormat()`: Generates a formatted string representation of the [K
+error.
+*   `operator<<():` Multiple constructors for error initialization.
+
+### Code Structure
+
+The code is organized into namespaces:
+
+*   `lite`: Main namespace containing the error class and helper functions.[10D[K
+functions.
+*   `err`: Helper namespace providing predefined error types.
+
+#### err Namespace Functions
+
+*   `wrong_indexing()`
+*   `wrong_declaration()`
+*   `wrong_construction()`
+*   `bad_input()`
+*   `undefined_behavior()`
+*   `invalid_argument()`
+*   `OutOfRange()`
+*   `internal_problem()`
+
+These functions create predefined error types with specific descriptions an[2D[K
+and attributes.
+
+#### error Class Methods
+
+*   `empty(bool isName)`
+*   `length(bool isName)`
+*   `printingFormat()`
+

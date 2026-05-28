@@ -1,0 +1,131 @@
+﻿exception.hpp
+================
+
+A comprehensive exception class hierarchy for the lite library.
+
+Description
+-----------
+
+The exception class hierarchy provides a structured and consistent way to h[1D[K
+handle errors in the lite library. The base class `lite::exception` serves [K
+as the foundation for all exceptions, while additional classes represent sp[2D[K
+specific error conditions, such as internal library errors, out-of-range ac[2D[K
+access attempts, undefined behavior detection, wrong indexing operations, i[1D[K
+incorrect variable or type declarations, invalid object construction, and i[1D[K
+invalid input data.
+
+Functions
+---------
+
+### exception
+
+* Constructs an exception with an optional message.
+	+ Parameters:
+		- `message`: The error message (default: empty string)
+	* Virtual destructor.
+	+ Returns: A pointer to the error message C-string
+* Gets the error message as a C-string.
+	+ Returns: Reference to the error message string
+
+### internal_exception
+
+* Constructs an internal_exception with an optional message.
+	+ Parameters:
+		- `message`: The error message (default: "Internal library error")
+	* Virtual destructor.
+
+### OutOfRange
+
+* Constructs an OutOfRange exception with index and size information.
+	+ Parameters:
+		- `index`: The out-of-range index
+		- `size`: The maximum valid size
+* Gets the out-of-range index that caused the exception.
+	+ Returns: The problematic index value
+
+### undefined_behavior
+
+* Constructs an undefined_behavior exception with an optional message.
+	+ Parameters:
+		- `message`: The error message (default: "Undefined behavior detected")
+* Virtual destructor.
+
+### wrong_indexing
+
+* Constructs a wrong_indexing exception with the problematic index.
+	+ Parameters:
+		- `index`: The invalid index value
+* Gets the invalid index value that caused the exception.
+	+ Returns: The problematic index value
+
+### wrong_declaration
+
+* Constructs a wrong_declaration exception for type mismatches.
+	+ Parameters:
+		- `message`: The error message (default: "Incorrect declaration")
+* Virtual destructor.
+
+### wrong_construction
+
+* Constructs a wrong_construction exception for construction failures.
+	+ Parameters:
+		- `message`: The error message (default: "Object construction failed")
+* Virtual destructor.
+
+### wrong_input
+
+* Constructs a wrong_input exception with the problematic input.
+	+ Parameters:
+		- `input`: The invalid input value
+* Gets the invalid input value that caused the exception.
+	+ Returns: Reference to the problematic input string
+
+Namespace Exception
+--------------------
+
+Helper functions in this namespace provide convenient ways to create except[6D[K
+exceptions with predefined messages and context information.
+
+### out_of_range
+
+Creates an OutOfRange exception with index and size information.
+
+* Parameters:
+	+ `index`: The out-of-range index
+	+ `size`: The maximum valid size
+* Returns: OutOfRange exception object with formatted message
+
+### wrong_indexing
+
+Creates a wrong_indexing exception with the problematic index.
+
+* Parameters:
+	+ `index`: The invalid index value
+* Returns: wrong_indexing exception object with formatted message
+
+### type_mismatch
+
+Creates a wrong_declaration exception for type mismatches.
+
+* Returns: wrong_declaration exception object
+
+### construction_failed
+
+Creates a wrong_construction exception for construction failures.
+
+* Returns: wrong_construction exception object
+
+### invalid_input
+
+Creates a wrong_input exception with the problematic input.
+
+* Parameters:
+	+ `input`: The invalid input value
+* Returns: wrong_input exception object with formatted message
+
+### undefined
+
+Creates an undefined_behavior exception.
+
+* Returns: undefined_behavior exception object
+

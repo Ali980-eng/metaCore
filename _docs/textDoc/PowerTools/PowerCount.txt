@@ -1,0 +1,109 @@
+﻿Here is the plain text documentation for the PowerShell code:
+
+PowerCount Module - Count Lines of Code in Libraries
+=====================================================
+
+This module provides functions to count lines of code in libraries and file[4D[K
+files. It supports both absolute and relative paths.
+
+Functions
+--------
+
+### Resolve-TargetPath
+
+Resolves a target path to an absolute path.
+
+#### Description
+
+This function takes a relative or absolute path as input and returns the re[2D[K
+resolved absolute path.
+
+#### Parameters
+
+* `$Path`: The relative or absolute path to resolve.
+* `Extensions`: An array of file extensions to include in the count (option[7D[K
+(optional).
+
+#### Returns
+
+A string representing the resolved absolute path.
+
+### CountCodeLines
+
+Counts lines of code in a library or multiple libraries and returns a repor[5D[K
+report with total lines of code, files by extension, and directory size.
+
+#### Description
+
+This function takes an array of paths as input and counts lines of code for[3D[K
+for each file. It also displays a table with total lines of code, files by [K
+extension, and directory size.
+
+#### Parameters
+
+* `$Paths`: An array of paths to count lines of code from.
+* `Extensions`: An array of file extensions to include in the count (option[7D[K
+(optional).
+
+#### Returns
+
+A dictionary containing:
+
+* `TotalLines`: The total number of lines of code.
+* `FileCount`: The number of files counted.
+* `Details`: A table with file statistics.
+
+### Measure-CodeLines
+
+Measures the size of a directory and its subdirectories.
+
+#### Description
+
+This function takes an array of paths as input and measures the size of eac[3D[K
+each directory. It also displays a report with total size, average size, an[2D[K
+and file count.
+
+#### Parameters
+
+* `$Path`: An array of paths to measure sizes from.
+* `Extensions`: An array of file extensions to include in the count (option[7D[K
+(optional).
+
+#### Returns
+
+A dictionary containing:
+
+* `TotalSize`: The total size of directories.
+* `AverageSize`: The average size of directories.
+* `FileCount`: The number of files measured.
+* `Details`: A table with directory statistics.
+
+### Get-FileSizeTotal
+
+Gets the total size of a file or directory.
+
+#### Description
+
+This function takes an array of paths as input and gets the total size of e[1D[K
+each file. It also displays a report with human-readable format (B, KB, MB,[3D[K
+MB, GB).
+
+#### Parameters
+
+* `$Path`: An array of paths to get sizes from.
+* `Extensions`: An array of file extensions to include in the count (option[7D[K
+(optional).
+
+#### Returns
+
+A dictionary containing:
+
+* `TotalSize`: The total size of files.
+* `AverageSize`: The average size of files.
+
+### New-Alias and Export-ModuleMember
+
+Export functions that provide backward compatibility with older versions of[2D[K
+of PowerShell. These aliases can be used to quickly call the corresponding [K
+functions in the module.
+

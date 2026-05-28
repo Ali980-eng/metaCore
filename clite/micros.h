@@ -20,7 +20,7 @@
  * - Assertion macro (ASSERT)
  * - Object/struct definition macro (cobject)
  * - Character constants (cnl, ctab)
- * - String type alias (cstr)
+ * - String type alias (cstrptr)
  * 
  * @functions (Standard Mode)
  * - length()           : Get string length
@@ -168,7 +168,7 @@
             printf("\n-------------------------------");        \
             printf("\n<<<<<<<<< test summary >>>>>>>>");        \
             printf("\n-------------------------------");        \
-            printf("TEST NAME: %s", testName);                  \
+            printf("\nTEST NAME: %s", testName);                  \
             printf("\npassed tests: %i", (int)tests_passed);    \
             printf("\nfailed tests: %i", (int)tests_failed);    \
             printf("\ntotal tests: %i", (int)total_tests);      \
@@ -255,32 +255,35 @@
         
         #define ctab '\t'
 
-        #define cstr char*
+        #define cstrptr char*
 
-        size_t length(const cstr value) {
+        #define cstr(name, string) \
+            char name[] = string;
+
+        size_t length(const cstrptr value) {
             return (value != NULL) ? strlen(value) : 0;
         }
 
-        bool equal(const cstr value_1, const cstr value_2) {
+        bool equal(const cstrptr value_1, const cstrptr value_2) {
             if(value_1 == NULL || value_2 == NULL) return false;
             return strcmp(value_1, value_2) == 0 ? true : false;
         }
 
-        cstr concatenate(cstr value_1, const cstr value_2) {
+        cstrptr concatenate(cstrptr value_1, const cstrptr value_2) {
             if(value_1 == NULL || value_2 == NULL) return value_1;
             return strcat(value_1, value_2);
         }
 
-        bool is_empty(const cstr value) {
+        bool is_empty(const cstrptr value) {
             return (value == NULL || strlen(value) == 0) ? true : false;
         }
 
-        void* cstr_empty(cstr value) {
+        void* cstr_empty(cstrptr value) {
             if(is_empty(value)) return NULL;
             return realloc(value, 1);
         }
 
-        void cstr_free(cstr value) {
+        void cstr_free(cstrptr value) {
             if(is_empty(value)) {
                 printf("Error: can't free NULL or empty strings.\n");
                 return;
@@ -288,7 +291,7 @@
             free(value);
         }
 
-        bool exist(const cstr value, char c) {
+        bool exist(const cstrptr value, char c) {
             if(value == NULL || is_empty(value)) {
                 printf("bad input: input string is empty.\n");
                 return false;
@@ -299,7 +302,7 @@
             return false;
         }
 
-        bool sub_exist(const cstr value_1, const cstr value_2) {
+        bool sub_exist(const cstrptr value_1, const cstrptr value_2) {
             if(value_1 == NULL || value_2 == NULL || is_empty(value_1) || is_empty(value_2)) {
                 printf("bad input: one of the input strings is empty.\n");
                 return false;
@@ -320,7 +323,7 @@
             return false;
         }
 
-        size_t count(const cstr value, char c) {
+        size_t count(const cstrptr value, char c) {
             if(value == NULL || is_empty(value)) {
                 printf("bad input: input string is empty.");
                 return (size_t)0;
@@ -332,10 +335,11 @@
             return result;
         }
 
-        #define jump goto
+        #define jump(label) \
+            goto label;
 
-        #define jump_if(condition, label) \ 
-            if(condition) goto label;
+        #define jump_if(condition, label) \
+            if(condition) { goto label; }
 
     #endif // COBJECT_DATA
 

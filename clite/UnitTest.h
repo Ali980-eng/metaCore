@@ -245,43 +245,43 @@ bool string_test(const char *real, const char *expected, bool details, unsigned 
 
 #ifdef METACORE___CLITE_MICROS_H
 
-CTEST ctest_bool(bool real, bool expected, cstr name, cstr description)
+CTEST ctest_bool(bool real, bool expected, cstrptr name, cstrptr description)
 {
     CTEST newVal;
     return creatNew(newVal, name, description, real == expected);
 }
 
-CTEST ctest_char(char real, char expected, cstr name, cstr description)
+CTEST ctest_char(char real, char expected, cstrptr name, cstrptr description)
 {
     CTEST newVal;
     return creatNew(newVal, name, description, real == expected);
 }
 
-CTEST ctest_short(short real, short expected, cstr name, cstr description)
+CTEST ctest_short(short real, short expected, cstrptr name, cstrptr description)
 {
     CTEST newVal;
     return creatNew(newVal, name, description, real == expected);
 }
 
-CTEST ctest_int(int real, int expected, cstr name, cstr description)
+CTEST ctest_int(int real, int expected, cstrptr name, cstrptr description)
 {
     CTEST newVal;
     return creatNew(newVal, name, description, real == expected);
 }
 
-CTEST ctest_size(size_t real, size_t expected, cstr name, cstr description)
+CTEST ctest_size(size_t real, size_t expected, cstrptr name, cstrptr description)
 {
     CTEST newVal;
     return creatNew(newVal, name, description, real == expected);
 }
 
-CTEST ctest_long(long real, long expected, cstr name, cstr description)
+CTEST ctest_long(long real, long expected, cstrptr name, cstrptr description)
 {
     CTEST newVal;
     return creatNew(newVal, name, description, real == expected);
 }
 
-CTEST ctest_float(float real, float expected, float resolution, cstr name, cstr description)
+CTEST ctest_float(float real, float expected, float resolution, cstrptr name, cstrptr description)
 {
     if (resolution >= 5.0f)
     {
@@ -292,7 +292,7 @@ CTEST ctest_float(float real, float expected, float resolution, cstr name, cstr 
     return creatNew(newVal, name, description, 100 * (fabs(expected - real) / fabs(expected)) <= resolution);
 }
 
-CTEST ctest_double(double real, double expected, double resolution, cstr name, cstr description)
+CTEST ctest_double(double real, double expected, double resolution, cstrptr name, cstrptr description)
 {
     if (resolution >= 5.0)
     {
@@ -304,7 +304,7 @@ CTEST ctest_double(double real, double expected, double resolution, cstr name, c
 }
 
 
-CTEST string_ctest(const cstr real, const cstr expected, cstr name, cstr description)
+CTEST string_ctest(const cstrptr real, const cstrptr expected, cstrptr name, cstrptr description)
 {
     CTEST newVal;
     if (strlen(real) != strlen(expected))
@@ -319,13 +319,13 @@ CTEST string_ctest(const cstr real, const cstr expected, cstr name, cstr descrip
 
 #endif // METACORE___CLITE_MICROS_H
 
-#ifdef OPENUDT___CUDT_CSTRING_H
-bool string_test(cstring real, cstring expected, bool details, unsigned int seplen, char sepch)
+#ifdef OPENUDT___CUDT_cstrptrING_H
+bool string_test(cstrptring real, cstrptring expected, bool details, unsigned int seplen, char sepch)
 {
     return string_test(real.data, expected.data,
                        details, seplen, sepch);
 }
-#endif // OPENUDT___CUDT_CSTRING_H
+#endif // OPENUDT___CUDT_cstrptrING_H
 
 typedef struct 
 {
