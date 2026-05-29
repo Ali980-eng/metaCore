@@ -1,30 +1,19 @@
-﻿Bit Retrieval Utilities for Reading Individual Bits from Integers
-
+﻿clite/bitUtilitys/get_bit.h
     Overview
-
         This header provides a comprehensive set of functions for reading or retrieving the value of individual bits at specified positions from various integer types.
         It supports both signed and unsigned integer types ranging from 8-bit to 64-bit, as well as convenience wrappers for common types like char, short, int, and long.
-
     Functions
-
         get_u8bit
-
             Get bit value at specified position from 8-bit number
-
             Parameters:
                 num: The value to read (8-bit integer)
                 position: Bit position (0-7)
             Returns: True if the bit is 1, false if it's 0; out of range error and false if invalid position
             Example:
-
             uint8_t num = 0b10101010;
             bool result = get_u8bit(num, 7);
-
-
         get_8bit
-
             Get bit value at specified position from signed 8-bit number
-
             Parameters:
                 num: The value to read (signed 8-bit integer)
                 position: Bit position (0-7)
@@ -32,25 +21,17 @@
             Example:
             int8_t num = -1;
             bool result = get_8bit(num, 7);
-
-
         get_u16bit
-
             Get bit value at specified position from 16-bit number
-
             Parameters:
                 num: The value to read (16-bit integer)
                 position: Bit position (0-15)
             Returns: True if the bit is 1, false if it's 0; out of range error and false if invalid position
             Example:
-
             uint16_t num = 0b10010101;
             bool result = get_u16bit(num, 5);
-
         get_16bit
-
             Get bit value at specified position from signed 16-bit number
-
             Parameters:
                 num: The value to read (signed 16-bit integer)
                 position: Bit position (0-15)
@@ -58,11 +39,8 @@
             Example:
             int16_t num = -123;
             bool result = get_16bit(num, 5);
-
         get_u32bit
-
             Get bit value at specified position from 32-bit number
-
             Parameters:
                 num: The value to read (32-bit integer)
                 position: Bit position (0-31)
@@ -70,11 +48,8 @@
             Example:
             uint32_t num = 0b100000011110101;
             bool result = get_u32bit(num, 9);
-
         get_32bit
-
             Get bit value at specified position from signed 32-bit number
-
             Parameters:
                 num: The value to read (signed 32-bit integer)
                 position: Bit position (0-31)
@@ -82,11 +57,8 @@
             Example:
             int32_t num = -2147483648;
             bool result = get_32bit(num, 9);
-
         get_u64bit
-
             Get bit value at specified position from 64-bit number
-
             Parameters:
                 num: The value to read (64-bit integer)
                 position: Bit position (0-63)
@@ -94,11 +66,8 @@
             Example:
             uint64_t num = 0b100000011110101111;
             bool result = get_u64bit(num, 29);
-
         get_64bit
-
             Get bit value at specified position from signed 64-bit number
-
             Parameters:
                 num: The value to read (signed 64-bit integer)
                 position: Bit position (0-63)

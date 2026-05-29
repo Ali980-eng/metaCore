@@ -1,89 +1,54 @@
-﻿Reset Bit Utilities
-
-Overview
-
-The reset_bit.h file provides a set of functions to reset (clear to 0) bi[2D[K
-bits at specified positions in various integer types. This includes 8-bit, [K
-16-bit, 32-bit, and 64-bit signed and unsigned integers.
-
-Functions
-
-uint8_t
-
-reset_u8bit(uint8_t num, uint8_t position)
-    Clears the bit at the specified position in the 8-bit integer.
-Example: uint8_t num = 5; uint8_t position = 1; uint8_t cleared_num = [K
-reset_u8bit(num, position);
-
-uint16_t
-
-reset_u16bit(uint16_t num, uint8_t position)
-    Clears the bit at the specified position in the 16-bit integer.
-Example: uint16_t num = 10; uint16_t position = 2; uint16_t cleared_nu[10D[K
-cleared_num = reset_u16bit(num, position);
-
-uint32_t
-
-reset_u32bit(uint32_t num, uint8_t position)
-    Clears the bit at the specified position in the 32-bit integer.
-Example: uint32_t num = 20; uint32_t position = 3; uint32_t cleared_nu[10D[K
-cleared_num = reset_u32bit(num, position);
-
-uint64_t
-
-reset_u64bit(uint64_t num, uint8_t position)
-    Clears the bit at the specified position in the 64-bit integer.
-Example: uint64_t num = 30; uint64_t position = 4; uint64_t cleared_nu[10D[K
-cleared_num = reset_u64bit(num, position);
-
-int8_t
-
-reset_8bit(int8_t num, uint8_t position)
-    Clears the bit at the specified position in the signed 8-bit integer.
-Example: int8_t num = -1; uint8_t position = 3; int8_t cleared_num = r[1D[K
-reset_8bit(num, position);
-
-int16_t
-
-reset_16bit(int16_t num, uint8_t position)
-    Clears the bit at the specified position in the signed 16-bit integer.
-Example: int16_t num = -5; uint8_t position = 4; int16_t cleared_num =[1D[K
-= reset_16bit(num, position);
-
-int32_t
-
-reset_32bit(int32_t num, uint8_t position)
-    Clears the bit at the specified position in the signed 32-bit integer.
-Example: int32_t num = -10; uint8_t position = 6; int32_t cleared_num [K
-= reset_32bit(num, position);
-
-int64_t
-
-reset_64bit(int64_t num, uint8_t position)
-    Clears the bit at the specified position in the signed 64-bit integer.
-Example: int64_t num = -15; uint8_t position = 7; int64_t cleared_num [K
-= reset_64bit(num, position);
-
-char
-
-reset_char_bit(char c, uint8_t position)
-    Clears the bit at the specified position in the character.
-Example: char c = 'a'; uint8_t position = 1; char cleared_c = reset_ch[8D[K
-reset_char_bit(c, position);
-
-short
-
-reset_short_bit(short num, uint8_t position)
-    Clears the bit at the specified position in the signed short integer.
-Example:
-    short num = -5; uint8_t position = 4;
-    short cleared_num = reset_short_bit(num, position);
-
-long int
-
-reset_long_bit(long int num, uint8_t position)
-    Clears the bit at the specified position in the signed long integer.
-Example:
-    long int num = -10;
-    uint8_t position = 6;
-    long int cleared_num = reset_long_bit(num, position);
+﻿clite/bitUtilitys/reset_bit.h
+    Overview
+        The reset_bit.h file provides a set of functions to reset (clear to 0) bits at specified positions in various integer types.
+        This includes 8-bit, 16-bit, 32-bit, and 64-bit signed and unsigned integers.
+    Functions
+        uint8_t
+            reset_u8bit(uint8_t num, uint8_t position)
+                Clears the bit at the specified position in the 8-bit integer.
+            Example: uint8_t num = 5; uint8_t position = 1; uint8_t cleared_num = reset_u8bit(num, position);
+        uint16_t
+            reset_u16bit(uint16_t num, uint8_t position)
+                Clears the bit at the specified position in the 16-bit integer.
+            Example: uint16_t num = 10; uint16_t position = 2; uint16_t cleared_num = reset_u16bit(num, position);
+        uint32_t
+            reset_u32bit(uint32_t num, uint8_t position)
+                Clears the bit at the specified position in the 32-bit integer.
+            Example: uint32_t num = 20; uint32_t position = 3; uint32_t cleared_num = reset_u32bit(num, position);
+        uint64_t
+            reset_u64bit(uint64_t num, uint8_t position)
+                Clears the bit at the specified position in the 64-bit integer.
+            Example: uint64_t num = 30; uint64_t position = 4; uint64_t cleared_num = reset_u64bit(num, position);
+        int8_t
+            reset_8bit(int8_t num, uint8_t position)
+                Clears the bit at the specified position in the signed 8-bit integer.
+            Example: int8_t num = -1; uint8_t position = 3; int8_t cleared_num = reset_8bit(num, position);
+        int16_t
+            reset_16bit(int16_t num, uint8_t position)
+                Clears the bit at the specified position in the signed 16-bit integer.
+            Example: int16_t num = -5; uint8_t position = 4; int16_t cleared_num = reset_16bit(num, position);
+        int32_t
+            reset_32bit(int32_t num, uint8_t position)
+                Clears the bit at the specified position in the signed 32-bit integer.
+            Example: int32_t num = -10; uint8_t position = 6; int32_t cleared_num = reset_32bit(num, position);
+        int64_t
+            reset_64bit(int64_t num, uint8_t position)
+                Clears the bit at the specified position in the signed 64-bit integer.
+            Example: int64_t num = -15; uint8_t position = 7; int64_t cleared_num = reset_64bit(num, position);
+        char
+            reset_char_bit(char c, uint8_t position)
+                Clears the bit at the specified position in the character.
+            Example: char c = 'a'; uint8_t position = 1; char cleared_c = reset_char_bit(c, position);
+        short
+            reset_short_bit(short num, uint8_t position)
+                Clears the bit at the specified position in the signed short integer.
+            Example:
+                short num = -5; uint8_t position = 4;
+                short cleared_num = reset_short_bit(num, position);
+        long int
+            reset_long_bit(long int num, uint8_t position)
+                Clears the bit at the specified position in the signed long integer.
+            Example:
+                long int num = -10;
+                uint8_t position = 6;
+                long int cleared_num = reset_long_bit(num, position);

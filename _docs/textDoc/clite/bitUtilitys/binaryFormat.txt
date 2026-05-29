@@ -1,13 +1,8 @@
-﻿binaryFormat.h
-
+﻿clite/bitUtilitys/binaryFormat.h
     This header file provides functions to convert various integer types to their binary string representation.
-
     Functions
-
     bool2char()
-
         Converts a boolean value to its character representation ('0' or '1')
-
         /**
         * @brief Converts a boolean value to its character representation ('0' or '1').
         *
@@ -17,12 +12,8 @@
         char bool2char(bool value) {
             return (char)('0' + value);
         }
-
     bit_str_char()
-
         Converts a char value to its binary string representation
-
-
         /**
         * @brief Converts a char value to its binary string representation.
         *
@@ -31,22 +22,16 @@
         * @return A dynamically allocated string representing the binary format of the char value. The caller is responsible for freeing this memory.
         */
         char* bit_str_char(char value, bool high2low) {
-            char* result = malloc(9);
-            
+            char* result = malloc(9);        
             if (result == NULL)
                 return NULL;
-            
             for(uint8_t i = 7; i >= 0; i--)
                 result[i] = bool2char(get_char_bit(value, i));
-            
             result[8] = '\0';
             return result;
         }
-
     bit_str_short()
-
         Converts a short value to its binary string representation
-
         /**
         * @brief Converts a short value to its binary string representation.
         *
@@ -55,21 +40,15 @@
         */
         char* bit_str_short(short value) {
             char* result = malloc(8 * sizeof(short) + 1);
-            
             if (result == NULL)
                 return NULL;
-            
             for(uint8_t i = 8 * sizeof(short) - 1; i >= 0; i--)
                 result[i] = bool2char(get_short_bit(value, i));
-            
             result[8 * sizeof(short)] = '\0';
             return result;
         }
-
     bit_str_int()
-
         Converts an int value to its binary string representation
-
         /**
         * @brief Converts an int value to its binary string representation.
         *
@@ -78,21 +57,15 @@
         */
         char* bit_str_int(int value) {
             char* result = malloc(8 * sizeof(int) + 1);
-            
             if (result == NULL)
                 return NULL;
-            
             for(uint8_t i = 8 * sizeof(int) - 1; i >= 0; i--)
                 result[i] = bool2char(get_int_bit(value, i));
-            
             result[8 * sizeof(int)] = '\0';
             return result;
         }
-
     bit_str_long()
-
         Converts a long value to its binary string representation
-
         /**
         * @brief Converts a long value to its binary string representation.
         *
@@ -101,21 +74,15 @@
         */
         char* bit_str_long(long value) {
             char* result = malloc(8 * sizeof(long) + 1);
-            
             if (result == NULL)
                 return NULL;
-            
             for(uint8_t i = 8 * sizeof(long) - 1; i >= 0; i--)
                 result[i] = bool2char(get_long_bit(value, i));
-            
             result[8 * sizeof(long)] = '\0';
             return result;
         }
-
     bit8_str()
-
         Converts an 8-bit signed integer to its binary string representation
-
         /**
         * @brief Converts an 8-bit signed integer to its binary string representation.
         *
@@ -124,21 +91,15 @@
         */
         char* bit8_str(int8_t value) {
             char* result = malloc(9);
-            
             if (result == NULL)
                 return NULL;
-            
             for(uint8_t i = 7; i >= 0; i--)
                 result[i] = bool2char(get_u8bit(value, i));
-            
             result[8] = '\0';
             return result;
         }
-
     bit16_str()
-
         Converts a 16-bit signed integer to its binary string representation
-
         /**
         * @brief Converts a 16-bit signed integer to its binary string representation.
         *
@@ -147,21 +108,15 @@
         */
         char* bit16_str(int16_t value) {
             char* result = malloc(16);
-            
             if (result == NULL)
                 return NULL;
-            
             for(uint8_t i = 15; i >= 0; i--)
                 printf("%c", bool2char(get_16bit(value, i)));
-            
             result[15] = '\0';
             return result;
         }
-
     bit32_str()
-
         Converts a 32-bit signed integer to its binary string representation
-
         /**
         * @brief Converts a 32-bit signed integer to its binary string representation.
         *
@@ -170,21 +125,15 @@
         */
         char* bit32_str(int32_t value) {
             char* result = malloc(34);
-            
             if (result == NULL)
                 return NULL;
-            
             for(uint8_t i = 31; i >= 0; i--)
                 printf("%c", bool2char(get_32bit(value, i)));
-            
             result[33] = '\0';
             return result;
         }
-
     bit64_str()
-
         Converts a 64-bit signed integer to its binary string representation
-
         /**
         * @brief Converts a 64-bit signed integer to its binary string representation.
         *
@@ -193,21 +142,15 @@
         */
         char* bit64_str(int64_t value) {
             char* result = malloc(68);
-            
             if (result == NULL)
                 return NULL;
-            
             for(uint8_t i = 63; i >= 0; i--)
                 printf("%c", bool2char(get_64bit(value, i)));
-            
             result[67] = '\0';
             return result;
         }
-
     print8bit()
-
         Prints the binary representation of an 8-bit signed integer
-
         /**
         * @brief Prints the binary representation of an 8-bit signed integer.
         *
@@ -219,11 +162,8 @@
                 printf("%c", bool2char(get_8bit(value, i)));
             if(pnl) printf("\n");
         }
-
     print16bit()
-
         Prints the binary representation of a 16-bit signed integer
-
         /**
         * @brief Prints the binary representation of a 16-bit signed integer.
         *
@@ -235,11 +175,8 @@
                 printf("%c", bool2char(get_16bit(value, i)));
             if(pnl) printf("\n");
         }
-
     print32bit()
-
     Prints the binary representation of a 32-bit signed integer
-
         /**
         * @brief Prints the binary representation of a 32-bit signed integer.
         *
@@ -251,11 +188,8 @@
                 printf("%c", bool2char(get_32bit(value, i)));
             if(pnl) printf("\n");
         }
-
     print64bit()
-
         Prints the binary representation of a 64-bit signed integer
-
         /**
         * @brief Prints the binary representation of a 64-bit signed integer.
         *
@@ -267,11 +201,8 @@
                 printf("%c", bool2char(get_64bit(value, i)));
             if(pnl) printf("\n");
         }
-
     print_u8bit()
-
         Prints the binary representation of a 16-bit unsigned integer
-
         /**
         * @brief Prints the binary representation of a 16-bit unsigned integer.
         *
@@ -283,11 +214,8 @@
                 printf("%c", bool2char(get_u8bit(value, i)));
             if(pnl) printf("\n");
         }
-
     print_u16bit()
-
         Prints the binary representation of a 32-bit unsigned integer
-
         /**
         * @brief Prints the binary representation of a 32-bit unsigned integer.
         *
@@ -299,11 +227,8 @@
                 printf("%c", bool2char(get_16bit(value, i)));
             if(pnl) printf("\n");
         }
-
     print_u32bit()
-
         Prints the binary representation of a 64-bit unsigned integer
-
         /**
         * @brief Prints the binary representation of a 64-bit unsigned integer.
         *
@@ -315,11 +240,8 @@
                 printf("%c", bool2char(get_32bit(value, i)));
             if(pnl) printf("\n");
         }
-
     print_u64bit()
-
         Prints the binary representation of a 128-bit unsigned integer
-
         /**
         * @brief Prints the binary representation of a 128-bit unsigned integer.
         *
@@ -331,7 +253,6 @@
                 printf("%c", bool2char(get_64bit(value, i)));
             if(pnl) printf("\n");
         }
-
-Overall,
-This header file provides a set of functions to convert various integer types to their binary string representations.
-These functions can be used for debugging and testing purposes, as well as for implementing custom conversion algorithms.
+    Overall,
+    This header file provides a set of functions to convert various integer types to their binary string representations.
+    These functions can be used for debugging and testing purposes, as well as for implementing custom conversion algorithms.

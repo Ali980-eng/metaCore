@@ -1,9 +1,6 @@
-﻿micros.h
-
+﻿clite/micros.h
     A header file providing macro definitions for constant declarations and object definitions in a microprocessor-based environment.
-
     Functions
-
         Standard Mode
         length(const cstrptr value): Returns the length of a string.
         equal(const cstrptr value_1, const cstrptr value_2): Compares two strings for equality.
@@ -14,9 +11,7 @@
         exist(const cstrptr value, char c): Checks if a character exists in a string.
         sub_exist(const cstrptr value_1, const cstrptr value_2): Checks if a substring exists in a string.
         count(const cstrptr value, char c): Counts the occurrences of a character in a string.
-
         Standard Mode Utilities
-
         printSummary(): Prints a summary of test results.
         MAIN_TEST(name): Initializes and runs a test suite with a given name.
         EXIT_TEST(PS): Terminates the program if passed tests.
@@ -24,33 +19,22 @@
         TEST_1(cond, msg): Runs a test that fails if condition is false and reports an error message.
         TEST_2(real, expected): Runs a test that checks for equality between two real values.
         TEST_3(real, expected, msg): Runs a test that checks for equality between two real values and reports an error message.
-
         Standard Mode Macros
-
         ASSERT(cond): Checks if a condition is true.
         If false, prints an error message.
-
         Object/Struct Definitions
-
         cobject(name, elements): Defines a struct with the given name and elements.
         cnl, ctab, cstrptr are character constants.
-
     Functions
-
         Non-Standard Mode
-
         init_test(name): Initializes and runs a test suite with a given name.
         printSummary(): Prints a summary of test results.
         main(): Runs the microprocessor-based program.
         EXIT_TEST(PS): Terminates the program if passed tests.
-
         Non-Standard Mode Macros
-
         RET(retval): Returns an integer value indicating success or failure.
         cobject(name, elements) defines a struct with the given name and elements.
         cnl, ctab are character constants.
-
         Notes
-
         The microprocessor-based environment is designed to run on platforms that support 64-bit integers.
         The macros provided in this header file assume a typical platform architecture.

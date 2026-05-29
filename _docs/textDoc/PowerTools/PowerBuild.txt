@@ -1,86 +1,50 @@
 ﻿PowerBuild Class
-================
-
-The PowerBuild class is a PowerShell class used to manage and execute build[5D[K
-build processes. It provides methods for setting up the project, compiling [K
-code, and cleaning up the build files.
-
-Functions
---------
-
-### Constructor
-
-*   `PowerBuild()`
-
-    Initializes an empty PowerBuild object.
-*   `[void] SetProjectName([string]$name)`
-
-      Sets the name of the project.
-*   `[string] GetProjectName()`
-
-      Returns the current project name.
-*   `[void] SetLanguage([string]$lang)`
-
-    Sets the programming language used for compilation.
-*   `[string] GetLanguage()`
-
-      Returns the current programming language.
-*   `[void] SetCompiler([string]$compiler)`
-
-    Sets the compiler to use for compilation.
-*   `[string] GetCompiler()`
-
-      Returns the current compiler being used.
-*   `[void] AddIncludePath([string]$path)`
-
-    Adds an include path to the project's config map.
-*   `[string[]] GetIncludePaths()`
-
-      Returns an array of included paths.
-*   `[void] AddSourcePath([string]$path)`
-
-    Adds a source path to the project's config map.
-*   `[string[]] GetSourcePaths()`
-
-      Returns an array of source paths.
-*   `[double] GetVersion()`
-
-    Returns the current version number of the project.
-*   `[void] mini_version([double]$version)`
-
-    Sets the minimum required version number of the project.
-
-### Build Methods
-
-*   `PowerBuild::Build([string]$outputPath)`
-
-    Builds the project with the specified output path.
-*   `[void] SetVerbose([bool]$verbose)`
-
-    Sets the verbosity level for build processes.
-*   `[void] SetCompilerPath([string]$compiler, [string]$path)`
-
-    Sets the compiler to use for compilation and updates the compiler path [K
-in the config map.
-
-### Build Methods
-
-*   `CompileCpp([string]$outputPath)`
-
-    Compiles C++ code using the specified output path.
-*   `[void] CompileC([string]$outputPath)`
-
-    Compiles C code using the specified output path.
-*   `[void] CompileCSharp([string]$outputPath)`
-
-    Compiles C# code using the specified output path.
-*   `[void] HandlePython([string]$outputPath)`
-
-    Compiles Python code and sets up the environment.
-
-### Clean Methods
-
-*   `PowerBuild::Clean()`
-
-    Cleans up build files in the project's directory.
-
+    The PowerBuild class is a PowerShell class used to manage and execute build processes.
+    It provides methods for setting up the project, compiling code, and cleaning up the build files.
+    Functions
+        Constructor
+            PowerBuild()
+                Initializes an empty PowerBuild object.
+            [void] SetProjectName([string]$name)
+                Sets the name of the project.
+            [string] GetProjectName()
+                Returns the current project name.
+            [void] SetLanguage([string]$lang)
+                Sets the programming language used for compilation.
+            [string] GetLanguage()
+                Returns the current programming language.
+            [void] SetCompiler([string]$compiler)
+                Sets the compiler to use for compilation.
+            [string] GetCompiler()
+                Returns the current compiler being used.
+            [void] AddIncludePath([string]$path)
+                Adds an include path to the project's config map.
+            [string[]] GetIncludePaths()
+                Returns an array of included paths.
+            [void] AddSourcePath([string]$path)
+                Adds a source path to the project's config map.
+            [string[]] GetSourcePaths()
+                Returns an array of source paths.
+            [double] GetVersion()
+                Returns the current version number of the project.
+            [void] mini_version([double]$version)
+                Sets the minimum required version number of the project.
+        Build Methods
+            PowerBuild::Build([string]$outputPath)
+                Builds the project with the specified output path.
+            [void] SetVerbose([bool]$verbose)
+                Sets the verbosity level for build processes.
+            [void] SetCompilerPath([string]$compiler, [string]$path)
+                Sets the compiler to use for compilation and updates the compiler path in the config map.
+        Build Methods
+            CompileCpp([string]$outputPath)
+                Compiles C++ code using the specified output path.
+            [void] CompileC([string]$outputPath)
+                Compiles C code using the specified output path.
+            [void] CompileCSharp([string]$outputPath)
+                Compiles C# code using the specified output path.
+            [void] HandlePython([string]$outputPath)
+                Compiles Python code and sets up the environment.
+        Clean Methods
+            PowerBuild::Clean()
+                Cleans up build files in the project's directory.

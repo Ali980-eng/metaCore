@@ -1,29 +1,21 @@
-﻿To format the output of this code to better suit common practices for displ[5D[K
-displaying test results, we can use some standard libraries and formatting [K
-techniques. Here's an updated version of the code:
-
-```c
+﻿To format the output of this code to better suit common practices for displaying test results, we can use some standard libraries and formatting techniques.
+Here's an updated version of the code:
 #include <stdio.h>
 #include <stdlib.h>
-
 #ifdef OPENUDT___CUDT_CSTRING_CSTRINGTYPE_H
-void print_test_cstring(cstring real, cstring expected, unsigned int seplen[6D[K
-seplen, char sepch) {
+void print_test_cstring(cstring real, cstring expected, unsigned int seplen, char sepch) {
     printf("The test result:\n");
     separator(seplen, sepch);
     printf("%s\n", real.data);
     printf("%s\n", expected.data);
 }
 #endif // OPENUDT___CUDT_CSTRING_CSTRINGTYPE_H
-
-void print_test_string(const char *real, const char *expected, unsigned int[3D[K
-int seplen, char sepch, bool result) {
+void print_test_string(const char *real, const char *expected, unsigned int seplen, char sepch, bool result) {
     printf("The test result: %s\n", (result) ? "true" : "false");
     separator(seplen, sepch);
     printf("The real value is: %s\n", real);
     printf("The expected value is: %s\n", expected);
 }
-
 void print_test_float(float real, float expected, unsigned int seplen,
                         char sepch, float resolution) {
     if (resolution >= 5.0f) {
@@ -32,21 +24,17 @@ void print_test_float(float real, float expected, unsigned int seplen,
     }
     double dReal = real;
     double dExpected = expected;
-
     while ((fabs(dReal - dExpected) > resolution * fabs(expected)) ||
             (fabs(dReal - dExpected) == resolution * fabs(expected) &&
              (dReal < dExpected || dExpected < dReal))) {
         printf("Test failed due to high resolution input\n");
         return;
     }
-
-    printf("The test result: %s\n", (fabs(dReal - dExpected) <= resolution [K
-* fabs(expected)) ? "true" : "false");
+    printf("The test result: %s\n", (fabs(dReal - dExpected) <= resolution * fabs(expected)) ? "true" : "false");
     separator(seplen, sepch);
     printf("The real value is: %lf\n", dReal);
     printf("The expected value is: %lf\n", dExpected);
 }
-
 void print_test_cstring(cstring real, cstring expected) {
     if (real.data != expected.data) {
         printf("Warning: C-style string mismatch:\n");
@@ -55,7 +43,6 @@ void print_test_cstring(cstring real, cstring expected) {
         return;
     }
 }
-
 void print_test_int(int real, int expected) {
     if (real == expected) {
         printf("The test result: true\n");
@@ -63,16 +50,6 @@ void print_test_int(int real, int expected) {
         printf("The test result: false\n");
     }
 }
-```
-
-In this updated version, we've added a `separator` function that takes in t[1D[K
-the separator length and character as arguments. This is used to print each[4D[K
-each line of output with a specified number of blank lines between them.
-
-We've also extracted some common functions into separate functions (`print_[8D[K
-(`print_test_cstring`, `print_test_string`, `print_test_float`) which makes[5D[K
-makes the code easier to read and maintain.
-
-The new functions provide better readability and formatting for common test[4D[K
-test scenarios, making it easier to understand what each function is doing.
-
+In this updated version, we've added a `separator` function that takes in the separator length and character as arguments. This is used to print each line of output with a specified number of blank lines between them.
+We've also extracted some common functions into separate functions (`print_test_cstring`, `print_test_string`, `print_test_float`) which makes the code easier to read and maintain.
+The new functions provide better readability and formatting for common test scenarios, making it easier to understand what each function is doing.

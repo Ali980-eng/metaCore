@@ -1,48 +1,28 @@
-﻿The code you provided is a C++ header file that defines various macros and [K
-functions for unit testing. Here's a breakdown of the different parts:
-
-**Macros**
-
-* `METACORE___LITE_UNITTEST_HPP`: This is a compiler-specific macro that in[2D[K
-indicates this file is part of the Metacore Lite library.
-
-**Functions**
-
-* The `function` function is the main entry point for unit testing. It take[4D[K
-takes four arguments:
-	+ `fx`: A function to test
-	+ `expected`: The expected return value
-	+ `value1`, `value2`, etc.: Input values (e.g., parameters) passed to the f[1D[K
-function being tested
-
-The `function` function uses various macros to control its behavior:
-
-* `TEST`: Marks a function as a unit test.
-* `fx(value1, value2, ...)`: Calls the input function with the specified ar[2D[K
-arguments.
-
-**Reset functions**
-
-* `reset_count()`, `reset_vector_count()`, and `reset_function_count()` res[3D[K
-reset internal counters for testing:
-	+ `index.basic = 1`: Resets basic test counter
-	+ `index.vector = 1`: Resets vector test counter
-	+ `index.function = 1`: Resets function test counter
-
-These functions are declared as `constexpr inline` to enable them at compil[6D[K
-compile-time.
-
-**Reset all counts**
-
-* `reset_all_counts()` resets all internal counters:
-
-```cpp
-constexpr inline void reset_all_counts() noexcept {
-    reset_count();
-    reset_vector_count();
-    reset_function_count();
-}
-```
-
-This function calls each of the above reset functions in turn.
-
+﻿lite/UnitTest.hpp
+	The code you provided is a C+header file that defines various macros and functions for unit testing.
+	Here's a breakdown of the different parts:
+	Macros
+		METACORE___LITE_UNITTEST_HPP: This is a compiler-specific macro that indicates this file is part of the Metacore Lite library.
+	Functions
+		The function function is the main entry point for unit testing.
+		It takes four arguments:
+			fx: A function to test
+			expected: The expected return value
+			value1, value2, etc.: Input values (e.g., parameters) passed to the function being tested
+		The function function uses various macros to control its behavior:
+		TEST: Marks a function as a unit test.
+		fx(value1, value2, ...): Calls the input function with the specified arguments.
+	Reset functions
+		reset_count(), reset_vector_count(), and reset_function_count() reset internal counters for testing:
+			index.basic = 1: Resets basic test counter
+			index.vector = 1: Resets vector test counter
+			index.function = 1: Resets function test counter
+		These functions are declared as constexpr inline to enable them at compile-time.
+	Reset all counts
+		reset_all_counts() resets all internal counters:
+		constexpr inline void reset_all_counts() noexcept {
+			reset_count();
+			reset_vector_count();
+			reset_function_count();
+		}
+	This function calls each of the above reset functions in turn.

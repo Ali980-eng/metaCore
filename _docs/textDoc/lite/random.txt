@@ -1,71 +1,41 @@
-﻿Random Functions
-================
-
-This header file contains a collection of functions for generating random n[1D[K
-numbers, characters, and vectors.
-
-Functions
---------
-
-### GRN (Generate Random Number)
-
-* Generates a random integer within the specified range using Mersenne Twis[4D[K
-Twister algorithm.
-* @param start The lower bound of the range (inclusive).
-* @param end The upper bound of the range (inclusive).
-* @return A random integer between start and end (inclusive).
-
-### SES (Simple Shift Encryption)
-
-* Encrypts a string by shifting all characters by a randomly generated key.[4D[K
-key.
-* @param input The input string to be encrypted.
-* @param start The lower bound for the random shift key (inclusive).
-* @param end The upper bound for the random shift key (inclusive).
-* @param shift_key_container A vector to store the generated shift key.
-
-### SEC (Simple Shift Encryption Complex)
-
-* Encrypts a string by shifting each character by a different randomly gene[4D[K
-generated key.
-* @param input The input string to be encrypted.
-* @param start The lower bound for the random shift keys (inclusive).
-* @param end The upper bound for the random shift keys (inclusive).
-* @param shift_key_container A vector to store the generated shift keys for[3D[K
-for each character.
-
-### GRC (Generate Random Printable ASCII Character)
-
-* Generates a random printable ASCII character.
-* @return A random character in the range of printable ASCII characters (32[3D[K
-(32 to 126).
-
-### GRV (Generate Random Vector)
-
-* Generates a vector of random integers within the specified range.
-* @param ele_num The number of elements in the vector.
-* @param start The lower bound of the range (inclusive).
-* @param end The upper bound of the range (inclusive).
-* @return A vector containing ele_num random integers between start and end[3D[K
-end (inclusive).
-
-### GRCV (Generate 2D Vector)
-
-* Generates a 2D vector of random integers within the specified range.
-* @param vec_num The number of vectors in the 2D vector.
-* @param ele_num The number of elements in each vector.
-* @param start The lower bound of the range (inclusive).
-* @param end The upper bound of the range (inclusive).
-
-### GRC2DV (Generate 2D Vector)
-
-* Generates a 2D vector of random printable ASCII characters.
-* @return A 2D vector containing random characters in the range of printabl[8D[K
-printable ASCII characters.
-
-### GRC3DV (Generate 3D Vector)
-
-* Generates a 3D vector of random printable ASCII characters.
-* @return A 3D vector containing random characters in the range of printabl[8D[K
-printable ASCII characters.
-
+﻿lite/Random.hpp
+    This header file contains a collection of functions for generating random numbers, characters, and vectors.
+    Functions
+        GRN (Generate Random Number)
+            Generates a random integer within the specified range using Mersenne Twister algorithm.
+            parameter start The lower bound of the range (inclusive).
+            parameter end The upper bound of the range (inclusive).
+            parameterreturn A random integer between start and end (inclusive).
+        SES (Simple Shift Encryption)
+            Encrypts a string by shifting all characters by a randomly generated key.
+            parameter input The input string to be encrypted.
+            parameter start The lower bound for the random shift key (inclusive).
+            parameter end The upper bound for the random shift key (inclusive).
+            parameter shift_key_container A vector to store the generated shift key.
+        SEC (Simple Shift Encryption Complex)
+            Encrypts a string by shifting each character by a different randomly generated key.
+            parameter input The input string to be encrypted.
+            parameter start The lower bound for the random shift keys (inclusive).
+            parameter end The upper bound for the random shift keys (inclusive).
+            parameter shift_key_container A vector to store the generated shift keys for each character.
+        GRC (Generate Random Printable ASCII Character)
+            Generates a random printable ASCII character.
+            parameterreturn A random character in the range of printable ASCII character (32 to 126).
+        GRV (Generate Random Vector)
+            Generates a vector of random integers within the specified range.
+            parameter ele_num The number of elements in the vector.
+            parameter start The lower bound of the range (inclusive).
+            parameter end The upper bound of the range (inclusive).
+            parameterreturn A vector containing ele_num random integers between start and end (inclusive).
+        GRCV (Generate 2D Vector)
+            Generates a 2D vector of random integers within the specified range.
+            parameter vec_num The number of vectors in the 2D vector.
+            parameter ele_num The number of elements in each vector.
+            parameter start The lower bound of the range (inclusive).
+            parameter end The upper bound of the range (inclusive).
+        GRC2DV (Generate 2D Vector)
+            Generates a 2D vector of random printable ASCII characters.
+            parameterreturn A 2D vector containing random characters in the range of printable ASCII characters.
+        GRC3DV (Generate 3D Vector)
+            Generates a 3D vector of random printable ASCII characters.
+            parameterreturn A 3D vector containing random characters in the range of printable ASCII characters.

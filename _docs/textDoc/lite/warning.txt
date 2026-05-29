@@ -1,5 +1,5 @@
 ﻿**warning.hpp**
-================
+
 
 A header file for warning messages in the MetaCore library.
 

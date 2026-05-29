@@ -1,9 +1,6 @@
-﻿Bit Count Utilities
-
+﻿clite/bitUtilitys/count_bit.h
 	This file provides functions to count set (1) or unset (0) bits in various integer types.
-
 	Functions
-
 		count_u8bit(uint8_t num, bool ones) Counts bits in an 8-bit value.
 			Parameters:
 				num: The value to analyze.
@@ -64,7 +61,6 @@
 				num: The value to analyze.
 				ones: If true counts 1-bits, else counts 0-bits.
 			Returns: Number of bits matching the criteria.
-
 	Notes
 
 		This file provides functions for analyzing bit patterns and determining bit populations in various integer types.

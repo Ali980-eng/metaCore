@@ -1,33 +1,16 @@
-﻿Here is the plain text documentation for the given C++ code:
-
-**Description**
-
-This header file defines a set of macros and function prototypes for workin[6D[K
-working with strings and lambda expressions in C++. It provides definitions[11D[K
-definitions for common string manipulations, lambda functions, and a way to[2D[K
-to print output.
-
-**Macro Definitions**
-
-* `nl`: defined as `\n`, used for newline characters
-* `tab`: defined as `\t`, used for tab characters
-* `object`: defines the type of object being used (not explicitly shown in [K
-this code)
-* `Print(output)`: expands to `std::cout << output;` and prints the input s[1D[K
-string
-* `PrintLn(output)`: expands to `std::cout << output << nl;` and prints the[3D[K
-the input string followed by a newline character
-* `lambda(capture_clause, parameters, return_type, script)`: expands to a l[1D[K
-lambda function definition with capture clauses, parameters, return type, a[1D[K
-and script. The capture clauses are used to specify which variables in the [K
-function scope will be captured. The script is where the function body shou[4D[K
-should go.
-
-**Function Prototypes**
-
-* `str` defines the type of string being defined (not explicitly shown in t[1D[K
-this code)
-
-Note: This documentation only includes the provided C++ code and does not i[1D[K
-include any external dependencies or usage examples.
-
+﻿lite/micros.hpp
+    Description
+        This header file defines a set of macros and function prototypes for working with strings and lambda expressions in C++.
+        It provides definitions for common string manipulations, lambda functions, and a way to print output.
+    Macro Definitions
+        nl: defined as \n, used for newline characters
+        tab: defined as \t, used for tab characters
+        object: defines the type of object being used (not explicitly shown in this code)
+        Print(output): expands to std::cout << output; and prints the input string
+        PrintLn(output): expands to std::cout << output << nl; and prints the input string followed by a newline character
+        lambda(capture_clause, parameters, return_type, script): expands to a lambda function definition with capture clauses, parameters, return type, and script.
+            The capture clauses are used to specify which variables in the function scope will be captured.
+            The script is where the function body should go.
+    Function Prototypes
+        str defines the type of string being defined (not explicitly shown in this code)
+    Note: This documentation only includes the provided C++ code and does not include any external dependencies or usage examples.

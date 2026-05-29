@@ -1,72 +1,37 @@
-﻿The code you've provided is a C++ header file that appears to define severa[6D[K
-several template classes for handling binary and unary functions. The code [K
-includes several custom function objects (CFFOs) that can be used as argume[6D[K
-arguments in `std::function` templates, which represent functions with fixe[4D[K
-fixed return types.
+﻿lite/stream.hpp
+    The code you've provided is a C++ header file that appears to define several template classes for handling binary and unary functions.
+    The code includes several custom function objects (CFFOs) that can be used as arguments in std::function templates, which represent functions with fixed return types.
+    Here are some observations about the code:
+        1. Custom Function Objects: Each template class defines a custom function object (std::function<T>) that takes two arguments and returns an unspecified type (e.g., int, double). These objects can be used as arguments in std::function templates.
+        2. Template Classes: The code includes several template classes, including stream__t_p, stream__tp, and stream__t_t.
+        Each of these classes represents a binary function with two input arguments and one output argument (in the case of stream__t_p) or no return type (stream__t_t).
+        3. Function Template Parameters: The code defines several function template parameters, including T1, T2, and T3.
+        These parameters represent the types of the input arguments for the custom function objects.
+        4. Custom Function Object Usage: In various places throughout the code, you can use custom function objects as arguments in std::function templates.
+            For example:
+                s << [](double x) { return static_cast<int>(x * 2); };
+                func >> s;
+        5. Return Value: The code does not explicitly specify a return type for the custom function objects or the binary functions defined in the template classes.
+    Example Usage
+        Here's an example of how to use the custom function object as an argument in a std::function template:
+        #include "your_header_file.hpp"
+        int main() {
+            // Define a binary function with two input arguments and one output argument
+            auto add = [](double x, double y) { return x + y; };
 
-Here are some observations about the code:
+            // Use the custom function object as an argument in a std::function template
+            auto result = s << add;
 
-1.  **Custom Function Objects**: Each template class defines a custom funct[5D[K
-function object (`std::function<T>`) that takes two arguments and returns a[1D[K
-an unspecified type (e.g., `int`, `double`). These objects can be used as a[1D[K
-arguments in `std::function` templates.
+            // Print the result of the operation
+            std::cout << "Result: " << *result << std::endl;
+            return 0;
+        }
+        In this example, we define a binary function add with two input arguments x and y.
+        We then use the custom function object s as an argument in a std::function template.
+        Finally, we print the result of the operation using dereferencing the result variable.
+    Notes
 
-2.  **Template Classes**: The code includes several template classes, inclu[5D[K
-including `stream__t_p`, `stream__tp`, and `stream__t_t`. Each of these cla[3D[K
-classes represents a binary function with two input arguments and one outpu[5D[K
-output argument (in the case of `stream__t_p`) or no return type (`stream__[10D[K
-(`stream__t_t`).
-
-3.  **Function Template Parameters**: The code defines several function tem[3D[K
-template parameters, including `T1`, `T2`, and `T3`. These parameters repre[5D[K
-represent the types of the input arguments for the custom function objects.[8D[K
-objects.
-
-4.  **Custom Function Object Usage**: In various places throughout the code[4D[K
-code, you can use custom function objects as arguments in `std::function` t[1D[K
-templates. For example:
-    *   `s << [](double x) { return static_cast<int>(x * 2); };`
-    *   `func >> s;`
-
-5.  **Return Value**: The code does not explicitly specify a return type fo[2D[K
-for the custom function objects or the binary functions defined in the temp[4D[K
-template classes.
-
-**Example Usage**
-
-Here's an example of how to use the custom function object as an argument i[1D[K
-in a `std::function` template:
-```cpp
-#include "your_header_file.hpp"
-
-int main() {
-    // Define a binary function with two input arguments and one output arg[3D[K
-argument
-    auto add = [](double x, double y) { return x + y; };
-
-    // Use the custom function object as an argument in a std::function tem[3D[K
-template
-    auto result = s << add;
-
-    // Print the result of the operation
-    std::cout << "Result: " << *result << std::endl;
-    return 0;
-}
-```
-In this example, we define a binary function `add` with two input arguments[9D[K
-arguments `x` and `y`. We then use the custom function object `s` as an arg[3D[K
-argument in a `std::function` template. Finally, we print the result of the[3D[K
-the operation using dereferencing the `result` variable.
-
-**Notes**
-
-*   The code assumes that the custom function objects (`std::function`) hav[3D[K
-have been defined elsewhere in your program.
-*   The code uses C-style syntax for defining custom function objects and b[1D[K
-binary functions.
-*   You can modify the template classes, custom function objects, and their[5D[K
-their usage to suit your specific requirements.
-
-Overall, the code provides a good foundation for working with custom functi[6D[K
-function objects and binary functions in C++.
-
+        The code assumes that the custom function objects (std::function) have been defined elsewhere in your program.
+        The code uses C-style syntax for defining custom function objects and binary functions.
+        You can modify the template classes, custom function objects, and their usage to suit your specific requirements.
+    Overall, the code provides a good foundation for working with custom function objects and binary functions in C++.

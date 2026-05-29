@@ -254,7 +254,7 @@ namespace meta {
             if(retval) std::exit(EXIT_FAILURE);
             else std::exit(EXIT_SUCCESS);
         }
-    } metaSystem;
+    } ecosystem;
 }
 
 #endif // METACORE___ECOSYSTEM_HPP

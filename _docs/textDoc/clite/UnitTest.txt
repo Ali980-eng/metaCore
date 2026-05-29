@@ -1,61 +1,37 @@
-﻿This is a C++ code snippet that appears to be implementing various test uti[3D[K
-utilities for different types of tests, including boolean, character, short[5D[K
-short, integer, floating-point, and size_t values. Here's a breakdown of th[2D[K
-the code:
+﻿Test Stream Structure
 
-**Test Stream Structure**
+The code defines a test_stream structure, which contains information about each test result. It has three fields:
 
-The code defines a `test_stream` structure, which contains information abou[4D[K
-about each test result. It has three fields:
+details: a boolean indicating whether detailed testing results are desired
+seplen: an unsigned integer representing the expected number of spaces between characters (used for formatting purposes)
+sepch: a character representing the separator to use when concatenating strings
 
-* `details`: a boolean indicating whether detailed testing results are desi[4D[K
-desired
-* `seplen`: an unsigned integer representing the expected number of spaces [K
-between characters (used for formatting purposes)
-* `sepch`: a character representing the separator to use when concatenating[13D[K
-concatenating strings
+Adding Test Results
 
-**Adding Test Results**
+The code provides several functions that allow you to add test results to a test_stream structure:
 
-The code provides several functions that allow you to add test results to a[1D[K
-a `test_stream` structure:
+addTestBool: adds boolean test results
+addTestChar: adds character test results
+addTestShort, addTestInt, addTestLong, and addTestFloat: adds specific types of integer values (short, int, long, double) to the test stream
+addTestSize: adds size_t value test results
 
-* `addTestBool`: adds boolean test results
-* `addTestChar`: adds character test results
-* `addTestShort`, `addTestInt`, `addTestLong`, and `addTestFloat`: adds spe[3D[K
-specific types of integer values (short, int, long, double) to the test str[3D[K
-stream
-* `addTestSize`: adds size_t value test results
+Each function takes a test stream structure as an argument and performs the necessary operations:
 
-Each function takes a test stream structure as an argument and performs the[3D[K
-the necessary operations:
+For boolean tests: sets success and failed counts based on expected values and checks for valid success/failure counts
+For character tests: sets success, failed, and total count counters based on actual characters compared to expected strings
+For specific integer types:
+	addTestShort, addTestInt: sets success and failed counts based on comparison with expected values
+	addTestLong and addTestFloat: sets success and failed counts based on comparison with expected values, using a floating-point arithmetic approach to avoid truncation
 
-* For boolean tests: sets success and failed counts based on expected value[5D[K
-values and checks for valid success/failure counts
-* For character tests: sets success, failed, and total count counters based[5D[K
-based on actual characters compared to expected strings
-* For specific integer types:
-	+ `addTestShort`, `addTestInt`: sets success and failed counts based on com[3D[K
-comparison with expected values
-	+ `addTestLong` and `addTestFloat`: sets success and failed counts based on[2D[K
-on comparison with expected values, using a floating-point arithmetic appro[5D[K
-approach to avoid truncation
+Calculating Test Statistics
 
-**Calculating Test Statistics**
+The code provides several functions that calculate various statistics from the accumulated test results:
 
-The code provides several functions that calculate various statistics from [K
-the accumulated test results:
+ASR: calculates the average success rate (0.0-100.0) as a percentage
+AFR: calculates the average failure rate (0.0-100.0) as a percentage
 
-* `ASR`: calculates the average success rate (0.0-100.0) as a percentage
-* `AFR`: calculates the average failure rate (0.0-100.0) as a percentage
+Printing Test Summary Report
 
-**Printing Test Summary Report**
+The code defines a function print that prints a comprehensive test summary report, including statistics for success and failed tests, total count, ASR, and AFR.
 
-The code defines a function `print` that prints a comprehensive test summar[6D[K
-summary report, including statistics for success and failed tests, total co[2D[K
-count, ASR, and AFR.
-
-In summary, this code provides a set of utilities for working with differen[8D[K
-different types of test results in C++, allowing you to add test data, calc[4D[K
-calculate relevant statistics, and print informative reports.
-
+In summary, this code provides a set of utilities for working with different types of test results in C++, allowing you to add test data, calculate relevant statistics, and print informative reports.

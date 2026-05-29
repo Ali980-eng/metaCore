@@ -2,14 +2,25 @@
 
 MAIN_TEST(micros)
     
-    short jmpval = 0;
+    short jv1 = 0, jv2 = 0, jv3 = 100, jv4 = 200, jv5 = 10;
+    tl1: jv1++;
+    jump_if(jv1 < 50, tl1)
+    tl2: jv2++;
+    jump_if(jv2 <= 50, tl2)
+    tl3: jv3--;
+    jump_if(jv3 > 0, tl3)
+    tl4: jv4--;
+    jump_if(jv4 >= 0, tl4)
+    tl5: jv5--;
+    jump_if(jv5 != 5, tl5)
+    
+    TEST_2(jv1, 49)
+    TEST_2(jv2, 50)
+    TEST_2(jv3, 0)
+    TEST_2(jv4, -1)
+    TEST_2(jv5, 5)
 
-    test_label:
-    printf("(%d), ", jmpval);
-    jmpval++;
-    jump_if(jmpval  < 50, test_label)
-
-    /*cstr(s1, "09iie8")
+    cstr(s1, "09iie8")
     TEST_2(length(s1), 6)
     cstr(s2, "88938")
     TEST_2(equal(s1, s2), false)
@@ -30,6 +41,6 @@ MAIN_TEST(micros)
     cstr_free(s1);
     cstr_free(s2);
     cstr_free(s3);
-    cstr_free(s4);*/
+    cstr_free(s4);
 
 EXIT_TEST(true)
