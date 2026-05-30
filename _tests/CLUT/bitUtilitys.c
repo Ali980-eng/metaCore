@@ -69,6 +69,14 @@ MAIN_TEST(bitUtilitys)
   TEST_2(get_8bit(value_6, 1), false)
 
   uint16_t value_7 = 3380;
-  
+  TEST_2(get_u16bit(value_7, 7), false)
+  TEST_2(get_u16bit(value_7, 8), true)
+  value_7 = toggle_u16bit(value_7, 7);
+  TEST_2(get_u16bit(value_7, 7), true)
+  value_7 = reset_u16bit(value_7, 8);
+  TEST_2(get_u16bit(value_7, 8), false)
+  TEST_2(get_u16bit(value_7, 1), false)
+  value_7 = set_u16bit(value_7, 1);
+  TEST_2(get_u16bit(value_7, 1), true)
 
 EXIT_TEST(true)

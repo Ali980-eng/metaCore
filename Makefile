@@ -5,8 +5,8 @@ CFLAGS  := -I.
 CXXFLAGS:= -I.
 
 # Output files
-CLITE_TEST_OUT := _tests/output/clut
-LITE_TEST_OUT  := _tests/output/lut
+CLITE_TEST_OUT := _output/tests/clut
+LITE_TEST_OUT  := _output/tests/lut
 
 # Source files
 CLITE_TEST_SRC := _tests/clut/*.c

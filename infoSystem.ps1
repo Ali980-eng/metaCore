@@ -25,7 +25,7 @@
 
 param(
     [Parameter(Mandatory=$true, Position=0)]
-    [ValidateSet('--version', '--license', '--help')]
+    [ValidateSet('--version', '--license', '--brief', '--help')]
     [string]$Command,
     
     [Parameter(Position=1)]
@@ -33,9 +33,10 @@ param(
 )
 
 # ===================== Global Settings =====================
-$script:Version = "0.1.4"
+$script:Version = "0.1.5"
 $script:LicenseFile = Join-Path -Path $PSScriptRoot -ChildPath "_docs/lic.txt"
 $script:DocRoot = "_docs/textDoc"
+$script:briefFile = "_docs/brief.txt"
 
 # ===================== Helper Functions =====================
 
@@ -50,6 +51,16 @@ function Show-License {
     } else {
         Write-Error "License file not found: $script:LicenseFile"
         Write-Host "Please create a lic.txt file in the '_docs' folder." -ForegroundColor Red
+    }
+}
+
+function Show-Brief {
+    if (Test-Path $script:briefFile) {
+        Write-Host "`n=============== BRIEF ===============`n" -ForegroundColor Yellow
+        Get-Content $script:briefFile | ForEach-Object { Write-Host $_ }
+    } else {
+        Write-Error "Brief file not found: $script:briefFile"
+        Write-Host "Please create a brief.txt file in the '_docs' folder." -ForegroundColor Red
     }
 }
 
@@ -121,8 +132,9 @@ if ($Command -eq "--version") {
 }
 elseif ($Command -eq "--license") {
     Show-License
-}
-elseif ($Command -eq "--help") {
+} elseif ($Command -eq "--brief") {
+    Show-Brief
+} elseif ($Command -eq "--help") {
     if ($Path) {
         Show-Documentation -LibraryPath $Path
     } else {

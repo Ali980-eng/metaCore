@@ -1,0 +1,18 @@
+                |\/| . /¯
+                |  | . \_
+
+===========================================
+
+    metaCore is a comprehensive, 
+    low-level ecosystem and framework
+    written in C / C++ and powered by
+    automated tooling built with PowerShell.
+
+    It is designed to serve as a robust
+    foundational infrastructure that provides
+    developers with advanced helper tools
+    to streamline development, testing,
+    and error management with minimal
+    external runtime dependencies.
+
+===========================================
