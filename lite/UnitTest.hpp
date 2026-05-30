@@ -152,7 +152,7 @@ namespace lite
          * @brief Set the test name.
          * @param name The new test name
          */
-        constexpr void set(const std::string& name) noexcept {
+        void set(const std::string& name) noexcept {
             this->name = name;
         }
 
@@ -169,7 +169,7 @@ namespace lite
          * @param isName If true, returns the name; if false, returns the description
          * @return The requested string property
          */
-        constexpr std::string get(bool isName) noexcept {
+        std::string get(bool isName) noexcept {
             return isName ? name : description;
         }
 
@@ -185,7 +185,7 @@ namespace lite
          * @brief Assignment operator for boolean value.
          * @param result The new result value
          */
-        constexpr void operator=(bool result) noexcept {
+        void operator=(bool result) noexcept {
             this->result = result;
         }
 
@@ -262,7 +262,7 @@ namespace lite
          * @brief Copy assignment operator with another TEST object.
          * @param other The TEST object to copy from
          */
-        constexpr void operator=(const TEST& other) noexcept {
+        void operator=(const TEST& other) noexcept {
             name = other.name;
             description = other.description;
             result = other.result;
@@ -342,7 +342,7 @@ namespace lite
          * @param name The test name to look up
          * @return The test result if name matches, bool() otherwise with error message
          */
-        constexpr bool operator[](const std::string& name) noexcept {
+        bool operator[](const std::string& name) noexcept {
             if(name == this->name) return result;
             std::cerr << "Name Error: Unknown name." << std::endl;
             return bool();
@@ -545,7 +545,7 @@ namespace lite
                     TEST{name, description, false} : TEST{false};
                 }
                 for(size_t j = 0; j < real_2dv[i].size(); j++) {
-                    if(real_v[i] != expected_v[i]) {
+                    if(real_2dv[i] != expected_2dv[i]) {
                         return !(name.empty()) && !(description.empty()) ?
                         TEST{name, description, false} : TEST{false};
                     }

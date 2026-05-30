@@ -6,7 +6,7 @@
 #include "bitUtilitys/reset_bit.h"
 #include "bitUtilitys/set_bit.h"
 #include "bitUtilitys/toggle_bit.h"
-#include "bitUtilitys/boolean.h"
+#include "bitUtilitys/cbool_8.h"
 #include "bitUtilitys/xchg_bit.h"
 #include "bitUtilitys/binaryFormat.h"
 

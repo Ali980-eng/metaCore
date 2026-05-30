@@ -177,7 +177,7 @@ namespace meta {
             const char* s1 = "lite ecosystem warning";
             
             if(msgbox) {
-                MessageBox(NULL, 
+                MessageBoxW(NULL, 
                     toWide(wm).c_str(), 
                     toWide(w.printingFormat()).c_str(), 
                     MB_OK | MB_ICONINFORMATION);
@@ -207,7 +207,7 @@ namespace meta {
          * @see Catch(const lite::warning&, bool) for non-fatal warning handling
          */
         void Catch(lite::error& e) noexcept {
-            MessageBox(NULL, 
+            MessageBoxW(NULL, 
                 toWide(em).c_str(),
                 toWide(e.printingFormat()).c_str(),
                 MB_OK | MB_ICONINFORMATION);

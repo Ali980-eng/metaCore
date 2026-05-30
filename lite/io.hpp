@@ -647,7 +647,7 @@ namespace lite
          * @details This function evaluates the provided value using the given function pointer (or lambda). If the function returns true for the provided data, the value is printed to standard output followed by a newline. If the function returns false, nothing is printed.
          */
         template<typename T>
-        constexpr void print_if(std::function<bool(T)> Fp, const T& data) noexcept {
+        void print_if(std::function<bool(T)> Fp, const T& data) noexcept {
             if(Fp(data)) print(data);
         }
 
@@ -659,18 +659,18 @@ namespace lite
          * @details This function evaluates the provided value using the given function pointer (or lambda). If the function returns true for the provided data, the value is printed to standard output followed by a newline. If the function returns false, nothing is printed.
          */
         template<typename T>
-        constexpr void println_if(std::function<bool(T)> Fp, const T& data) noexcept {
+        void println_if(std::function<bool(T)> Fp, const T& data) noexcept {
             if(Fp(data)) println(data);
         }
 
         template<typename T>
-        constexpr void print_if(bool result, const T& data) noexcept {
-            if constexpr (result) print(data);
+        void print_if(bool result, const T& data) noexcept {
+            if(result) print(data);
         }
 
         template<typename T>
-        constexpr void println_if(bool result, const T& data) noexcept {
-            if constexpr (result) print(data);
+        void println_if(bool result, const T& data) noexcept {
+            if(result) print(data);
         }
     }
 }

@@ -38,7 +38,7 @@ void PTab() { printf("\t"); }
  * printf("The test result: %s\n", test_msg(test_result)); // This will print "The test result: succeed" if the test passed, or "The test result: failed" if it did not.
  * This function can be used in conjunction with the print_test functions to provide a clear indication of whether a test case has passed or failed, enhancing the readability and clarity of test outputs.
  */
-char *test_msg(bool result)
+const char *test_msg(bool result)
 {
     if (result)
         return "succeed";

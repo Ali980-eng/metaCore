@@ -62,7 +62,7 @@ char bool2char(bool value) {
  * @return A dynamically allocated string representing the binary format of the char value. The caller is responsible for freeing this memory.
  */
 char* bit_str_char(char value, bool high2low) {
-    char* result = malloc(9);
+    char* result = (char*) malloc(9);
     
     if (result == NULL)
         return NULL;
@@ -80,7 +80,7 @@ char* bit_str_char(char value, bool high2low) {
  * @return A dynamically allocated string representing the binary format of the short value. The caller is responsible for freeing this memory.
  */
 char* bit_str_short(short value) {
-    char* result = malloc(8 * sizeof(short) + 1);
+    char* result = (char*) malloc(8 * sizeof(short) + 1);
     
     if (result == NULL)
         return NULL;
@@ -98,7 +98,7 @@ char* bit_str_short(short value) {
  * @return A dynamically allocated string representing the binary format of the int value. The caller is responsible for freeing this memory.
  */
 char* bit_str_int(int value) {
-    char* result = malloc(8 * sizeof(int) + 1);
+    char* result = (char*) malloc(8 * sizeof(int) + 1);
 
     if (result == NULL)
         return NULL;
@@ -116,7 +116,7 @@ char* bit_str_int(int value) {
  * @return A dynamically allocated string representing the binary format of the long value. The caller is responsible for freeing this memory.
  */
 char* bit_str_long(long value) {
-    char* result = malloc(8 * sizeof(long) + 1);
+    char* result = (char*) malloc(8 * sizeof(long) + 1);
     
     if (result == NULL)
         return NULL;
@@ -134,7 +134,7 @@ char* bit_str_long(long value) {
  * @return A dynamically allocated string representing the binary format. Caller must free memory.
  */
 char* bit8_str(int8_t value) {
-    char* result = malloc(9);
+    char* result = (char*) malloc(9);
     
     if (result == NULL)
         return NULL;
@@ -152,7 +152,7 @@ char* bit8_str(int8_t value) {
  * @return A dynamically allocated string representing the binary format. Caller must free memory.
  */
 char* bit16_str(int16_t value) {
-    char* result = malloc(17);
+    char* result = (char*) malloc(17);
 
     if (result == NULL) 
         return NULL;
@@ -170,7 +170,7 @@ char* bit16_str(int16_t value) {
  * @return A dynamically allocated string representing the binary format. Caller must free memory.
  */
 char* bit32_str(int32_t value) {
-    char* result = malloc(33);
+    char* result = (char*) malloc(33);
 
     if (result == NULL)
         return NULL;
@@ -188,7 +188,7 @@ char* bit32_str(int32_t value) {
  * @return A dynamically allocated string representing the binary format. Caller must free memory.
  */
 char* bit64_str(int64_t value) {
-    char* result = malloc(65);
+    char* result = (char*) malloc(65);
 
     if (result == NULL)
         return NULL;
@@ -207,7 +207,7 @@ char* bit64_str(int64_t value) {
  * @return A dynamically allocated string representing the binary format. Caller must free memory.
  */
 char* ubit8_str(uint8_t value) {
-    char* result = malloc(9);
+    char* result = (char*) malloc(9);
 
     if (result == NULL)
         return NULL;
@@ -225,7 +225,7 @@ char* ubit8_str(uint8_t value) {
  * @return A dynamically allocated string representing the binary format. Caller must free memory.
  */
 char* ubit16_str(uint16_t value) {
-    char* result = malloc(17);
+    char* result = (char*) malloc(17);
 
     if (result == NULL) 
         return NULL;
@@ -243,7 +243,7 @@ char* ubit16_str(uint16_t value) {
  * @return A dynamically allocated string representing the binary format. Caller must free memory.
  */
 char* ubit32_str(uint32_t value) {
-    char* result = malloc(33);
+    char* result = (char*) malloc(33);
 
     if (result == NULL)
         return NULL;
@@ -261,7 +261,7 @@ char* ubit32_str(uint32_t value) {
  * @return A dynamically allocated string representing the binary format. Caller must free memory.
  */
 char* ubit64_str(uint64_t value) {
-    char* result = malloc(65);
+    char* result = (char*) malloc(65);
 
     if (result == NULL)
         return NULL;
