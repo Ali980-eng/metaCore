@@ -46,7 +46,7 @@
 /// @param num The value to read
 /// @param position Bit position (0-7)
 /// @return True if bit is 1, false if bit is 0
-bool get_u8bit(uint8_t num, uint8_t position) {
+static inline bool get_u8bit(uint8_t num, uint8_t position) {
     if (position > 7) {
         printf("outOfRange Error: position must be 0-7\n");
         return false;
@@ -58,7 +58,7 @@ bool get_u8bit(uint8_t num, uint8_t position) {
 /// @param num The value to read
 /// @param position Bit position (0-15)
 /// @return True if bit is 1, false if bit is 0
-bool get_u16bit(uint16_t num, uint8_t position) {
+static inline bool get_u16bit(uint16_t num, uint8_t position) {
     if (position > 15) {
         printf("outOfRange Error: position must be 0-15\n");
         return false;
@@ -70,7 +70,7 @@ bool get_u16bit(uint16_t num, uint8_t position) {
 /// @param num The value to read
 /// @param position Bit position (0-31)
 /// @return True if bit is 1, false if bit is 0
-bool get_u32bit(uint32_t num, uint8_t position) {
+static inline bool get_u32bit(uint32_t num, uint8_t position) {
     if (position > 31) {
         printf("outOfRange Error: position must be 0-31\n");
         return false;
@@ -82,7 +82,7 @@ bool get_u32bit(uint32_t num, uint8_t position) {
 /// @param num The value to read
 /// @param position Bit position (0-63)
 /// @return True if bit is 1, false if bit is 0
-bool get_u64bit(uint64_t num, uint8_t position) {
+static inline bool get_u64bit(uint64_t num, uint8_t position) {
     if (position > 63) {
         printf("outOfRange Error: position must be 0-63\n");
         return false;
@@ -94,7 +94,7 @@ bool get_u64bit(uint64_t num, uint8_t position) {
 /// @param num The value to read
 /// @param position Bit position (0-7)
 /// @return True if bit is 1, false if bit is 0
-bool get_8bit(int8_t num, uint8_t position) {
+static inline bool get_8bit(int8_t num, uint8_t position) {
     if (position > 7) {
         printf("outOfRange Error: position must be 0-7\n");
         return false;
@@ -106,7 +106,7 @@ bool get_8bit(int8_t num, uint8_t position) {
 /// @param num The value to read
 /// @param position Bit position (0-15)
 /// @return True if bit is 1, false if bit is 0
-bool get_16bit(int16_t num, uint8_t position) {
+static inline bool get_16bit(int16_t num, uint8_t position) {
     if (position > 15) {
         printf("outOfRange Error: position must be 0-15\n");
         return false;
@@ -118,7 +118,7 @@ bool get_16bit(int16_t num, uint8_t position) {
 /// @param num The value to read
 /// @param position Bit position (0-31)
 /// @return True if bit is 1, false if bit is 0
-bool get_32bit(int32_t num, uint8_t position) {
+static inline bool get_32bit(int32_t num, uint8_t position) {
     if (position > 31) {
         printf("outOfRange Error: position must be 0-31\n");
         return false;
@@ -130,7 +130,7 @@ bool get_32bit(int32_t num, uint8_t position) {
 /// @param num The value to read
 /// @param position Bit position (0-63)
 /// @return True if bit is 1, false if bit is 0
-bool get_64bit(int64_t num, uint8_t position) {
+static inline bool get_64bit(int64_t num, uint8_t position) {
     if (position > 63) {
         printf("outOfRange Error: position must be 0-63\n");
         return false;
@@ -142,7 +142,7 @@ bool get_64bit(int64_t num, uint8_t position) {
 /// @param c The character to read
 /// @param position Bit position (0-7)
 /// @return True if bit is 1, false if bit is 0
-bool get_char_bit(char c, uint8_t position) {
+static inline bool get_char_bit(char c, uint8_t position) {
     return get_u8bit((uint8_t)c, position);
 }
 
@@ -150,7 +150,7 @@ bool get_char_bit(char c, uint8_t position) {
 /// @param num The value to read
 /// @param position Bit position (0-15)
 /// @return True if bit is 1, false if bit is 0
-bool get_short_bit(short num, uint8_t position) {
+static inline bool get_short_bit(short num, uint8_t position) {
     return get_16bit((int16_t)num, position);
 }
 
@@ -158,7 +158,7 @@ bool get_short_bit(short num, uint8_t position) {
 /// @param num The value to read
 /// @param position Bit position (0-31)
 /// @return True if bit is 1, false if bit is 0
-bool get_int_bit(int num, uint8_t position) {
+static inline bool get_int_bit(int num, uint8_t position) {
     return get_32bit((int32_t)num, position);
 }
 
@@ -166,7 +166,7 @@ bool get_int_bit(int num, uint8_t position) {
 /// @param num The value to read
 /// @param position Bit position (0-63)
 /// @return True if bit is 1, false if bit is 0
-bool get_long_bit(long num, uint8_t position) {
+static inline bool get_long_bit(long num, uint8_t position) {
     return get_64bit((int64_t)num, position);
 }
 

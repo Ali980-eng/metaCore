@@ -12,5 +12,6 @@
 #include "lite/type.hpp"
 #include "lite/UnitTest.hpp"
 #include "lite/warning.hpp"
+#include "lite/ecosystem.hpp"
 
 #endif // METACORE___LITE_HPP

@@ -40,7 +40,7 @@
 /// @return Modified value with bits at pos1 and pos2 exchanged, or 0 if positions are invalid
 /// @note Prints error message to console if pos1 or pos2 exceed valid range (0-7)
 /// @example xchg_u8bit(0b10100101, 0, 7) returns 0b00100101 (swap LSB and MSB)
-uint8_t xchg_u8bit(uint8_t value, uint8_t pos1, uint8_t pos2) {
+static inline uint8_t xchg_u8bit(uint8_t value, uint8_t pos1, uint8_t pos2) {
     if(pos1 > 7 || pos2 > 7) {
         printf("outOfRange Error: the position 1 or 2 is out of the range 0-7");
         return 0;
@@ -66,7 +66,7 @@ uint8_t xchg_u8bit(uint8_t value, uint8_t pos1, uint8_t pos2) {
 /// @param pos2 Second bit position to exchange (0-15)
 /// @return Modified value with bits at pos1 and pos2 exchanged, or 0 if positions are invalid
 /// @note Prints error message to console if pos1 or pos2 exceed valid range (0-15)
-uint16_t xchg_u16bit(uint16_t value, uint8_t pos1, uint8_t pos2) {
+static inline uint16_t xchg_u16bit(uint16_t value, uint8_t pos1, uint8_t pos2) {
     if(pos1 > 15 || pos2 > 15) {
         printf("outOfRange Error: the position 1 or 2 is out of the range 0-15");
         return 0;
@@ -92,7 +92,7 @@ uint16_t xchg_u16bit(uint16_t value, uint8_t pos1, uint8_t pos2) {
 /// @param pos2 Second bit position to exchange (0-31)
 /// @return Modified value with bits at pos1 and pos2 exchanged, or 0 if positions are invalid
 /// @note Prints error message to console if pos1 or pos2 exceed valid range (0-31)
-uint32_t xchg_u32bit(uint32_t value, uint8_t pos1, uint8_t pos2) {
+static inline uint32_t xchg_u32bit(uint32_t value, uint8_t pos1, uint8_t pos2) {
     if(pos1 > 31 || pos2 > 31) {
         printf("outOfRange Error: the position 1 or 2 is out of the range 0-31");
         return 0;
@@ -115,7 +115,7 @@ uint32_t xchg_u32bit(uint32_t value, uint8_t pos1, uint8_t pos2) {
 /// @param pos1 First bit position (0-63)
 /// @param pos2 Second bit position (0-63)
 /// @return Modified value with bits exchanged
-uint64_t xchg_u64bit(uint64_t value, uint8_t pos1, uint8_t pos2) {
+static inline uint64_t xchg_u64bit(uint64_t value, uint8_t pos1, uint8_t pos2) {
     if(pos1 > 63 || pos2 > 63) {
         printf("outOfRange Error: the position 1 or 2 is out of the range 0-63");
         return 0;
@@ -153,7 +153,7 @@ int8_t xchg_8bit(int8_t value, uint8_t pos1, uint8_t pos2) {
 /// @param pos2 Second bit position to exchange (0-15)
 /// @return Modified value with bits at pos1 and pos2 exchanged, or 0 if positions are invalid
 /// @note Prints error message to console if pos1 or pos2 exceed valid range (0-15)
-int16_t xchg_16bit(int16_t value, uint8_t pos1, uint8_t pos2) {
+static inline int16_t xchg_16bit(int16_t value, uint8_t pos1, uint8_t pos2) {
     return (int16_t)xchg_u16bit((uint16_t) value, pos1, pos2);
 }
 
@@ -165,7 +165,7 @@ int16_t xchg_16bit(int16_t value, uint8_t pos1, uint8_t pos2) {
 /// @param pos2 Second bit position to exchange (0-31)
 /// @return Modified value with bits at pos1 and pos2 exchanged, or 0 if positions are invalid
 /// @note Prints error message to console if pos1 or pos2 exceed valid range (0-31)
-int32_t xchg_32bit(int32_t value, uint8_t pos1, uint8_t pos2) {
+static inline int32_t xchg_32bit(int32_t value, uint8_t pos1, uint8_t pos2) {
     return (int32_t)xchg_u32bit((uint32_t) value, pos1, pos2);
 }
 
@@ -177,7 +177,7 @@ int32_t xchg_32bit(int32_t value, uint8_t pos1, uint8_t pos2) {
 /// @param pos2 Second bit position to exchange (0-63)
 /// @return Modified value with bits at pos1 and pos2 exchanged, or 0 if positions are invalid
 /// @note Prints error message to console if pos1 or pos2 exceed valid range (0-63)
-int64_t xchg_64bit(int64_t value, uint8_t pos1, uint8_t pos2) {
+static inline int64_t xchg_64bit(int64_t value, uint8_t pos1, uint8_t pos2) {
     return (int64_t)xchg_u64bit((uint64_t) value, pos1, pos2);
 }
 

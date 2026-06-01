@@ -14,6 +14,7 @@
 // std headers
 #include <string>
 #include <iostream>
+#include <source_location>
 
 // local headers
 #include "io.hpp"
@@ -30,15 +31,17 @@ namespace lite
     class warning
     {
     private:
-        std::string name = std::string();
-        std::string description = std::string();
-        float event = float();
+        std::string name;
+        std::string description;
+        std::source_location warningLocation;
+        float event;
     public:
 
         /// @brief Constructs a warning with default name and description.
         warning() noexcept {
             name = "Undefined";
             description = "This warning has no description";
+            warningLocation = std::source_location::current();
             event = warning_time.get_duration();
         }
 
@@ -48,6 +51,7 @@ namespace lite
         warning(const std::string& name, const std::string& description) noexcept {
             this->name = name;
             this->description = description;
+            warningLocation = std::source_location::current();
             event = warning_time.get_duration();
         }
 
@@ -56,6 +60,7 @@ namespace lite
         warning(const std::string& name) noexcept {
             this->name = name;
             description = "";
+            warningLocation = std::source_location::current();
             event = warning_time.get_duration();
         }
 
@@ -64,6 +69,7 @@ namespace lite
         warning(const warning& other) noexcept {
             name = other.name;
             description = other.description;
+            warningLocation = std::source_location::current();
             event = other.event;
         }
 
@@ -97,6 +103,12 @@ namespace lite
         /// @return The description of the warning.
         std::string get_des() const noexcept { return description; }
 
+        constexpr size_t get_line() const noexcept { return (size_t) warningLocation.line(); }
+
+        std::string get_file() const noexcept { return warningLocation.file_name(); }
+
+        constexpr size_t get_column() const noexcept { return (size_t) warningLocation.column(); }
+
         /// @brief Replaces the name and description of the warning.
         /// @param name The new name of the warning.
         /// @param description The new description of the warning.
@@ -104,13 +116,6 @@ namespace lite
             const std::string &description) noexcept {
             this->name = name;
             this->description = description;
-        }
-
-        /// @brief Clears the name, description, and time of the warning.
-        void clear() noexcept {
-            name = std::string();
-            description = std::string();
-            event = float();
         }
 
         // SRV: standard return value.
@@ -133,6 +138,7 @@ namespace lite
         void operator=(const std::string& name) noexcept {
             this->name = name;
             description = "";
+            warningLocation = std::source_location::current();
             event = warning_time.get_duration();
         }
 
@@ -149,6 +155,7 @@ namespace lite
         void operator=(const warning& other) noexcept {
             name = other.name;
             description = other.description;
+            warningLocation = other.warningLocation;
             event = other.event;
         }
 
@@ -157,10 +164,11 @@ namespace lite
          * @return A formatted string containing the warning's name, description, and event time.
          */
         std::string printingFormat() const noexcept {
-            std::string result = std::string(get());
-            result += std::string("Time: " + 
-                std::to_string(get_time()) + 
-                " ms.\n");
+            std::string result = get();
+            result += std::string("File: " + get_file());
+            result += std::string("Line: " + std::to_string(get_line()));
+            result += std::string("Column: " + std::to_string(get_column()));
+            result += std::string("Time: " + std::to_string(get_time()) + " ms.\n");
             return result;
         }
 

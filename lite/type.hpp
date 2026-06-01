@@ -27,118 +27,118 @@ namespace lite
     /// @tparam T The type to get the name of.
     /// @return The name of the type as a string.
     template <typename T>
-    constexpr std::string type() noexcept { return "unkown"; }
+    inline std::string type() noexcept { return "unkown"; }
 
     /// @brief Specializations for common types.
     /// @return The name of the type as a string.
     template <>
-    std::string type<bool>() noexcept { return "bool"; }
+    inline std::string type<bool>() noexcept { return "bool"; }
 
     /// @brief Specializations for common types.
     /// @return The name of the type as a string.
     template <>
-    std::string type<char>() noexcept { return "char"; }
+    inline std::string type<char>() noexcept { return "char"; }
 
     /// @brief Specializations for common types.
     /// @return The name of the type as a string.
     template <>
-    std::string type<short>() noexcept { return "short"; }
+    inline std::string type<short>() noexcept { return "short"; }
 
     /// @brief Specializations for common types.
     /// @return The name of the type as a string.
     template <>
-    std::string type<int>() noexcept { return "int"; }
+    inline std::string type<int>() noexcept { return "int"; }
 
     /// @brief Specializations for common types.
     /// @return The name of the type as a string.
     template <>
-    std::string type<long>() noexcept { return "long"; }
+    inline std::string type<long>() noexcept { return "long"; }
 
     /// @brief Specializations for common types.
     /// @return The name of the type as a string.
     template <>
-    std::string type<long long>() noexcept { return "long long"; }
+    inline std::string type<long long>() noexcept { return "long long"; }
 
     /// @brief Specializations for common types.
     /// @return The name of the type as a string.
     template <>
-    std::string type<float>() noexcept { return "float"; }
+    inline std::string type<float>() noexcept { return "float"; }
 
     /// @brief Specializations for common types.
     /// @return The name of the type as a string.
     template <>
-    std::string type<double>() noexcept { return "double"; }
+    inline std::string type<double>() noexcept { return "double"; }
 
     /// @brief Specializations for common types.
     /// @return The name of the type as a string.
     template <>
-    std::string type<long double>() noexcept { return "long double"; }
+    inline std::string type<long double>() noexcept { return "long double"; }
 
     /// @brief Specializations for common types.
     /// @return The name of the type as a string.
     template <>
-    std::string type<std::string>() noexcept { return "std::string"; }
+    inline std::string type<std::string>() noexcept { return "std::string"; }
 
     /// @brief function to get type name from variable.
     /// @tparam T the type of the input.
     /// @param input The input variable.
     /// @return The name of the type as a string.
     template <typename T>
-    constexpr std::string type(const T &input) noexcept { return "unkown"; }
+    inline std::string type(const T &input) noexcept { return "unkown"; }
 
     /// @brief Specializations for common types.
     /// @param input The input variable.
     /// @return The name of the type as a string.
     template <>
-    std::string type<bool>(const bool &input) noexcept { return "bool"; }
+    inline std::string type<bool>(const bool &input) noexcept { return "bool"; }
 
     /// @brief Specializations for common types.
     /// @param input The input variable.
     /// @return The name of the type as a string.
     template <>
-    std::string type<char>(const char &input) noexcept { return "char"; }
+    inline std::string type<char>(const char &input) noexcept { return "char"; }
 
     /// @brief Specializations for common types.
     /// @param input The input variable.
     /// @return The name of the type as a string.
     template <>
-    std::string type<short>(const short &input) noexcept { return "short"; }
+    inline std::string type<short>(const short &input) noexcept { return "short"; }
 
     /// @brief Specializations for common types.
     /// @param input The input variable.
     /// @return The name of the type as a string.
     template <>
-    std::string type<int>(const int &input) noexcept { return "int"; }
+    inline std::string type<int>(const int &input) noexcept { return "int"; }
 
     /// @brief Specializations for common types.
     /// @param input The input variable.
     /// @return The name of the type as a string.
     template <>
-    std::string type<long>(const long &input) noexcept { return "long"; }
+    inline std::string type<long>(const long &input) noexcept { return "long"; }
 
     /// @brief Specializations for common types.
     /// @param input The input variable.
     /// @return The name of the type as a string.
     template <>
-    std::string type<float>(const float &input) noexcept { return "float"; }
+    inline std::string type<float>(const float &input) noexcept { return "float"; }
 
     /// @brief Specializations for common types.
     /// @param input The input variable.
     /// @return The name of the type as a string.
     template <>
-    std::string type<double>(const double &input) noexcept { return "double"; }
+    inline std::string type<double>(const double &input) noexcept { return "double"; }
 
     /// @brief Specializations for common types.
     /// @param input The input variable.
     /// @return The name of the type as a string.
     template <>
-    std::string type<long double>(const long double &input) noexcept { return "long double"; }
+    inline std::string type<long double>(const long double &input) noexcept { return "long double"; }
 
     /// @brief Specializations for common types.
     /// @param input The input variable.
     /// @return The name of the type as a string.
     template <>
-    std::string type<std::string>(const std::string &input) noexcept { return "std: string"; }
+    inline std::string type<std::string>(const std::string &input) noexcept { return "std: string"; }
 
     /// @brief Type checking functions.
     /// @tparam T the type to check.
@@ -289,7 +289,7 @@ namespace lite
     template <typename T>
     constexpr bool is_string() noexcept { return false; }
 
-    /// @brief Specialization for std::string type.
+    /// @brief Specialization for inline std::string type.
     /// @return true since T is std::string.
     template <>
     constexpr bool is_string<std::string>() noexcept { return true; }
@@ -301,7 +301,7 @@ namespace lite
     template <typename T>
     constexpr bool is_string(const T &input) noexcept { return false; }
 
-    /// @brief Specialization for std::string type.
+    /// @brief Specialization for inline std::string type.
     /// @param input The input variable.
     /// @return true since T is std::string.
     template <>
@@ -400,6 +400,6 @@ namespace lite
     /// @brief Converts a boolean value to its string representation.
     /// @param value The boolean value to convert.
     /// @return The string representation of the boolean value.
-    std::string boolean_msg(bool value) noexcept { return value ? "true" : "false"; }
+    inline std::string boolean_msg(bool value) noexcept { return value ? "true" : "false"; }
 }
 #endif // METACORE___LITE_TYPE_HPP

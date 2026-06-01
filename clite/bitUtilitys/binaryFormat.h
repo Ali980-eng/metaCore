@@ -51,7 +51,7 @@
  *  value = false;
  *  result = bool2char(value); // result will be '0'
  */
-char bool2char(bool value) {
+static inline const char bool2char(bool value) {
     return (char)('0' + value);
 }
 
@@ -61,7 +61,7 @@ char bool2char(bool value) {
  * @param high2low If true, the binary string will be ordered from high bit to low bit; if false, it will be ordered from low bit to high bit.
  * @return A dynamically allocated string representing the binary format of the char value. The caller is responsible for freeing this memory.
  */
-char* bit_str_char(char value, bool high2low) {
+static inline char* bit_str_char(char value, bool high2low) {
     char* result = (char*) malloc(9);
     
     if (result == NULL)
@@ -79,7 +79,7 @@ char* bit_str_char(char value, bool high2low) {
  * @param value The short value to convert.
  * @return A dynamically allocated string representing the binary format of the short value. The caller is responsible for freeing this memory.
  */
-char* bit_str_short(short value) {
+static inline char* bit_str_short(short value) {
     char* result = (char*) malloc(8 * sizeof(short) + 1);
     
     if (result == NULL)
@@ -97,7 +97,7 @@ char* bit_str_short(short value) {
  * @param value The int value to convert.
  * @return A dynamically allocated string representing the binary format of the int value. The caller is responsible for freeing this memory.
  */
-char* bit_str_int(int value) {
+static inline char* bit_str_int(int value) {
     char* result = (char*) malloc(8 * sizeof(int) + 1);
 
     if (result == NULL)
@@ -115,7 +115,7 @@ char* bit_str_int(int value) {
  * @param value The long value to convert.
  * @return A dynamically allocated string representing the binary format of the long value. The caller is responsible for freeing this memory.
  */
-char* bit_str_long(long value) {
+static inline char* bit_str_long(long value) {
     char* result = (char*) malloc(8 * sizeof(long) + 1);
     
     if (result == NULL)
@@ -133,7 +133,7 @@ char* bit_str_long(long value) {
  * @param value The value to convert.
  * @return A dynamically allocated string representing the binary format. Caller must free memory.
  */
-char* bit8_str(int8_t value) {
+static inline char* bit8_str(int8_t value) {
     char* result = (char*) malloc(9);
     
     if (result == NULL)
@@ -151,7 +151,7 @@ char* bit8_str(int8_t value) {
  * @param value The value to convert.
  * @return A dynamically allocated string representing the binary format. Caller must free memory.
  */
-char* bit16_str(int16_t value) {
+static inline char* bit16_str(int16_t value) {
     char* result = (char*) malloc(17);
 
     if (result == NULL) 
@@ -169,7 +169,7 @@ char* bit16_str(int16_t value) {
  * @param value The value to convert.
  * @return A dynamically allocated string representing the binary format. Caller must free memory.
  */
-char* bit32_str(int32_t value) {
+static inline char* bit32_str(int32_t value) {
     char* result = (char*) malloc(33);
 
     if (result == NULL)
@@ -187,7 +187,7 @@ char* bit32_str(int32_t value) {
  * @param value The value to convert.
  * @return A dynamically allocated string representing the binary format. Caller must free memory.
  */
-char* bit64_str(int64_t value) {
+static inline char* bit64_str(int64_t value) {
     char* result = (char*) malloc(65);
 
     if (result == NULL)
@@ -206,7 +206,7 @@ char* bit64_str(int64_t value) {
  * @param value The value to convert.
  * @return A dynamically allocated string representing the binary format. Caller must free memory.
  */
-char* ubit8_str(uint8_t value) {
+static inline char* ubit8_str(uint8_t value) {
     char* result = (char*) malloc(9);
 
     if (result == NULL)
@@ -224,7 +224,7 @@ char* ubit8_str(uint8_t value) {
  * @param value The value to convert.
  * @return A dynamically allocated string representing the binary format. Caller must free memory.
  */
-char* ubit16_str(uint16_t value) {
+static inline char* ubit16_str(uint16_t value) {
     char* result = (char*) malloc(17);
 
     if (result == NULL) 
@@ -242,7 +242,7 @@ char* ubit16_str(uint16_t value) {
  * @param value The value to convert.
  * @return A dynamically allocated string representing the binary format. Caller must free memory.
  */
-char* ubit32_str(uint32_t value) {
+static inline char* ubit32_str(uint32_t value) {
     char* result = (char*) malloc(33);
 
     if (result == NULL)
@@ -260,7 +260,7 @@ char* ubit32_str(uint32_t value) {
  * @param value The value to convert.
  * @return A dynamically allocated string representing the binary format. Caller must free memory.
  */
-char* ubit64_str(uint64_t value) {
+static inline char* ubit64_str(uint64_t value) {
     char* result = (char*) malloc(65);
 
     if (result == NULL)
@@ -278,7 +278,7 @@ char* ubit64_str(uint64_t value) {
  * @param value The value to print.
  * @param pnl If true, prints a newline after the binary representation.
  */
-void print8bit(int8_t value, bool pnl) {
+static inline void print8bit(int8_t value, bool pnl) {
     for(uint8_t i = 7; i >= 0; i--)
         printf("%c", bool2char(get_8bit(value, i)));
     if(pnl) printf("%c", '\n');
@@ -289,7 +289,7 @@ void print8bit(int8_t value, bool pnl) {
  * @param value The value to print.
  * @param pnl If true, prints a newline after the binary representation.
  */
-void print16bit(int16_t value, bool pnl) {
+static inline void print16bit(int16_t value, bool pnl) {
     for(uint8_t i = 15; i >= 0; i--)
         printf("%c", bool2char(get_16bit(value, i)));
     if(pnl) printf("%c", '\n');
@@ -300,7 +300,7 @@ void print16bit(int16_t value, bool pnl) {
  * @param value The value to print.
  * @param pnl If true, prints a newline after the binary representation.
  */
-void print32bit(int32_t value, bool pnl) {
+static inline void print32bit(int32_t value, bool pnl) {
     for(uint8_t i = 31; i >= 0; i--)
         printf("%c", bool2char(get_32bit(value, i)));
     if(pnl) printf("%c", '\n');
@@ -311,7 +311,7 @@ void print32bit(int32_t value, bool pnl) {
  * @param value The value to print.
  * @param pnl If true, prints a newline after the binary representation.
  */
-void print64bit(int64_t value, bool pnl) {
+static inline void print64bit(int64_t value, bool pnl) {
     for(uint8_t i = 63; i >= 0; i--)
         printf("%c", bool2char(get_64bit(value, i)));
     if(pnl) printf("%c", '\n');
@@ -322,7 +322,7 @@ void print64bit(int64_t value, bool pnl) {
  * @param value The value to print.
  * @param pnl If true, prints a newline after the binary representation.
  */
-void print_u8bit(uint8_t value, bool pnl) {
+static inline void print_u8bit(uint8_t value, bool pnl) {
     for(uint8_t i = 7; i >= 0; i--)
         printf("%c", bool2char(get_u8bit(value, i)));
     if(pnl) printf("%c", '\n');
@@ -333,7 +333,7 @@ void print_u8bit(uint8_t value, bool pnl) {
  * @param value The value to print.
  * @param pnl If true, prints a newline after the binary representation.
  */
-void print_u16bit(uint16_t value, bool pnl) {
+static inline void print_u16bit(uint16_t value, bool pnl) {
     for(uint8_t i = 15; i >= 0; i--)
         printf("%c", bool2char(get_u16bit(value, i)));
     if(pnl) printf("%c", '\n');
@@ -344,7 +344,7 @@ void print_u16bit(uint16_t value, bool pnl) {
  * @param value The value to print.
  * @param pnl If true, prints a newline after the binary representation.
  */
-void print_u32bit(uint32_t value, bool pnl) {
+static inline void print_u32bit(uint32_t value, bool pnl) {
     for(uint8_t i = 31; i >= 0; i--)
         printf("%c", bool2char(get_u32bit(value, i)));
     if(pnl) printf("%c", '\n');
@@ -355,7 +355,7 @@ void print_u32bit(uint32_t value, bool pnl) {
  * @param value The value to print.
  * @param pnl If true, prints a newline after the binary representation.
  */
-void print_u64bit(uint64_t value, bool pnl) {
+static inline void print_u64bit(uint64_t value, bool pnl) {
     for(uint8_t i = 63; i >= 0; i--)
         printf("%c", bool2char(get_u64bit(value, i)));
     if(pnl) printf("%c", '\n');

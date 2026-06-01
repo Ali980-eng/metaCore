@@ -28,10 +28,10 @@
  *
  * Usage Example:
  * @code
- * lite::warning w("Something unexpected happened");
+ * warning w("Something unexpected happened");
  * meta::metaSystem.Catch(w, true);  // Display as message box
  *
- * lite::error e("Critical failure");
+ * error e("Critical failure");
  * meta::metaSystem.Catch(e);  // Display and exit
  *
  * CTEST test("my_test", true);
@@ -53,18 +53,19 @@
 #include <windows.h>
 #include <string>
 #include <queue>
-#include "clite/micros.h"
-#include "lite/micros.hpp"
-#include "lite/warning.hpp"
-#include "lite/error.hpp"
-#include "clite/UnitTest.h"
-#include "clite/IOUtilitys.h"
+
+
+#include "stream.hpp"
+#include "micros.hpp"
+#include "warning.hpp"
+#include "error.hpp"
+
 
 #pragma once
-#ifndef METACORE___ECOSYSTEM_HPP
-#define METACORE___ECOSYSTEM_HPP
+#ifndef METACORE___LITE_ECOSYSTEM_HPP
+#define METACORE___LITE_ECOSYSTEM_HPP
 
-namespace meta {
+namespace lite {
     /**
      * @brief Converts a std::string to std::wstring for Windows API compatibility.
      * 
@@ -106,14 +107,14 @@ namespace meta {
      */
     object system65 {
         private:
-        std::queue<lite::warning> _sys_w;
-        lite::error _sys_err;
-        std::vector<CTEST> _sys_test;
+        std::queue<warning> sys_w;
+        error sys_err;
         bool retval;
         protected:
         const str wm = "meta ecosystem warning",
         em = "meta ecosystem error";
         public:
+        function::test_stream sys_test;
 
         /**
          * @brief Adds a test result to the ecosystem's test collection.
@@ -126,11 +127,11 @@ namespace meta {
          *
          * @note The test result is always added to the collection regardless of PTS value.
          *
-         * @see print_sys_test() for viewing all collected tests
+         * @see printcsys_test() for viewing all collected tests
          */
-        void add(const CTEST& value, bool PTS) {
-            _sys_test.push_back(value);
-            if(PTS) printTest(value);
+        void add(TEST& value, bool PTS) {
+            sys_test << value;
+            if(PTS) io::print_test(value.get(true), value.get(false), value.get(), sys_test.get_total_tests());
         }
         
         /**
@@ -145,15 +146,7 @@ namespace meta {
          * @note Uses TEST_0 macro pattern for summary generation.
          * @see add() for adding tests to the collection
          */
-        void print_sys_test() {
-            INIT_TEST("meta ecosystem test")
-            for(CTEST T : _sys_test) {
-                if(T.result) tests_passed++;
-                else tests_failed++;
-                total_tests++;
-            }
-            printSummary
-        }
+        void print_summary() { }
 
         /**
          * @brief Catches and displays a warning with optional message box.
@@ -173,7 +166,7 @@ namespace meta {
          * @see warning class in lite/warning.hpp
          * @see exit_value() for checking accumulated warning status
          */
-        void Catch(const lite::warning& w, bool msgbox = false) noexcept {
+        void Catch(const warning& w, bool msgbox = false) noexcept {
             const char* s1 = "lite ecosystem warning";
             
             if(msgbox) {
@@ -204,9 +197,9 @@ namespace meta {
          *          Resources are not guaranteed to be cleaned up properly.
          *
          * @see error class in lite/error.hpp
-         * @see Catch(const lite::warning&, bool) for non-fatal warning handling
+         * @see Catch(const warning&, bool) for non-fatal warning handling
          */
-        void Catch(lite::error& e) noexcept {
+        void Catch(error& e) noexcept {
             MessageBoxW(NULL, 
                 toWide(em).c_str(),
                 toWide(e.printingFormat()).c_str(),
@@ -254,7 +247,8 @@ namespace meta {
             if(retval) std::exit(EXIT_FAILURE);
             else std::exit(EXIT_SUCCESS);
         }
+
     } ecosystem;
 }
 
-#endif // METACORE___ECOSYSTEM_HPP
+#endif // METACORE___LITE_ECOSYSTEM_HPP

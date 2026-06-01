@@ -22,10 +22,10 @@
 #define METACORE___CLITE___IOUTILITYS_H
 
 /// @brief Prints a newline character.
-void PNL() { printf("\n"); }
+static inline void PNL() { printf("\n"); }
 
 /// @brief Prints a specified number of tab characters.
-void PTab() { printf("\t"); }
+static inline void PTab() { printf("\t"); }
 
 /**
  * @brief Returns a message indicating the result of a test.
@@ -58,7 +58,7 @@ const char *test_msg(bool result)
  * If an excessively large number is provided, such as NewLines(UINT_MAX), the function will throw an exception to prevent potential issues with output formatting.
  * This function is useful for creating spacing in output, especially when formatting structured data or creating visually organized displays in console applications.
  */
-void NewLines(unsigned int num)
+static inline void NewLines(unsigned int num)
 {
     for (unsigned int i = 0; i < num; i++)
         printf("\n");
@@ -75,7 +75,7 @@ void NewLines(unsigned int num)
  * If an excessively large number is provided, such as Tabs(UINT_MAX), the function will throw an exception to prevent potential issues with output formatting.
  * This function is useful for creating indents in output, especially when formatting structured data or creating visually organized displays in console applications.
  */
-void Tabs(unsigned int num)
+static inline void Tabs(unsigned int num)
 {
     for (unsigned int i = 0; i < num; i++)
         printf("\t");
@@ -94,7 +94,7 @@ void Tabs(unsigned int num)
  * print_char_str("Another Test", 20); // This will print "A n o t h e r   T e s t" (starting from index 0)
  * This function is useful for displaying specific parts of a string or for debugging purposes when you want to see the characters from a certain point onward.
  */
-void print_char_str(const char* str, unsigned int index)
+static inline void print_char_str(const char* str, unsigned int index)
 {
     if (index >= strlen(str))
         index = 0;
@@ -116,7 +116,7 @@ void print_char_str(const char* str, unsigned int index)
  * separator(25, '='); // This will print a line of 25 equal signs.
  * If an invalid character is provided, such as separator(15, '@'), the function will
  */
-void separator(unsigned int length, char ch)
+static inline void separator(unsigned int length, char ch)
 {
     if (ch == '~' || ch == '-' || ch == '#' || ch == '*' || ch == '=')
     {
@@ -136,7 +136,7 @@ void separator(unsigned int length, char ch)
  * @details This function prints the specified number of separators in a row, each with the given length and character.
  * The function validates the separator character and throws an exception if an invalid character is provided.  This allows for consistent formatting of output with customizable visual dividers.
  */
-void separators(unsigned int numsep, unsigned int length, char ch)
+static inline void separators(unsigned int numsep, unsigned int length, char ch)
 {
     for (unsigned int i = 0; i < numsep; i++)
         separator(length, ch);
@@ -147,7 +147,7 @@ void separators(unsigned int numsep, unsigned int length, char ch)
  * @param category The category string to be printed.
  * @details This function prints a formatted category header with separators for better readability.
  */
-void print_category(const char *category)
+static inline void print_category(const char *category)
 {
     separator(2 * strlen(category), '-');
     Tabs(strlen(category) / 10);
@@ -164,7 +164,7 @@ void print_category(const char *category)
  * @details This function prints a formatted category header with customizable separators and indentation for better readability.
  * The user can specify the number of tabs for indentation, the length of the separators, and the character to be used for the separators, allowing for flexible formatting of the category header in the output.
  */
-void printCategory(const char *category_s, unsigned int tabs_num, unsigned int seplen, char sepch)
+static inline void printCategory(const char *category_s, unsigned int tabs_num, unsigned int seplen, char sepch)
 {
     separator(seplen, sepch);
     Tabs(tabs_num);
@@ -183,7 +183,7 @@ void printCategory(const char *category_s, unsigned int tabs_num, unsigned int s
  * determined by a simple equality check between the real and expected values, and the output is formatted to clearly
  * indicate the results of the test.
  */
-void print_test_bool(bool real, bool expected, unsigned int seplen, char sepch)
+static inline void print_test_bool(bool real, bool expected, unsigned int seplen, char sepch)
 {
     printf("The test result: %s\n", test_msg(real == expected));
     separator(seplen, sepch);
@@ -203,7 +203,7 @@ void print_test_bool(bool real, bool expected, unsigned int seplen, char sepch)
  * determined by a simple equality check between the real and expected values, and the output is formatted to clearly
  * indicate the results of the test.
  */
-void print_test_char(char real, char expected, unsigned int seplen, char sepch)
+static inline void print_test_char(char real, char expected, unsigned int seplen, char sepch)
 {
     printf("The test result: %s\n", test_msg(real == expected));
     separator(seplen, sepch);
@@ -223,7 +223,7 @@ void print_test_char(char real, char expected, unsigned int seplen, char sepch)
  * determined by a simple equality check between the real and expected values, and the output is formatted to clearly
  * indicate the results of the test.
  */
-void print_test_short(short real, short expected, unsigned int seplen, char sepch)
+static inline void print_test_short(short real, short expected, unsigned int seplen, char sepch)
 {
     printf("The test result: %s\n", test_msg(real == expected));
     separator(seplen, sepch);
@@ -243,7 +243,7 @@ void print_test_short(short real, short expected, unsigned int seplen, char sepc
  * determined by a simple equality check between the real and expected values, and the output is formatted to clearly
  * indicate the results of the test.
  */
-void print_test_int(int real, int expected, unsigned int seplen, char sepch)
+static inline void print_test_int(int real, int expected, unsigned int seplen, char sepch)
 {
     printf("The test result: %s\n", test_msg(real == expected));
     separator(seplen, sepch);
@@ -263,7 +263,7 @@ void print_test_int(int real, int expected, unsigned int seplen, char sepch)
  * determined by a simple equality check between the real and expected values, and the output is formatted to clearly
  * indicate the results of the test.
  */
-void print_test_long(long real, long expected, unsigned int seplen, char sepch)
+static inline void print_test_long(long real, long expected, unsigned int seplen, char sepch)
 {
     printf("The test result: %s\n", test_msg(real == expected));
     separator(seplen, sepch);
@@ -283,7 +283,7 @@ void print_test_long(long real, long expected, unsigned int seplen, char sepch)
  * determined by a simple equality check between the real and expected values, and the output is formatted to clearly
  * indicate the results of the test.
  */
-void print_test_size(size_t real, size_t expected, unsigned int seplen, char sepch)
+static inline void print_test_size(size_t real, size_t expected, unsigned int seplen, char sepch)
 {
     printf("The test result: %s\n", test_msg(real == expected));
     separator(seplen, sepch);
@@ -303,7 +303,7 @@ void print_test_size(size_t real, size_t expected, unsigned int seplen, char sep
  * It then prints the test result, the real value, and the expected value, with separators for better readability.
  * If the provided resolution is unreasonably high (greater than or equal to 5.
  */
-void print_test_float(float real, float expected, unsigned int seplen,
+static inline void print_test_float(float real, float expected, unsigned int seplen,
                 char sepch, float resolution)
 {
     if (resolution >= 5.0f)
@@ -330,7 +330,7 @@ void print_test_float(float real, float expected, unsigned int seplen,
  * It then prints the test result, the real value, and the expected value, with separators for better readability.
  * If the provided resolution is unreasonably high (greater than or equal to 5.0), a warning is printed and the resolution is reset to 0.01 to ensure meaningful test results.
  */
-void print_test_double(double real, double expected, unsigned int seplen,
+static inline void print_test_double(double real, double expected, unsigned int seplen,
                 char sepch, double resolution)
 {
     if (resolution >= 5.0)
@@ -357,7 +357,7 @@ void print_test_double(double real, double expected, unsigned int seplen,
  * and then displays the real and expected values along with separators for better readability.
  * The test result is determined by comparing the two strings using strcmp, and the output is formatted to clearly indicate the results of the test.
  */
-void print_test_string(const char *real, const char *expected,
+static inline void print_test_string(const char *real, const char *expected,
                 unsigned int seplen, char sepch, bool result)
 {
     printf("The test result: %s\n", test_msg(result));
@@ -368,7 +368,7 @@ void print_test_string(const char *real, const char *expected,
 }
 
 #ifdef OPENUDT___CUDT_CSTRING_CSTRINGTYPE_H
-void print_test_cstring(cstring real, cstring expected, unsigned int seplen, char sepch)
+static inline void print_test_cstring(cstring real, cstring expected, unsigned int seplen, char sepch)
 {
     printf("The test result:\n");
     separator(seplen, sepch);

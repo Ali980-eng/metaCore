@@ -34,6 +34,7 @@
 #include <string>
 #include <iostream>
 #include <cstdlib>
+#include <source_location>
 #include "benchmark.hpp"
 
 #pragma once
@@ -53,6 +54,7 @@ namespace lite {
         private:
         std::string name;
         std::string description;
+        std::source_location errLocation;
         float event;
 
         public:
@@ -62,6 +64,7 @@ namespace lite {
         error() {
             name = "Unknown Error";
             description = "no description for this error";
+            errLocation = std::source_location::current();
             event = errTimer.get_duration();
         }
 
@@ -71,6 +74,7 @@ namespace lite {
          */
         error(const std::string& name) noexcept {
             this->name = name;
+            errLocation = std::source_location::current();
             event = errTimer.get_duration();
         }
 
@@ -82,6 +86,7 @@ namespace lite {
         error(const std::string& name, const std::string& description) noexcept {
             this->name = name;
             this->description = description;
+            errLocation = std::source_location::current();
             event = errTimer.get_duration();
         }
 
@@ -107,6 +112,14 @@ namespace lite {
             description.length();
         }
 
+        constexpr float get_time() const noexcept { return event; }
+
+        std::string get_file() const noexcept { return errLocation.file_name(); }
+
+        constexpr size_t get_line() noexcept { return (size_t) errLocation.line(); }
+
+        constexpr size_t get_column() noexcept { return (size_t) errLocation.column(); }
+
         /**
          * @brief Generates a formatted string representation of the error.
          * @return A formatted string containing error name, description, and time.
@@ -127,9 +140,17 @@ namespace lite {
             else {
                 result += "error description: nothing \n";
             }
-            result += std::string("Error Time: " + 
-                std::to_string(event) + " ms.\n");
+            result += std::string("Error File: " + get_file());
+            result += std::string("Error Line: " + std::to_string(get_line()));
+            result += std::string("Error Time: " + std::to_string(event) + " ms.\n");
             return result;
+        }
+
+        void operator=(const error& other) noexcept {
+            name = other.name;
+            description = other.description;
+            errLocation = other.errLocation;
+            event = other.event;
         }
 
         /**

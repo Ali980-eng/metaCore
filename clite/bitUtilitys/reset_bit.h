@@ -35,7 +35,7 @@
 /// @param num The value to modify
 /// @param position Bit position (0-7)
 /// @return Modified value with bit cleared
-uint8_t reset_u8bit(uint8_t num, uint8_t position) {
+static inline uint8_t reset_u8bit(uint8_t num, uint8_t position) {
     if (position > 7) {
         printf("outOfRange Error: position must be 0-7\n");
         return num;
@@ -47,7 +47,7 @@ uint8_t reset_u8bit(uint8_t num, uint8_t position) {
 /// @param num The value to modify
 /// @param position Bit position (0-15)
 /// @return Modified value with bit cleared
-uint16_t reset_u16bit(uint16_t num, uint8_t position) {
+static inline uint16_t reset_u16bit(uint16_t num, uint8_t position) {
     if (position > 15) {
         printf("outOfRange Error: position must be 0-15\n");
         return num;
@@ -59,7 +59,7 @@ uint16_t reset_u16bit(uint16_t num, uint8_t position) {
 /// @param num The value to modify
 /// @param position Bit position (0-31)
 /// @return Modified value with bit cleared
-uint32_t reset_u32bit(uint32_t num, uint8_t position) {
+static inline uint32_t reset_u32bit(uint32_t num, uint8_t position) {
     if (position > 31) {
         printf("outOfRange Error: position must be 0-31\n");
         return num;
@@ -71,7 +71,7 @@ uint32_t reset_u32bit(uint32_t num, uint8_t position) {
 /// @param num The value to modify
 /// @param position Bit position (0-63)
 /// @return Modified value with bit cleared
-uint64_t reset_u64bit(uint64_t num, uint8_t position) {
+static inline uint64_t reset_u64bit(uint64_t num, uint8_t position) {
     if (position > 63) {
         printf("outOfRange Error: position must be 0-63\n");
         return num;
@@ -83,7 +83,7 @@ uint64_t reset_u64bit(uint64_t num, uint8_t position) {
 /// @param num The value to modify
 /// @param position Bit position (0-7)
 /// @return Modified value with bit cleared
-int8_t reset_8bit(int8_t num, uint8_t position) {
+static inline int8_t reset_8bit(int8_t num, uint8_t position) {
     if (position > 7) {
         printf("outOfRange Error: position must be 0-7\n");
         return num;
@@ -95,7 +95,7 @@ int8_t reset_8bit(int8_t num, uint8_t position) {
 /// @param num The value to modify
 /// @param position Bit position (0-15)
 /// @return Modified value with bit cleared
-int16_t reset_16bit(int16_t num, uint8_t position) {
+static inline int16_t reset_16bit(int16_t num, uint8_t position) {
     if (position > 15) {
         printf("outOfRange Error: position must be 0-15\n");
         return num;
@@ -107,7 +107,7 @@ int16_t reset_16bit(int16_t num, uint8_t position) {
 /// @param num The value to modify
 /// @param position Bit position (0-31)
 /// @return Modified value with bit cleared
-int32_t reset_32bit(int32_t num, uint8_t position) {
+static inline int32_t reset_32bit(int32_t num, uint8_t position) {
     if (position > 31) {
         printf("outOfRange Error: position must be 0-31\n");
         return num;
@@ -119,7 +119,7 @@ int32_t reset_32bit(int32_t num, uint8_t position) {
 /// @param num The value to modify
 /// @param position Bit position (0-63)
 /// @return Modified value with bit cleared
-int64_t reset_64bit(int64_t num, uint8_t position) {
+static inline int64_t reset_64bit(int64_t num, uint8_t position) {
     if (position > 63) {
         printf("outOfRange Error: position must be 0-63\n");
         return num;
@@ -131,7 +131,7 @@ int64_t reset_64bit(int64_t num, uint8_t position) {
 /// @param c The character to modify
 /// @param position Bit position (0-7)
 /// @return Modified character with bit cleared
-char reset_char_bit(char c, uint8_t position) {
+static inline char reset_char_bit(char c, uint8_t position) {
     return (char)reset_u8bit((uint8_t)c, position);
 }
 
@@ -139,7 +139,7 @@ char reset_char_bit(char c, uint8_t position) {
 /// @param num The value to modify
 /// @param position Bit position (0-15)
 /// @return Modified value with bit cleared
-short reset_short_bit(short num, uint8_t position) {
+static inline short reset_short_bit(short num, uint8_t position) {
     return (short)reset_16bit((int16_t)num, position);
 }
 
@@ -147,7 +147,7 @@ short reset_short_bit(short num, uint8_t position) {
 /// @param num The value to modify
 /// @param position Bit position (0-31)
 /// @return Modified value with bit cleared
-int reset_int_bit(int num, uint8_t position) {
+static inline int reset_int_bit(int num, uint8_t position) {
     return (int)reset_32bit((int32_t)num, position);
 }
 
@@ -155,7 +155,7 @@ int reset_int_bit(int num, uint8_t position) {
 /// @param num The value to modify
 /// @param position Bit position (0-63)
 /// @return Modified value with bit cleared
-long reset_long_bit(long num, uint8_t position) {
+static inline long reset_long_bit(long num, uint8_t position) {
     return (long)reset_64bit((int64_t)num, position);
 }
 

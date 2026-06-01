@@ -50,7 +50,7 @@ typedef struct { uint8_t value; } cbool_8;
 /// @param current The current cbool_8 structure
 /// @param value The cbool_8 value to set
 /// @return A new cbool_8 structure with the specified bit modified
-cbool_8 set(cbool_8 current, bool value) {
+static inline cbool_8 set(cbool_8 current, bool value) {
     return value ? (cbool_8){set_u8bit(current.value, 0)} 
                  : (cbool_8){reset_u8bit(current.value, 0)};
 }
@@ -58,7 +58,7 @@ cbool_8 set(cbool_8 current, bool value) {
 /// @brief Retrieve the cbool_8 value at position 0
 /// @param current The current cbool_8 structure
 /// @return The cbool_8 value at position 0 (true for 1, false for 0)
-bool get(cbool_8 current) {
+static inline bool get(cbool_8 current) {
     return get_u8bit(current.value, 0);
 }
 
@@ -70,7 +70,7 @@ bool get(cbool_8 current) {
 /// @param position The bit position to modify (0-7, where 0 is LSB)
 /// @return A new cbool_8 structure with the specified bit modified
 /// @note Position 0 represents the least significant bit (LSB)
-cbool_8 set_in(cbool_8 current, bool value, uint8_t position) {
+static inline cbool_8 set_in(cbool_8 current, bool value, uint8_t position) {
     return value ? (cbool_8){set_u8bit(current.value, position)} 
                  : (cbool_8){reset_u8bit(current.value, position)};
 }
@@ -82,7 +82,7 @@ cbool_8 set_in(cbool_8 current, bool value, uint8_t position) {
 /// @param position The bit position to read (0-7, where 0 is LSB)
 /// @return The cbool_8 value at the specified position (true for 1, false for 0)
 /// @note Position 0 represents the least significant bit (LSB)
-bool get_in(cbool_8 current, uint8_t position) {
+static inline bool get_in(cbool_8 current, uint8_t position) {
     return get_u8bit(current.value, position);
 }
 
@@ -91,7 +91,7 @@ bool get_in(cbool_8 current, uint8_t position) {
 ///          representing an empty or unset state.
 /// @return A new cbool_8 structure with value 0 (all bits cleared)
 /// @note This function is commonly used to initialize a fresh cbool_8 container
-cbool_8 empty() {
+static inline cbool_8 empty() {
     return (cbool_8){0};
 }
 
@@ -100,7 +100,7 @@ cbool_8 empty() {
 ///          and returns true if they are equal (i.e., all bits are 0).
 /// @param current The cbool_8 structure to check
 /// @return true if the structure is empty (all bits are 0), false otherwise
-bool isEmpty(cbool_8 current) {
+static inline bool isEmpty(cbool_8 current) {
     return (current.value == (uint8_t)0) ? true : false;
 }
 

@@ -33,7 +33,7 @@ typedef struct {
 } CTEST;
 
 
-CTEST creatNew(CTEST current, char* name, char* des, bool value) {
+static inline CTEST creatNew(CTEST current, char* name, char* des, bool value) {
     current.name = (name != NULL) ? name : strdup("");
     current.description = (des != NULL) ? des : strdup("");
     current.num = cttn;
@@ -42,11 +42,11 @@ CTEST creatNew(CTEST current, char* name, char* des, bool value) {
     return current;
 }
 
-bool catchValue(CTEST current) {
+static inline bool catchValue(CTEST current) {
     return current.result;
 }
 
-void printTest(CTEST current) {
+static inline void printTest(CTEST current) {
     printf("\n");
     printf("------------\n");
     printf("<<< TEST >>>\n");
@@ -72,7 +72,7 @@ void printTest(CTEST current) {
  * @return true if real equals expected, false otherwise.
  * @note When details is true, prints formatted output with separators.
  */
-bool basic_test_bool(bool real, bool expected, bool details, unsigned int seplen, char sepch)
+static inline bool basic_test_bool(bool real, bool expected, bool details, unsigned int seplen, char sepch)
 {
     if (details)
         print_test_bool(real, expected, seplen, sepch);
@@ -89,7 +89,7 @@ bool basic_test_bool(bool real, bool expected, bool details, unsigned int seplen
  * @return true if real equals expected, false otherwise.
  * @note When details is true, prints formatted output with separators.
  */
-bool basic_test_char(char real, char expected, bool details, unsigned int seplen, char sepch)
+static inline bool basic_test_char(char real, char expected, bool details, unsigned int seplen, char sepch)
 {
     if (details)
         print_test_char(real, expected, seplen, sepch);
@@ -106,7 +106,7 @@ bool basic_test_char(char real, char expected, bool details, unsigned int seplen
  * @return true if real equals expected, false otherwise.
  * @note When details is true, prints formatted output with separators.
  */
-bool basic_test_short(short real, short expected, bool details, unsigned int seplen, char sepch)
+static inline bool basic_test_short(short real, short expected, bool details, unsigned int seplen, char sepch)
 {
     if (details)
         print_test_short(real, expected, seplen, sepch);
@@ -123,7 +123,7 @@ bool basic_test_short(short real, short expected, bool details, unsigned int sep
  * @return true if real equals expected, false otherwise.
  * @note When details is true, prints formatted output with separators.
  */
-bool basic_test_int(int real, int expected, bool details, unsigned int seplen, char sepch)
+static inline bool basic_test_int(int real, int expected, bool details, unsigned int seplen, char sepch)
 {
     if (details)
         print_test_int(real, expected, seplen, sepch);
@@ -140,7 +140,7 @@ bool basic_test_int(int real, int expected, bool details, unsigned int seplen, c
  * @return true if real equals expected, false otherwise.
  * @note When details is true, prints formatted output with separators.
  */
-bool basic_test_size(size_t real, size_t expected, bool details, unsigned int seplen, char sepch)
+static inline bool basic_test_size(size_t real, size_t expected, bool details, unsigned int seplen, char sepch)
 {
     if (details)
         print_test_size(real, expected, seplen, sepch);
@@ -157,7 +157,7 @@ bool basic_test_size(size_t real, size_t expected, bool details, unsigned int se
  * @return true if real equals expected, false otherwise.
  * @note Provides optional detailed output with visual separators.
  */
-bool basic_test_long(long real, long expected, bool details, unsigned int seplen, char sepch)
+static inline bool basic_test_long(long real, long expected, bool details, unsigned int seplen, char sepch)
 {
     if (details)
         print_test_long(real, expected, seplen, sepch);
@@ -174,7 +174,7 @@ bool basic_test_long(long real, long expected, bool details, unsigned int seplen
  * @return true if real equals expected, false otherwise.
  * @note Provides optional detailed output with visual separators.
  */
-bool basic_test_float(float real, float expected, bool details, unsigned int seplen, char sepch, float resolution)
+static inline bool basic_test_float(float real, float expected, bool details, unsigned int seplen, char sepch, float resolution)
 {
     if (resolution >= 5.0f)
     {
@@ -196,7 +196,7 @@ bool basic_test_float(float real, float expected, bool details, unsigned int sep
  * @return true if real equals expected, false otherwise.
  * @note Provides optional detailed output with visual separators.
  */
-bool basic_test_double(double real, double expected, bool details, unsigned int seplen, char sepch, double resolution)
+static inline bool basic_test_double(double real, double expected, bool details, unsigned int seplen, char sepch, double resolution)
 {
     if (resolution >= 5.0)
     {
@@ -218,7 +218,7 @@ bool basic_test_double(double real, double expected, bool details, unsigned int 
  * @return true if real equals expected, false otherwise.
  * @note Provides optional detailed output with visual separators.
  */
-bool string_test(const char *real, const char *expected, bool details, unsigned int seplen, char sepch)
+static bool string_test(const char *real, const char *expected, bool details, unsigned int seplen, char sepch)
 {
     if (strlen(real) != strlen(expected))
     {
@@ -245,43 +245,43 @@ bool string_test(const char *real, const char *expected, bool details, unsigned 
 
 #ifdef METACORE___CLITE_MICROS_H
 
-CTEST ctest_bool(bool real, bool expected, cstrptr name, cstrptr description)
+static inline CTEST ctest_bool(bool real, bool expected, cstrptr name, cstrptr description)
 {
     CTEST newVal;
     return creatNew(newVal, name, description, real == expected);
 }
 
-CTEST ctest_char(char real, char expected, cstrptr name, cstrptr description)
+static inline CTEST ctest_char(char real, char expected, cstrptr name, cstrptr description)
 {
     CTEST newVal;
     return creatNew(newVal, name, description, real == expected);
 }
 
-CTEST ctest_short(short real, short expected, cstrptr name, cstrptr description)
+static inline CTEST ctest_short(short real, short expected, cstrptr name, cstrptr description)
 {
     CTEST newVal;
     return creatNew(newVal, name, description, real == expected);
 }
 
-CTEST ctest_int(int real, int expected, cstrptr name, cstrptr description)
+static inline CTEST ctest_int(int real, int expected, cstrptr name, cstrptr description)
 {
     CTEST newVal;
     return creatNew(newVal, name, description, real == expected);
 }
 
-CTEST ctest_size(size_t real, size_t expected, cstrptr name, cstrptr description)
+static inline CTEST ctest_size(size_t real, size_t expected, cstrptr name, cstrptr description)
 {
     CTEST newVal;
     return creatNew(newVal, name, description, real == expected);
 }
 
-CTEST ctest_long(long real, long expected, cstrptr name, cstrptr description)
+static inline CTEST ctest_long(long real, long expected, cstrptr name, cstrptr description)
 {
     CTEST newVal;
     return creatNew(newVal, name, description, real == expected);
 }
 
-CTEST ctest_float(float real, float expected, float resolution, cstrptr name, cstrptr description)
+static inline CTEST ctest_float(float real, float expected, float resolution, cstrptr name, cstrptr description)
 {
     if (resolution >= 5.0f)
     {
@@ -292,7 +292,7 @@ CTEST ctest_float(float real, float expected, float resolution, cstrptr name, cs
     return creatNew(newVal, name, description, 100 * (fabs(expected - real) / fabs(expected)) <= resolution);
 }
 
-CTEST ctest_double(double real, double expected, double resolution, cstrptr name, cstrptr description)
+static inline CTEST ctest_double(double real, double expected, double resolution, cstrptr name, cstrptr description)
 {
     if (resolution >= 5.0)
     {
@@ -304,7 +304,7 @@ CTEST ctest_double(double real, double expected, double resolution, cstrptr name
 }
 
 
-CTEST string_ctest(const cstrptr real, const cstrptr expected, cstrptr name, cstrptr description)
+static CTEST string_ctest(const cstrptr real, const cstrptr expected, cstrptr name, cstrptr description)
 {
     CTEST newVal;
     if (strlen(real) != strlen(expected))
@@ -319,13 +319,13 @@ CTEST string_ctest(const cstrptr real, const cstrptr expected, cstrptr name, cst
 
 #endif // METACORE___CLITE_MICROS_H
 
-#ifdef OPENUDT___CUDT_cstrptrING_H
-bool string_test(cstrptring real, cstrptring expected, bool details, unsigned int seplen, char sepch)
+#ifdef OPENUDT___CUDT_CSTRING_H
+static inline bool string_test(cstring real, cstring expected, bool details, unsigned int seplen, char sepch)
 {
     return string_test(real.data, expected.data,
                        details, seplen, sepch);
 }
-#endif // OPENUDT___CUDT_cstrptrING_H
+#endif // OPENUDT___CUDT_CSTRING_H
 
 typedef struct 
 {
@@ -343,7 +343,7 @@ typedef struct
 /// @param expected the expected boolean value base on the desired behaver.
 /// @param details Whether to print detailed test results.
 /// @return test stream value after changing the values of it.
-test_stream addTestBool(test_stream current, bool real, bool expected, bool details) {
+static inline test_stream addTestBool(test_stream current, bool real, bool expected, bool details) {
     bool temp = basic_test_bool(real, expected, details, current.seplen, current.sepch);
     if(temp) current.success_tests++;
     else current.failed_tests++;
@@ -357,7 +357,7 @@ test_stream addTestBool(test_stream current, bool real, bool expected, bool deta
 /// @param expected the expected charater value base on the desired behaver.
 /// @param details Whether to print detailed test results.
 /// @return test stream value after changing the values of it.
-test_stream addTestChar(test_stream current, char real, char expected, bool details) {
+static inline test_stream addTestChar(test_stream current, char real, char expected, bool details) {
     bool temp = basic_test_char(real, expected, details, current.seplen, current.sepch);
     if(temp) current.success_tests++;
     else current.failed_tests++;
@@ -371,7 +371,7 @@ test_stream addTestChar(test_stream current, char real, char expected, bool deta
 /// @param expected the expected short value base on the desired behaver.
 /// @param details Whether to print detailed test results.
 /// @return test stream value after changing the values of it.
-test_stream addTestShort(test_stream current, short real, short expected, bool details) {
+static inline test_stream addTestShort(test_stream current, short real, short expected, bool details) {
     bool temp = basic_test_short(real, expected, details, current.seplen, current.sepch);
     if(temp) current.success_tests++;
     else current.failed_tests++;
@@ -385,7 +385,7 @@ test_stream addTestShort(test_stream current, short real, short expected, bool d
 /// @param expected the expected integer value base on the desired behaver.
 /// @param details Whether to print detailed test results.
 /// @return test stream value after changing the values of it.
-test_stream addTestInt(test_stream current, int real, int expected, bool details) {
+static inline test_stream addTestInt(test_stream current, int real, int expected, bool details) {
     bool temp = basic_test_int(real, expected, details, current.seplen, current.sepch);
     if(temp) current.success_tests++;
     else current.failed_tests++;
@@ -399,7 +399,7 @@ test_stream addTestInt(test_stream current, int real, int expected, bool details
 /// @param expected the expected long value base on the desired behaver.
 /// @param details Whether to print detailed test results.
 /// @return test stream value after changing the values of it.
-test_stream addTestLong(test_stream current, long real, long expected, bool details) {
+static inline test_stream addTestLong(test_stream current, long real, long expected, bool details) {
     bool temp = basic_test_long(real, expected, details, current.seplen, current.sepch);
     if(temp) current.success_tests++;
     else current.failed_tests++;
@@ -413,7 +413,7 @@ test_stream addTestLong(test_stream current, long real, long expected, bool deta
 /// @param expected the expected floating point value base on the desired behaver.
 /// @param details Whether to print detailed test results.
 /// @return test stream value after changing the values of it.
-test_stream addTestFloat(test_stream current, float real, float expected, bool details) {
+static inline test_stream addTestFloat(test_stream current, float real, float expected, bool details) {
     bool temp = basic_test_float(real, expected, details, current.seplen, current.sepch, 0.01f);
     if(temp) current.success_tests++;
     else current.failed_tests++;
@@ -427,7 +427,7 @@ test_stream addTestFloat(test_stream current, float real, float expected, bool d
 /// @param expected the expected double value base on the desired behaver.
 /// @param details Whether to print detailed test results.
 /// @return test stream value after changing the values of it.
-test_stream addTestDouble(test_stream current, double real, double expected, bool details) {
+static inline test_stream addTestDouble(test_stream current, double real, double expected, bool details) {
     bool temp = basic_test_double(real, expected, details, current.seplen, current.sepch, 0.01);
     if(temp) current.success_tests++;
     else current.failed_tests++;
@@ -441,7 +441,7 @@ test_stream addTestDouble(test_stream current, double real, double expected, boo
 /// @param expected the expected size_t value base on the desired behaver.
 /// @param details Whether to print detailed test results.
 /// @return test stream value after changing the values of it.
-test_stream addTestSize(test_stream current, size_t real, size_t expected, bool details) {
+static inline test_stream addTestSize(test_stream current, size_t real, size_t expected, bool details) {
     bool temp = basic_test_size(real, expected, details, current.seplen, current.sepch);
     if(temp) current.success_tests++;
     else current.failed_tests++;
@@ -455,7 +455,7 @@ test_stream addTestSize(test_stream current, size_t real, size_t expected, bool 
  * @return The average success rate as a percentage (0.0 - 100.0).
  * @note Uses floating-point arithmetic to avoid integer division truncation.
  */
-float ASR(test_stream ts) {
+static inline float ASR(test_stream ts) {
     if (ts.total_tests == 0) return 0.0f;
     return 100.0f * ts.success_tests / ts.total_tests;
 }
@@ -466,7 +466,7 @@ float ASR(test_stream ts) {
  * @return The average failure rate as a percentage (0.0 - 100.0).
  * @note Uses floating-point arithmetic to avoid integer division truncation.
  */
-float AFR(test_stream ts) {
+static inline float AFR(test_stream ts) {
     if (ts.total_tests == 0) return 0.0f;
     return 100.0f * ts.failed_tests / ts.total_tests;
 }
@@ -481,7 +481,7 @@ float AFR(test_stream ts) {
  *          - Average success rate (ASR) as a percentage
  *          - Average failure rate (AFR) as a percentage
  */
-void print(test_stream testResults) {
+static inline void print(test_stream testResults) {
     const char *category = "test summary";
     print_category(category);
     printf("\nThe success tests: %zu\n", testResults.success_tests);

@@ -1,5 +1,4 @@
 #include <string>
-#include <iostream>
 
 #pragma once
 #ifndef METACORE___LITE_MICROS_HPP
@@ -10,12 +9,6 @@
 #define tab '\t'
 
 #define object class
-
-#define Print(output) \
-    std::cout << output;
-
-#define PrintLn(output) \
-    std::cout << output << nl;
 
 typedef std::string str;
 

@@ -103,13 +103,10 @@ namespace lite
             }
             
             /// @brief Returns the last measured duration in seconds.
-            float get_duration() const noexcept
-            {
-                return mycodetime.count();
-            }
+            inline constexpr float get_duration() const noexcept { return mycodetime.count(); }
             
             /// @brief Start timing (only valid in manual mode).
-            void start_time()
+            inline void start_time()
             {
                 if constexpr (in_structure)
                     throw std::logic_error("RAII mode: timer is running by default");
@@ -118,7 +115,7 @@ namespace lite
             }
 
             /// @brief Stop timing (only valid in manual mode).
-            void stop_time()
+            inline void stop_time()
             {
                 if constexpr (in_structure)
                     throw std::logic_error("RAII mode: timer is running by default");

@@ -37,7 +37,7 @@
 /// @param num The value to analyze
 /// @param ones If true count 1-bits, else count 0-bits
 /// @return Number of bits matching the criteria
-uint8_t count_u8bit(uint8_t num, bool ones) {
+static inline uint8_t count_u8bit(uint8_t num, bool ones) {
     uint8_t count = 0;
     for(uint8_t i = 0; i < 8; i++) {
         if(get_u8bit(num, i) == true && ones) count++;
@@ -50,7 +50,7 @@ uint8_t count_u8bit(uint8_t num, bool ones) {
 /// @param num The value to analyze
 /// @param ones If true count 1-bits, else count 0-bits
 /// @return Number of bits matching the criteria
-uint8_t count_u16bit(uint16_t num, bool ones) {
+static inline uint8_t count_u16bit(uint16_t num, bool ones) {
     uint8_t count = 0;
     for(uint8_t i = 0; i < 16; i++) {
         if(get_u16bit(num, i) == true && ones) count++;
@@ -63,7 +63,7 @@ uint8_t count_u16bit(uint16_t num, bool ones) {
 /// @param num The value to analyze
 /// @param ones If true count 1-bits, else count 0-bits
 /// @return Number of bits matching the criteria
-uint8_t count_u32bit(uint32_t num, bool ones) {
+static inline uint8_t count_u32bit(uint32_t num, bool ones) {
     uint8_t count = 0;
     for(uint8_t i = 0; i < 32; i++) {
         if(get_u32bit(num, i) == true && ones) count++;
@@ -76,7 +76,7 @@ uint8_t count_u32bit(uint32_t num, bool ones) {
 /// @param num The value to analyze
 /// @param ones If true count 1-bits, else count 0-bits
 /// @return Number of bits matching the criteria
-uint8_t count_u64bit(uint64_t num, bool ones) {
+static inline uint8_t count_u64bit(uint64_t num, bool ones) {
     uint8_t count = 0;
     for(uint8_t i = 0; i < 64; i++) {
         if(get_u64bit(num, i) == true && ones) count++;
@@ -89,7 +89,7 @@ uint8_t count_u64bit(uint64_t num, bool ones) {
 /// @param num The value to analyze
 /// @param ones If true count 1-bits, else count 0-bits
 /// @return Number of bits matching the criteria
-uint8_t count_8bit(int8_t num, bool ones) {
+static inline uint8_t count_8bit(int8_t num, bool ones) {
     return count_u8bit((uint8_t)num, ones);
 }
 
@@ -97,7 +97,7 @@ uint8_t count_8bit(int8_t num, bool ones) {
 /// @param num The value to analyze
 /// @param ones If true count 1-bits, else count 0-bits
 /// @return Number of bits matching the criteria
-uint8_t count_16bit(int16_t num, bool ones) {
+static inline uint8_t count_16bit(int16_t num, bool ones) {
     return count_u16bit((uint16_t)num, ones);
 }
 
@@ -105,7 +105,7 @@ uint8_t count_16bit(int16_t num, bool ones) {
 /// @param num The value to analyze
 /// @param ones If true count 1-bits, else count 0-bits
 /// @return Number of bits matching the criteria
-uint8_t count_32bit(int32_t num, bool ones) {
+static inline uint8_t count_32bit(int32_t num, bool ones) {
     return count_u32bit((uint32_t)num, ones);
 }
 
@@ -113,7 +113,7 @@ uint8_t count_32bit(int32_t num, bool ones) {
 /// @param num The value to analyze
 /// @param ones If true count 1-bits, else count 0-bits
 /// @return Number of bits matching the criteria
-uint8_t count_64bit(int64_t num, bool ones) {
+static inline uint8_t count_64bit(int64_t num, bool ones) {
     return count_u64bit((uint64_t)num, ones);
 }
 
@@ -121,7 +121,7 @@ uint8_t count_64bit(int64_t num, bool ones) {
 /// @param c The character to analyze
 /// @param ones If true count 1-bits, else count 0-bits
 /// @return Number of bits matching the criteria
-uint8_t count_char_bit(char c, bool ones) {
+static inline uint8_t count_char_bit(char c, bool ones) {
     return count_u8bit((uint8_t)c, ones);
 }
 
@@ -129,7 +129,7 @@ uint8_t count_char_bit(char c, bool ones) {
 /// @param num The value to analyze
 /// @param ones If true count 1-bits, else count 0-bits
 /// @return Number of bits matching the criteria
-uint8_t count_short_bit(short num, bool ones) {
+static inline uint8_t count_short_bit(short num, bool ones) {
     return count_u16bit((uint16_t)num, ones);
 }
 
@@ -137,7 +137,7 @@ uint8_t count_short_bit(short num, bool ones) {
 /// @param num The value to analyze
 /// @param ones If true count 1-bits, else count 0-bits
 /// @return Number of bits matching the criteria
-uint8_t count_int_bit(int num, bool ones) {
+static inline uint8_t count_int_bit(int num, bool ones) {
     return count_u32bit((uint32_t)num, ones);
 }
 
@@ -145,7 +145,7 @@ uint8_t count_int_bit(int num, bool ones) {
 /// @param num The value to analyze
 /// @param ones If true count 1-bits, else count 0-bits
 /// @return Number of bits matching the criteria
-uint8_t count_long_bit(long num, bool ones) {
+static inline uint8_t count_long_bit(long num, bool ones) {
     return count_u64bit((uint64_t)num, ones);
 }
 
