@@ -23,7 +23,7 @@
 #ifndef METACORE___CLITE_UNITTEST_H
 #define METACORE___CLITE_UNITTEST_H
 
-size_t cttn = 0;
+size_t ctestCounter = 0;
 
 typedef struct {
     char* name;
@@ -36,13 +36,13 @@ typedef struct {
 static inline CTEST creatNew(CTEST current, char* name, char* des, bool value) {
     current.name = (name != NULL) ? name : strdup("");
     current.description = (des != NULL) ? des : strdup("");
-    current.num = cttn;
-    cttn++;
+    current.num = ctestCounter;
+    ctestCounter++;
     current.result = value;
     return current;
 }
 
-static inline bool catchValue(CTEST current) {
+static inline bool get_result(CTEST current) {
     return current.result;
 }
 

@@ -169,7 +169,8 @@ function Measure-CodeLines {
     $totalLines = 0
     
     if ((Get-Item $resolvedPath) -is [System.IO.FileInfo]) {
-        $totalLines = (Get-Content $resolvedPath | Measure-Object -Line).Lines ?? 0
+        $content = Get-Content $resolvedPath -Raw -ErrorAction SilentlyContinue
+        $totalLines = if ($null -eq $content) { 0 } else { @($content -split "`n").Count }
         Write-Host "File: $(Split-Path $resolvedPath -Leaf) - $totalLines lines" -ForegroundColor Green
     }
     else {
@@ -177,7 +178,8 @@ function Measure-CodeLines {
                  Where-Object { $Extensions.Contains($_.Extension) }
         
         foreach ($file in $files) {
-            $lines = (Get-Content $file.FullName | Measure-Object -Line).Lines ?? 0
+            $content = Get-Content $file.FullName -Raw -ErrorAction SilentlyContinue
+            $lines = if ($null -eq $content) { 0 } else { @($content -split "`n").Count }
             $totalLines += $lines
             if ($lines -gt 0) {
                 Write-Host ("$(Split-Path $file.FullName -Leaf)").PadRight(30) " - $lines lines" -ForegroundColor Green
@@ -407,14 +409,242 @@ function Get-FileSizeTotal {
     }
 }
 
+<#
+.SYNOPSIS
+    Count effective lines of code (excluding comments and blank lines)
+
+.DESCRIPTION
+    Intelligent line counter that excludes:
+    - Empty lines
+    - Single-line comments (// # )
+    - Multi-line comments (/* */ <# #> """ """)
+    Supports C, C++, C#, Java, JavaScript, TypeScript, Python, PowerShell
+
+.PARAMETER Paths
+    The path or paths (single file, folder, or array of paths) - can be relative or absolute
+
+.PARAMETER Extensions
+    File extensions to count (example: @('.cpp', '.h', '.ps1'))
+
+.EXAMPLE
+    Count-SmartLines -Paths 'lite'
+    Count-SmartLines -Paths @('lite', 'clite')
+#>
+function Count-SmartLines {
+    param(
+        [Parameter(Mandatory=$true, ValueFromPipeline=$true)]
+        [string[]]$Paths,
+        
+        [string[]]$Extensions = @('.cpp', '.c', '.h', '.hpp', '.ps1', '.py', '.cs', '.java', '.js', '.ts')
+    )
+
+    begin {
+        $totalLines = 0
+        $fileCount = 0
+        $results = @()
+        
+        $pathList = @()
+        foreach ($path in $Paths) {
+            $resolvedPath = Resolve-TargetPath $path
+            $pathList += $resolvedPath
+        }
+        
+        # Helper function to detect comment style based on file extension
+        function Get-CommentStyle {
+            param([string]$Extension)
+            switch ($Extension) {
+                {$_ -in @('.cpp', '.c', '.h', '.hpp', '.cs', '.java', '.js', '.ts')} {
+                    return @{
+                        'SingleLine' = '//'
+                        'MultiLineStart' = '/*'
+                        'MultiLineEnd' = '*/'
+                        'StringDelimiters' = @('"', "'")
+                    }
+                }
+                {$_ -in @('.ps1', '.psm1')} {
+                    return @{
+                        'SingleLine' = '#'
+                        'MultiLineStart' = '<#'
+                        'MultiLineEnd' = '#>'
+                        'StringDelimiters' = @('"', "'")
+                    }
+                }
+                {$_ -in @('.py')} {
+                    return @{
+                        'SingleLine' = '#'
+                        'MultiLineStart' = '"""'
+                        'MultiLineEnd' = '"""'
+                        'StringDelimiters' = @('"', "'")
+                    }
+                }
+                default {
+                    return @{
+                        'SingleLine' = '//'
+                        'MultiLineStart' = '/*'
+                        'MultiLineEnd' = '*/'
+                        'StringDelimiters' = @('"', "'")
+                    }
+                }
+            }
+        }
+        
+        # Count effective lines (excluding comments and blank lines)
+        function Count-EffectiveLines {
+            param([string]$FilePath)
+            
+            try {
+                $content = Get-Content $FilePath -Raw -ErrorAction SilentlyContinue
+                if ($null -eq $content) { return 0 }
+                
+                $lines = $content -split "`n"
+                $effectiveCount = 0
+                $inMultilineComment = $false
+                $commentStyle = Get-CommentStyle ([System.IO.Path]::GetExtension($FilePath))
+                $singleComment = $commentStyle['SingleLine']
+                $multiStart = $commentStyle['MultiLineStart']
+                $multiEnd = $commentStyle['MultiLineEnd']
+                
+                foreach ($line in $lines) {
+                    $trimmed = $line.Trim()
+                    
+                    # Skip empty lines
+                    if ([string]::IsNullOrWhiteSpace($trimmed)) {
+                        continue
+                    }
+                    
+                    # Handle multiline comment end
+                    if ($inMultilineComment) {
+                        if ($trimmed.Contains($multiEnd)) {
+                            $inMultilineComment = $false
+                        }
+                        continue
+                    }
+                    
+                    # Check for multiline comment start
+                    if ($trimmed.Contains($multiStart)) {
+                        if ($trimmed.Contains($multiEnd)) {
+                            # Start and end on same line
+                            $beforeComment = $trimmed.Substring(0, $trimmed.IndexOf($multiStart))
+                            if (-not [string]::IsNullOrWhiteSpace($beforeComment)) {
+                                $effectiveCount++
+                            }
+                            continue
+                        } else {
+                            # Multiline comment starts
+                            $beforeComment = $trimmed.Substring(0, $trimmed.IndexOf($multiStart))
+                            if (-not [string]::IsNullOrWhiteSpace($beforeComment)) {
+                                $effectiveCount++
+                            }
+                            $inMultilineComment = $true
+                            continue
+                        }
+                    }
+                    
+                    # Check for single line comment
+                    $commentIndex = $trimmed.IndexOf($singleComment)
+                    if ($commentIndex -eq 0) {
+                        # Entire line is a comment
+                        continue
+                    } elseif ($commentIndex -gt 0) {
+                        # Check if comment is inside string (simple check)
+                        $beforeComment = $trimmed.Substring(0, $commentIndex)
+                        $effectiveCount++
+                    } else {
+                        # This is actual code
+                        $effectiveCount++
+                    }
+                }
+                
+                return $effectiveCount
+            }
+            catch {
+                return 0
+            }
+        }
+    }
+
+    process {
+        foreach ($targetPath in $pathList) {
+            if (-not (Test-Path $targetPath)) {
+                Write-Warning "Path not found: $targetPath"
+                continue
+            }
+
+            if ((Get-Item $targetPath) -is [System.IO.FileInfo]) {
+                $file = Get-Item $targetPath
+                if ($Extensions.Contains($file.Extension)) {
+                    $lineCount = Count-EffectiveLines $file.FullName
+                    
+                    $results += [PSCustomObject]@{
+                        Name = $file.Name
+                        Path = $file.FullName
+                        Lines = $lineCount
+                        Type = 'File'
+                    }
+                    
+                    $totalLines += $lineCount
+                    $fileCount++
+                }
+            }
+            elseif ((Get-Item $targetPath) -is [System.IO.DirectoryInfo]) {
+                $directory = Get-Item $targetPath
+                $files = Get-ChildItem -Path $targetPath -Recurse -File | 
+                         Where-Object { $Extensions.Contains($_.Extension) }
+
+                foreach ($file in $files) {
+                    $lineCount = Count-EffectiveLines $file.FullName
+                    
+                    $results += [PSCustomObject]@{
+                        Name = $file.Name
+                        Path = $file.FullName
+                        Lines = $lineCount
+                        Type = 'File'
+                    }
+                    
+                    $totalLines += $lineCount
+                    $fileCount++
+                }
+            }
+        }
+    }
+
+    end {
+        if ($results.Count -gt 0) {
+            Write-Host "`n╔════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
+            Write-Host "║         Smart Lines of Code Report                 ║" -ForegroundColor Cyan
+            Write-Host "║     (Comments & Blank Lines Excluded)              ║" -ForegroundColor Cyan
+            Write-Host "╠════════════════════════════════════════════════════════╣" -ForegroundColor Cyan
+            
+            foreach ($result in $results) {
+                $displayPath = if ($result.Path.Length -gt 45) { 
+                    "..." + $result.Path.Substring($result.Path.Length - 42) 
+                } else { 
+                    $result.Path 
+                }
+                Write-Host ("║ {0,-43} {1,8} ║" -f $displayPath, $result.Lines) -ForegroundColor Green
+            }
+            
+            Write-Host "╠════════════════════════════════════════════════════════╣" -ForegroundColor Cyan
+            Write-Host ("║ Total Files: {0,-39} {1,8} ║" -f $fileCount, " ") -ForegroundColor Yellow
+            Write-Host ("║ Total Lines: {0,-39} {1,8} ║" -f " ", $totalLines) -ForegroundColor Yellow
+            Write-Host "╚════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
+            
+            return @{
+                TotalLines = $totalLines
+                FileCount = $fileCount
+                Details = $results
+            }
+        }
+        else {
+            Write-Warning "No source files found in the specified path."
+        }
+    }
+}
+
 # Create aliases for backward compatibility
 New-Alias -Name Quick-CountLines -Value Measure-CodeLines -Force
 New-Alias -Name Count-FilesByExtension -Value Measure-FilesByExtension -Force
+New-Alias -Name Smart-Count -Value Count-SmartLines -Force
 
 # Export functions
-# Create aliases for backward compatibility
-New-Alias -Name Quick-CountLines -Value Measure-CodeLines -Force
-New-Alias -Name Count-FilesByExtension -Value Measure-FilesByExtension -Force
-
-# Export functions
-Export-ModuleMember -Function @('CountCodeLines', 'Measure-CodeLines', 'Measure-FilesByExtension', 'Get-FileSizeTotal', 'Resolve-TargetPath') -Alias @('Quick-CountLines', 'Count-FilesByExtension')
+Export-ModuleMember -Function @('CountCodeLines', 'Measure-CodeLines', 'Measure-FilesByExtension', 'Get-FileSizeTotal', 'Count-SmartLines', 'Resolve-TargetPath') -Alias @('Quick-CountLines', 'Count-FilesByExtension', 'Smart-Count')

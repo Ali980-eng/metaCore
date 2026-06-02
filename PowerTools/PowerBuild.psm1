@@ -1,19 +1,31 @@
 class PowerBuild {
+
   hidden [string]$projectName
+
   hidden [string]$projectPath
+
   hidden [string]$language
+
   hidden [string]$compiler
+
   hidden [string[]]$includePaths
+
   hidden [string[]]$sourcePaths
+
   hidden [double]$version = 1.0
+
   hidden [double]$mini_version = 1.0
+
   hidden [hashtable]$configMap
+
   hidden [hashtable]$buildCache = @{}
+
   hidden [bool]$verbose = $false
+
   hidden [string]$osType
+
   hidden [hashtable]$compilerPaths = @{}
 
-  # constructor
   PowerBuild() {
     $this.projectPath = Get-Location
     $this.osType = [System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform([System.Runtime.InteropServices.OSPlatform]::Windows) ? "Windows" : "Linux"
@@ -23,34 +35,42 @@ class PowerBuild {
   }
 
   [void] SetProjectName([string]$name) { $this.projectName = $name }
-  
+
   [string] GetProjectName() { return $this.projectName }
-  
+
   [void] SetLanguage([string]$lang) { $this.language = $lang }
-  
+
   [string] GetLanguage() { return $this.language }
-  
+
   [void] SetCompiler([string]$compiler) { $this.compiler = $compiler }
-  
+
   [string] GetCompiler() { return $this.compiler }
-  
+
   [void] AddIncludePath([string]$path) { $this.includePaths += $path }
-  
+
   [string[]] GetIncludePaths() { return $this.includePaths }
-  
+
   [void] AddSourcePath([string]$path) { $this.sourcePaths += $path }
-  
+
   [string[]] GetSourcePaths() { return $this.sourcePaths }
-  
+
   [void] mini_version([double]$version) { $this.mini_version = $version }
-  
+
   [double] GetMiniVersion() { return $this.mini_version }
-  
+
   [double] GetVersion() { return $this.version }
-  
+
+  [string] GetOS() { return $this.osType }
+
   [void] addTargetConfig([string]$target, [hashtable]$config) { $this.configMap[$target] = $config }
-  
+
   [hashtable] GetTargetConfig([string]$target) { return $this.configMap[$target] }
+
+  [void] clearConfigMap() { $this.configMap.Clear() }
+
+  [void] clearAllConfigs() { $this.configMap.Clear() }
+
+  [void] SetVerbose([bool]$verbose) { $this.verbose = $verbose }
 
   [void] replaceTargetConfig([string]$target, [hashtable]$config) {
     if ($this.configMap.ContainsKey($target)) {
@@ -84,10 +104,6 @@ class PowerBuild {
     }
   }
 
-  [void] clearConfigMap() { $this.configMap.Clear() }
-
-  [void] clearAllConfigs() { $this.configMap.Clear() }
-
   [void] writeTarget([string]$target, [string]$key, $value) {
     if ($this.configMap.ContainsKey($target)) {
         Write-Host $this.configMap[$target][$key]
@@ -95,10 +111,6 @@ class PowerBuild {
       throw "Target '$target' does not exist in the configuration map."
     }
   }
-
-  # ==================== Build Methods ====================
-
-  [void] SetVerbose([bool]$verbose) { $this.verbose = $verbose }
 
   [void] SetCompilerPath([string]$compiler, [string]$path) {
     $this.compilerPaths[$compiler] = $path
@@ -305,6 +317,4 @@ class PowerBuild {
     $this.buildCache.Clear()
     Write-Host "✓ Cleanup completed" -ForegroundColor Green
   }
-
-  [string] GetOS() { return $this.osType }
 }

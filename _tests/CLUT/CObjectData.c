@@ -1,4 +1,4 @@
-#define COBJECT_DATA
+#define cobject_data_micros
 #include "clite/micros.h"
 
 cbool(value1, true)
@@ -10,7 +10,7 @@ clong(value5, 10009389)
 cuint8(value6, 199)
 cuint16(value7, 8889)
 cuint32(value8, 98883)
-cuint64(vlaue9, 998938)
+cuint64(value9, 998938)
 
 cint8(value10, -10)
 cint16(value11, -1183)

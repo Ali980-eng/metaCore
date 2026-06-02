@@ -134,11 +134,48 @@ $code
         # ---- Markdown output ----
         if ($OutputFormat -in @('md', 'All')) {
             $mdPrompt = @"
-Write a clear Markdown summary for the following $language code.
-Include:
-- A short description of what this code does.
-- List all functions and their purposes.
-- A simple usage example.
+Generate professional Markdown documentation for the following $language code.
+
+Structure the documentation exactly as follows:
+
+# Library Overview
+- Brief description of what this library/file does
+- Key features and capabilities
+- Use cases
+
+## Objects & Data Structures
+For each struct/class/object defined in the code:
+
+### ObjectName
+Brief description of the object.
+
+#### Members
+| Member | Type | Description |
+|--------|------|-------------|
+| member_name | data_type | What this member does |
+
+## Functions
+For each function/procedure:
+
+### function_name(parameters)
+**Description:** Clear explanation of what the function does.
+
+**Parameters:**
+- param1 (type): Description
+- param2 (type): Description
+
+**Returns:** Description of return value and type
+
+**Example:**
+\`\`\`$language
+// Usage example
+\`\`\`
+
+Make sure to:
+- Use clear, professional language
+- Include all objects and functions found in the code
+- Provide practical usage examples
+- Document edge cases and important notes
 
 Code:
 $code
@@ -156,11 +193,49 @@ $code
         # ---- Plain Text output ----
         if ($OutputFormat -in @('txt', 'All')) {
             $txtPrompt = @"
-Write a plain text documentation for the following $language code.
-Include:
-- A short description.
-- List of functions with brief explanations.
-- No markdown or special formatting, just plain text.
+Generate professional plain text documentation for the following $language code.
+
+Organize the documentation with this structure (using clear text formatting):
+
+LIBRARY OVERVIEW
+================
+Provide a clear description of what this library/file does and its main purpose.
+
+OBJECTS & DATA STRUCTURES
+=========================
+For each struct/class/object in the code:
+
+Object: ObjectName
+------------------
+Description of what this object represents and its purpose.
+
+Members:
+  - member_name (type): What this member stores/does
+  - another_member (type): Description
+
+FUNCTIONS
+=========
+For each function/procedure:
+
+Function: function_name(parameters)
+-------------------------------------
+Purpose: Clear explanation of what the function does
+
+Parameters:
+  - param1 (type): Description of this parameter
+  - param2 (type): Description of this parameter
+
+Returns: Description of what is returned and its type
+
+Notes: Any important considerations, edge cases, or usage tips
+
+Rules for the output:
+- Use plain ASCII text only, no special formatting
+- Clearly separate sections with lines of equals/dashes
+- Be descriptive and professional
+- Include all objects and functions found in the code
+- Explain what each component does and how to use it
+- Note any important limitations or requirements
 
 Code:
 $code

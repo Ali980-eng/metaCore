@@ -279,6 +279,15 @@
                 printf("FAIL[%d]: %s\n", (int)total_tests, msg); \
             }
 
+        #define ASSERT_TEST(cond)                                \
+            if(!(cond)) {                                        \
+                tests_failed++;                                  \
+                printf("FAIL[%d]\n", (int)total_tests); \
+            } else {                                             \
+                tests_passed++;                                  \
+            }                                                    \
+            total_tests++;
+
         #define ASSERT(cond)                \
             if (!(cond))                    \
             {                               \
@@ -312,7 +321,7 @@
 
         #define jump_if(condition, label) \
             if (condition)                \
-            goto label
+                goto label
 
     #endif // cstructure_micros
 
@@ -347,18 +356,37 @@
             return (value == NULL || strlen(value) == 0) ? true : false;
         }
 
+        /**
+         * @brief Clear string content by reallocating to empty string
+         * @param value The string to clear
+         * @return Pointer to cleared string or NULL if input is NULL
+         * @note Properly handles memory reallocation for empty string
+         */
         static void *cstr_empty(cstrptr value)
         {
-            if (is_empty(value))
+            if (value == NULL)
                 return NULL;
-            return realloc(value, 1);
+            
+            // Free old memory and allocate fresh 1 byte for empty string
+            char *temp = (char *)malloc(1);
+            if (temp != NULL) {
+                temp[0] = '\0';
+                free(value);
+                return temp;
+            }
+            return NULL;
         }
 
+        /**
+         * @brief Free allocated string memory
+         * @param value The string to free
+         * @note Safely handles NULL pointers, frees any non-NULL string regardless of content
+         */
         static void cstr_free(cstrptr value)
         {
-            if (is_empty(value))
+            if (value == NULL)
             {
-                printf("Error: can't free NULL or empty strings.\n");
+                printf("Warning: attempting to free NULL pointer.\n");
                 return;
             }
             free(value);
@@ -379,6 +407,13 @@
             return false;
         }
 
+        /**
+         * @brief Check if substring exists in string
+         * @param value_1 The main string to search in
+         * @param value_2 The substring to search for
+         * @return true if substring is found, false otherwise
+         * @note Uses standard strstr for reliable substring search with proper pattern handling
+         */
         static bool sub_exist(const cstrptr value_1, const cstrptr value_2)
         {
             if (value_1 == NULL || value_2 == NULL || is_empty(value_1) || is_empty(value_2))
@@ -386,24 +421,10 @@
                 printf("bad input: one of the input strings is empty.\n");
                 return false;
             }
-            bool sequence = false;
-            size_t ei = length(value_1), ej = length(value_2);
-            for (size_t i = 0, j = 0; i < ei; i++)
-            {
-                if (value_1[i] == value_2[j] && sequence)
-                {
-                    if (j == ej - 1)
-                        return true;
-                    j++;
-                    continue;
-                }
-                if (value_1[i] == value_2[j])
-                {
-                    sequence = true;
-                    j++;
-                }
-            }
-            return false;
+            
+            // Use standard strstr function for reliable substring search
+            // This properly handles overlapping patterns and multiple occurrences
+            return strstr(value_1, value_2) != NULL ? true : false;
         }
 
         static size_t count(const cstrptr value, char c)

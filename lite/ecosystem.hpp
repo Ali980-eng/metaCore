@@ -105,16 +105,19 @@ namespace lite {
      * @note This class uses protected members to prevent direct access to internal state.
      *       All interactions are through public member methods.
      */
-    object system65 {
+    object system64 {
         private:
         std::queue<warning> sys_w;
         error sys_err;
         bool retval;
         protected:
-        const str wm = "meta ecosystem warning",
-        em = "meta ecosystem error";
+        const str wm = "meta lite ecosystem warning",
+        em = "meta lite ecosystem error";
         public:
+
         function::test_stream sys_test;
+
+        system64() = default;
 
         /**
          * @brief Adds a test result to the ecosystem's test collection.
