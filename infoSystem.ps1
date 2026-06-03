@@ -24,16 +24,16 @@
 #>
 
 param(
-    [Parameter(Mandatory=$true, Position=0)]
+    [Parameter(Mandatory = $true, Position = 0)]
     [ValidateSet('--version', '--license', '--brief', '--help')]
     [string]$Command,
     
-    [Parameter(Position=1)]
+    [Parameter(Position = 1)]
     [string]$Path = $null
 )
 
 # ===================== Global Settings =====================
-$script:Version = "0.1.7"
+$script:Version = "0.1.8"
 $script:LicenseFile = Join-Path -Path $PSScriptRoot -ChildPath "_docs/lic.txt"
 $script:DocRoot = "_docs/textDoc"
 $script:briefFile = "_docs/brief.txt"
@@ -48,7 +48,8 @@ function Show-License {
     if (Test-Path $script:LicenseFile) {
         Write-Host "`n=== LICENSE ===`n" -ForegroundColor Yellow
         Get-Content $script:LicenseFile | ForEach-Object { Write-Host $_ }
-    } else {
+    }
+    else {
         Write-Error "License file not found: $script:LicenseFile"
         Write-Host "Please create a lic.txt file in the '_docs' folder." -ForegroundColor Red
     }
@@ -58,7 +59,8 @@ function Show-Brief {
     if (Test-Path $script:briefFile) {
         Write-Host "`n=============== BRIEF ===============`n" -ForegroundColor Yellow
         Get-Content $script:briefFile | ForEach-Object { Write-Host $_ }
-    } else {
+    }
+    else {
         Write-Error "Brief file not found: $script:briefFile"
         Write-Host "Please create a brief.txt file in the '_docs' folder." -ForegroundColor Red
     }
@@ -118,7 +120,8 @@ function Show-Documentation {
     if (Test-Path $docFullPath) {
         Write-Host "`n=== Documentation for: $LibraryPath ===`n" -ForegroundColor Yellow
         Get-Content $docFullPath | ForEach-Object { Write-Host $_ }
-    } else {
+    }
+    else {
         Write-Error "Documentation file not found: $docFileRelative"
         Write-Host "Please ensure the file exists at: $docFullPath" -ForegroundColor Red
         exit 1
@@ -132,12 +135,15 @@ if ($Command -eq "--version") {
 }
 elseif ($Command -eq "--license") {
     Show-License
-} elseif ($Command -eq "--brief") {
+}
+elseif ($Command -eq "--brief") {
     Show-Brief
-} elseif ($Command -eq "--help") {
+}
+elseif ($Command -eq "--help") {
     if ($Path) {
         Show-Documentation -LibraryPath $Path
-    } else {
+    }
+    else {
         Show-Help
     }
 }

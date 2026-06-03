@@ -3,12 +3,12 @@
 # Description: Generate documentation (TXT, MD, Doxygen) for code files using Ollama.
 # Usage:
 #   Import-Module .\PowerDoc.psm1
-#   Set-OllamaModel -Name "phi3:mini"
+#   Set-OllamaModel -Name "llama3.2:1b"
 #   Invoke-AutoDoc -Path ".\src" -OutputFormat "All" -Recurse
 # ============================================================
 
 # ===================== GLOBAL CONFIGURATION =====================
-$script:OllamaModel = "phi3:mini"   # Default model, can be changed with Set-OllamaModel
+$script:OllamaModel = "llama3.2:1b"   # Default model, can be changed with Set-OllamaModel
 # =================================================================
 
 <#
@@ -19,7 +19,7 @@ $script:OllamaModel = "phi3:mini"   # Default model, can be changed with Set-Oll
 .PARAMETER Name
     Name of the Ollama model (e.g., "phi3:mini", "llama3.2:3b").
 .EXAMPLE
-    Set-OllamaModel -Name "codellama:7b"
+    Set-OllamaModel -Name "llama3.2:1b"
 #>
 function Set-OllamaModel {
     param(
@@ -56,16 +56,16 @@ function Invoke-AutoDoc {
     param(
         [Parameter(Mandatory=$true)]
         [string]$Path,
-        
+
         [ValidateSet('txt', 'md', 'doxygen', 'All')]
         [string]$OutputFormat = "doxygen",
-        
+
         [string]$OutputDir = ".\Documentation",
-        
+
         [switch]$Recurse,
-        
+
         [string[]]$Extensions = @('.cpp', '.c', '.h', '.hpp', '.java', '.ps1', '.psm1', '.py', '.cs', '.js', '.ts'),
-        
+
         [switch]$Force
     )
 
@@ -92,14 +92,14 @@ function Invoke-AutoDoc {
             [string]$OutputDir,
             [bool]$Force
         )
-        
+
         $code = Get-Content $FilePath -Raw -ErrorAction Stop
         $fileName = [System.IO.Path]::GetFileNameWithoutExtension($FilePath)
         $extension = [System.IO.Path]::GetExtension($FilePath)
         $language = Get-LanguageFromExtension -Extension $extension
-        
+
         Write-Host "Processing: $([System.IO.Path]::GetFileName($FilePath))" -ForegroundColor Cyan
-        
+
         # Prepare output subfolder for this file (optional, but keeps things tidy)
         $fileOutputDir = Join-Path -Path $OutputDir -ChildPath $fileName
         if ($OutputFormat -ne "All") {
@@ -108,7 +108,7 @@ function Invoke-AutoDoc {
             # When All, create subfolder per file to avoid mixing
             New-Item -ItemType Directory -Force -Path $fileOutputDir | Out-Null
         }
-        
+
         # ---- Doxygen output (inside the code) ----
         if ($OutputFormat -in @('doxygen', 'All')) {
             $doxygenPrompt = @"
@@ -130,7 +130,7 @@ $code
                 Write-Host "  -> Doxygen: file exists (use -Force to overwrite)" -ForegroundColor Yellow
             }
         }
-        
+
         # ---- Markdown output ----
         if ($OutputFormat -in @('md', 'All')) {
             $mdPrompt = @"
@@ -189,7 +189,7 @@ $code
                 Write-Host "  -> Markdown: file exists (use -Force to overwrite)" -ForegroundColor Yellow
             }
         }
-        
+
         # ---- Plain Text output ----
         if ($OutputFormat -in @('txt', 'All')) {
             $txtPrompt = @"
@@ -259,23 +259,23 @@ $code
         Write-Error "Ollama is not installed or not in PATH. Please install Ollama first."
         return
     }
-    
+
     # Check if model exists, pull if needed
     $models = ollama list | Select-String $script:OllamaModel
     if (-not $models) {
         Write-Host "Model '$($script:OllamaModel)' not found locally. Pulling now..." -ForegroundColor Yellow
         ollama pull $script:OllamaModel
     }
-    
+
     # Create base output directory
     New-Item -ItemType Directory -Force -Path $OutputDir | Out-Null
-    
+
     # Resolve path
     if (-not (Test-Path $Path)) {
         Write-Error "Path not found: $Path"
         return
     }
-    
+
     $item = Get-Item $Path
     if (-not $item.PSIsContainer) {
         # Single file
@@ -288,17 +288,17 @@ $code
         }
         if ($Recurse) { $getParams.Recurse = $true }
         $files = Get-ChildItem @getParams | Where-Object { $Extensions -contains $_.Extension }
-        
+
         if ($files.Count -eq 0) {
             Write-Warning "No files with extensions ($($Extensions -join ', ')) found in $Path"
             return
         }
-        
+
         foreach ($file in $files) {
             Document-File -FilePath $file.FullName -OutputFormat $OutputFormat -OutputDir $OutputDir -Force $Force
         }
     }
-    
+
     Write-Host "`n✅ Documentation completed. Output saved to: $OutputDir" -ForegroundColor Green
 }
 

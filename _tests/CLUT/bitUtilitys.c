@@ -29,7 +29,7 @@ MAIN_TEST(bitUtilitys)
   
   value_1 = set_u8bit(value_1, 7);         // value_1: 1000-1001
   TEST_2(get_u8bit(value_1, 7), true)      // bit 7 should now be 1
-
+  
   uint8_t value_2 = 99;                    // value_2: 0110-0011
   TEST_2(get_u8bit(value_2, 6), true)      // bit 6 should be 1
   
@@ -235,5 +235,21 @@ MAIN_TEST(bitUtilitys)
   
   value_20 = toggle_64bit(value_20, 32);
   TEST_2(get_64bit(value_20, 32), true)    // bit 32 should be toggled
+
+  // generic tests for get_bit, set_bit, reset_bit, toggle_bit, xchg_bit using all values before
+
+  TEST_2(get_bit(value_1, 3), true)    // bit 3 should still be 1
+  TEST_2(get_bit(value_1, 2), false)   // bit 2 should be 0
+  value_1 = set_bit(value_1, 2); // value_1: 1000-1101
+  TEST_2(get_bit(value_1, 2), true) // bit 2 should now be 1
+  value_1 = reset_bit(value_1, 3); // value_1: 1000-0101
+  TEST_2(get_bit(value_1, 3), false) // bit 3 should now be 0
+  value_1 = toggle_bit(value_1, 0); // value_1: 1000-0100
+  TEST_2(get_bit(value_1, 0), false) // bit 0 should now be 0
+  value_1 = xchg_bit(value_1, 7, 0); // value_1: 0000-0100
+  TEST_2(get_bit(value_1, 7), false) // bit 7 should now be 0
+  TEST_2(get_bit(value_1, 0), false) // bit 0 should still be 0
+  TEST_2(count_bit(value_1, true), 1) // value_1 should have 1 set bit
+  TEST_2(count_bit(value_1, false), 7) // value_1 should have 7 unset bits
 
 EXIT_TEST(true)

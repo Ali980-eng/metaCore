@@ -273,6 +273,16 @@ static inline char* ubit64_str(uint64_t value) {
     return result;
 }
 
+#define to_binary_string(value) _Generic((value), \
+    int8_t: bit8_str(value),                      \
+    int16_t: bit16_str(value),                    \
+    int32_t: bit32_str(value),                    \
+    int64_t: bit64_str(value),                    \
+    uint8_t: ubit8_str(value),                    \
+    uint16_t: ubit16_str(value),                  \
+    uint32_t: ubit32_str(value),                  \
+    uint64_t: ubit64_str(value))
+
 /**
  * @brief Prints the binary representation of an 8-bit signed integer.
  * @param value The value to print.
@@ -360,5 +370,15 @@ static inline void print_u64bit(uint64_t value, bool pnl) {
         printf("%c", bool2char(get_u64bit(value, i)));
     if(pnl) printf("%c", '\n');
 }
+
+#define print_binary(value, pnl) _Generic((value), \
+    int8_t: print8bit(value, pnl),                 \
+    int16_t: print16bit(value, pnl),               \
+    int32_t: print32bit(value, pnl),               \
+    int64_t: print64bit(value, pnl),               \
+    uint8_t: print_u8bit(value, pnl),              \
+    uint16_t: print_u16bit(value, pnl),            \
+    uint32_t: print_u32bit(value, pnl),            \
+    uint64_t: print_u64bit(value, pnl))
 
 #endif // METACORE___CLITE_BITUTILITYS_BINARYFORMAT_H

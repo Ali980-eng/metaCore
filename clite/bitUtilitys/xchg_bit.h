@@ -141,7 +141,7 @@ static inline uint64_t xchg_u64bit(uint64_t value, uint8_t pos1, uint8_t pos2) {
 /// @param pos2 Second bit position to exchange (0-7)
 /// @return Modified value with bits at pos1 and pos2 exchanged, or 0 if positions are invalid
 /// @note Prints error message to console if pos1 or pos2 exceed valid range (0-7)
-int8_t xchg_8bit(int8_t value, uint8_t pos1, uint8_t pos2) {
+static inline int8_t xchg_8bit(int8_t value, uint8_t pos1, uint8_t pos2) {
     return (int8_t)xchg_u8bit((uint8_t) value, pos1, pos2);
 }
 
@@ -180,5 +180,15 @@ static inline int32_t xchg_32bit(int32_t value, uint8_t pos1, uint8_t pos2) {
 static inline int64_t xchg_64bit(int64_t value, uint8_t pos1, uint8_t pos2) {
     return (int64_t)xchg_u64bit((uint64_t) value, pos1, pos2);
 }
+
+#define xchg_bit(value, pos1, pos2) _Generic((value), \
+    uint8_t: xchg_u8bit(value, pos1, pos2),           \
+    uint16_t: xchg_u16bit(value, pos1, pos2),         \
+    uint32_t: xchg_u32bit(value, pos1, pos2),         \
+    uint64_t: xchg_u64bit(value, pos1, pos2),         \
+    int8_t: xchg_8bit(value, pos1, pos2),             \
+    int16_t: xchg_16bit(value, pos1, pos2),           \
+    int32_t: xchg_32bit(value, pos1, pos2),           \
+    int64_t: xchg_64bit(value, pos1, pos2))
 
 #endif // METACORE___CLITE_BITUTILITYS_XCHG_BIT_H

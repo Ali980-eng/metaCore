@@ -159,4 +159,14 @@ static inline long reset_long_bit(long num, uint8_t position) {
     return (long)reset_64bit((int64_t)num, position);
 }
 
+#define reset_bit(num, position) _Generic((num), \
+    int8_t: reset_8bit(num, position),           \
+    int16_t: reset_16bit(num, position),         \
+    int32_t: reset_32bit(num, position),         \
+    int64_t: reset_64bit(num, position),         \
+    uint8_t: reset_u8bit(num, position),         \
+    uint16_t: reset_u16bit(num, position),       \
+    uint32_t: reset_u32bit(num, position),       \
+    uint64_t: reset_u64bit(num, position))
+
 #endif // METACORE___CLITE_BITUTILITYS_RESET_BIT_H

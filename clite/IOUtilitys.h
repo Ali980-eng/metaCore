@@ -367,6 +367,17 @@ static inline void print_test_string(const char *real, const char *expected,
     separator(seplen, sepch);
 }
 
+#define print_test(real, expected, seplen, sepch) _Generic((real), \
+    bool: print_test_bool(real, expected, seplen, sepch),          \
+    char: print_test_char(real, expected, seplen, sepch),          \
+    short: print_test_short(real, expected, seplen, sepch),        \
+    int: print_test_int(real, expected, seplen, sepch),            \
+    long: print_test_long(real, expected, seplen, sepch),          \
+    size_t: print_test_size(real, expected, seplen, sepch),        \
+    float: print_test_float(real, expected, seplen, sepch),        \
+    double: print_test_double(real, expected, seplen, sepch),      \
+    const char*: print_test_string(real, expected, seplen, sepch))
+
 #ifdef OPENUDT___CUDT_CSTRING_CSTRINGTYPE_H
 static inline void print_test_cstring(cstring real, cstring expected, unsigned int seplen, char sepch)
 {

@@ -9,20 +9,20 @@
 
 param(
     [Parameter(Mandatory=$true)]
-    [string]$Path,                          # File or folder path
-    
+    [string]$Path, # File or folder path
+
     [ValidateSet('txt', 'md', 'doxygen', 'All')]
-    [string]$OutputFormat = "doxygen",      # Output format
-    
+    [string]$OutputFormat = "doxygen", # Output format
+
     [string]$OutputDir = ".\Documentation", # Output directory
-    
-    [switch]$Recurse,                       # Process subfolders
-    
+
+    [switch]$Recurse, # Process subfolders
+
     [string[]]$Extensions = @('.cpp', '.c', '.h', '.hpp', '.java', '.ps1', '.psm1', '.py', '.cs', '.js', '.ts'),
-    
-    [switch]$Force,                         # Overwrite existing files
-    
-    [string]$Model = "llama3.2:1b"           # Ollama model name
+
+    [switch]$Force, # Overwrite existing files
+
+    [string]$Model = "llama3.2:1b"  # Ollama model name
 )
 
 # ===================== Helper Functions =====================
@@ -50,14 +50,14 @@ function Document-File {
         [string]$OutputDir,
         [bool]$Force
     )
-    
+
     $code = Get-Content $FilePath -Raw -ErrorAction Stop
     $baseName = [System.IO.Path]::GetFileNameWithoutExtension($FilePath)
     $extension = [System.IO.Path]::GetExtension($FilePath)
     $language = Get-LanguageFromExtension -Extension $extension
-    
+
     Write-Host "Processing: $([System.IO.Path]::GetFileName($FilePath))" -ForegroundColor Cyan
-    
+
     # Determine output subfolder (for 'All' format, create a folder per file)
     if ($OutputFormat -eq "All") {
         $targetDir = Join-Path -Path $OutputDir -ChildPath $baseName
@@ -65,7 +65,7 @@ function Document-File {
     } else {
         $targetDir = $OutputDir
     }
-    
+
     # ----- Doxygen output -----
     if ($OutputFormat -in @('doxygen', 'All')) {
         $doxyPrompt = @"
@@ -85,7 +85,7 @@ $code
             Write-Host "  -> Doxygen: $doxyFile" -ForegroundColor Green
         } else { Write-Host "  -> Doxygen: file exists (use -Force)" -ForegroundColor Yellow }
     }
-    
+
     # ----- Markdown output -----
     if ($OutputFormat -in @('md', 'All')) {
         $mdPrompt = @"
@@ -105,7 +105,7 @@ $code
             Write-Host "  -> Markdown: $mdFile" -ForegroundColor Green
         } else { Write-Host "  -> Markdown: file exists (use -Force)" -ForegroundColor Yellow }
     }
-    
+
     # ----- Plain text output -----
     if ($OutputFormat -in @('txt', 'All')) {
         $txtPrompt = @"
@@ -162,12 +162,12 @@ if (-not $item.PSIsContainer) {
     $getParams = @{ Path = $item.FullName; File = $true }
     if ($Recurse) { $getParams.Recurse = $true }
     $files = Get-ChildItem @getParams | Where-Object { $Extensions -contains $_.Extension }
-    
+
     if ($files.Count -eq 0) {
         Write-Warning "No files with extensions ($($Extensions -join ', ')) in $Path"
         exit 0
     }
-    
+
     foreach ($file in $files) {
         Document-File -FilePath $file.FullName -OutputFormat $OutputFormat -OutputDir $OutputDir -Force $Force
     }

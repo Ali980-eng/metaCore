@@ -149,4 +149,14 @@ static inline uint8_t count_long_bit(long num, bool ones) {
     return count_u64bit((uint64_t)num, ones);
 }
 
+#define count_bit(num, ones) _Generic((num), \
+    int8_t: count_8bit(num, ones),           \
+    int16_t: count_16bit(num, ones),         \
+    int32_t: count_32bit(num, ones),         \
+    int64_t: count_64bit(num, ones),         \
+    uint8_t: count_u8bit(num, ones),         \
+    uint16_t: count_u16bit(num, ones),       \
+    uint32_t: count_u32bit(num, ones),       \
+    uint64_t: count_u64bit(num, ones))
+
 #endif // METACORE___CLITE_BITUTILITYS_COUNT_BIT_H

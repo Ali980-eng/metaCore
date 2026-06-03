@@ -170,4 +170,14 @@ static inline bool get_long_bit(long num, uint8_t position) {
     return get_64bit((int64_t)num, position);
 }
 
+#define get_bit(num, position) _Generic((num), \
+    int8_t: get_8bit(num, position),           \
+    int16_t: get_16bit(num, position),         \
+    int32_t: get_32bit(num, position),         \
+    int64_t: get_64bit(num, position),         \
+    uint8_t: get_u8bit(num, position),         \
+    uint16_t: get_u16bit(num, position),       \
+    uint32_t: get_u32bit(num, position),       \
+    uint64_t: get_u64bit(num, position))
+
 #endif // METACORE___CLITE_BITUTILITYS_GET_BIT_H

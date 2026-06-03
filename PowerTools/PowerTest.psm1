@@ -65,7 +65,7 @@ function Get-FrameworkSpecificPrompt {
         [Parameter(Mandatory = $true)]
         [ValidateSet('CTest', 'GTest', 'Jest', 'Pytest', 'NUnit', 'unittest', 'Pester', 'Mocha')]
         [string]$Framework,
-        
+
         [Parameter(Mandatory = $true)]
         [ValidateSet('C', 'C++', 'C#', 'Java', 'Python', 'PowerShell', 'JavaScript', 'TypeScript')]
         [string]$Language
@@ -146,7 +146,7 @@ REQUIREMENTS:
 SYNTAX EXAMPLE:
   def test_addition():
       assert add(2, 2) == 4
-  
+
   def test_division_by_zero():
       with pytest.raises(ZeroDivisionError):
           divide(5, 0)
@@ -191,7 +191,7 @@ SYNTAX EXAMPLE:
   class TestMath(unittest.TestCase):
     def test_addition(self):
       self.assertEqual(4, add(2, 2))
-    
+
     def test_division_by_zero(self):
       with self.assertRaises(ZeroDivisionError):
         divide(5, 0)
@@ -283,7 +283,7 @@ function New-Test {
         [Parameter(Mandatory = $false)]
         [ValidateScript({ Test-Path $_ -PathType Leaf })]
         [string]$Existing,
-        
+
         [Parameter(Mandatory = $false)]
         [string]$Model = "llama2"
     )
@@ -391,8 +391,8 @@ RULES FOR OUTPUT:
     Write-Host "🔗 Connecting to Ollama: $AI" -ForegroundColor Magenta
     Write-Host "🤖 Model: $Model | 📊 Framework: $Framework | 💻 Language: $Language" -ForegroundColor Magenta
     Write-Host "⏳ Generating tests (this may take a moment)..." -ForegroundColor Yellow
-    
-    $body = @{ 
+
+    $body = @{
         model = $Model
         prompt = $userPrompt
         system = $sysPrompt
@@ -401,13 +401,13 @@ RULES FOR OUTPUT:
 
     try {
         $resp = Invoke-RestMethod -Uri $AI -Method Post -Body $body -ContentType "application/json" -ErrorAction Stop -TimeoutSec 300
-        
+
         $tests = if ($resp.response) { $resp.response } elseif ($resp.choices -and $resp.choices[0].message.content) { $resp.choices[0].message.content } else { throw "Unexpected response format" }
-        
+
         if (-not $tests -or [string]::IsNullOrWhiteSpace($tests)) {
             throw "AI returned empty response"
         }
-        
+
         Write-Host "✅ Tests generated successfully!" -ForegroundColor Green
     } 
     catch {
@@ -447,12 +447,12 @@ RULES FOR OUTPUT:
             "C" { Write-Host "⏸️  Cancelled" -ForegroundColor Yellow; return }
             default { Set-Content -Path $Out -Value $tests -Encoding UTF8; Write-Host "✅ Overwrote $Out" -ForegroundColor Green }
         }
-    } 
+    }
     else {
         Set-Content -Path $Out -Value $tests -Encoding UTF8
         Write-Host "✅ Created $Out" -ForegroundColor Green
     }
-    
+
     Write-Host "`n🎉 Complete! Review and run your tests." -ForegroundColor Green
 }
 

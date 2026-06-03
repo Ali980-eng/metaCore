@@ -219,7 +219,7 @@ class PowerBuild {
     # Compile source files
     foreach ($sourcePath in $this.sourcePaths) {
       $sourceFiles = Get-ChildItem -Path $sourcePath -Filter "*.cpp" -Recurse
-      
+
       foreach ($file in $sourceFiles) {
         $objectFile = [IO.Path]::Combine($outputPath, [IO.Path]::GetFileNameWithoutExtension($file)) + ".o"
         $includeArgs = $this.includePaths | ForEach-Object { "-I $_" }
@@ -271,7 +271,7 @@ class PowerBuild {
     if ($objects.Count -gt 0) {
       $outputFile = [IO.Path]::Combine($outputPath, "$($this.projectName).exe")
       $linkCmd = "$compilerPath $($objects -join ' ') -o $outputFile"
-      
+
       $this.WriteLog("Linking files...")
       Invoke-Expression $linkCmd | Out-Host
     }
