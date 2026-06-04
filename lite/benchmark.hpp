@@ -43,8 +43,13 @@
 #ifndef METACORE___LITE_BENCHMARK_HPP
 #define METACORE___LITE_BENCHMARK_HPP
 
-namespace lite
-{
+#ifdef METACORE___META_HPP
+namespace meta {
+#endif // METACORE___META_HPP
+#ifdef METACORE___LITE_HPP
+namespace lite {
+#endif // METACORE___LITE_HPP
+
     namespace benchmark
     {
         /**
@@ -581,6 +586,12 @@ namespace lite
                 return 0;
         }
     }
+
+#ifdef METACORE___LITE_HPP
 }
+#endif // METACORE___LITE_HPP
+#ifdef METACORE___META_HPP
+}
+#endif // METACORE___META_HPP
 
 #endif // METACORE___LITE_BENCHMARK_HPP

@@ -33,8 +33,13 @@
  * @see exception_factory namespace for helper functions
  */
 
-namespace lite
-{
+#ifdef METACORE___META_HPP
+namespace meta {
+#endif // METACORE___META_HPP
+#ifdef METACORE___LITE_HPP
+namespace lite {
+#endif // METACORE___LITE_HPP
+
     /**
      * @class exception
      * @brief Base exception class for all lite library exceptions.
@@ -365,5 +370,11 @@ namespace lite
             return internal_exception("Internal library error");
         }
     }
+#ifdef METACORE___LITE_HPP
 }
+#endif // METACORE___LITE_HPP
+#ifdef METACORE___META_HPP
+}
+#endif // METACORE___META_HPP
+
 #endif // METACORE___LITE_EXCEPTION_HPP

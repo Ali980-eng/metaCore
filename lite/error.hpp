@@ -41,8 +41,13 @@
 #ifndef METACORE___LITE_ERROR_HPP
 #define METACORE___LITE_ERROR_HPP
 
+#ifdef METACORE___META_HPP
+namespace meta {
+#endif // METACORE___META_HPP
+#ifdef METACORE___LITE_HPP
 namespace lite {
-    
+#endif // METACORE___LITE_HPP
+
     benchmark::code_timer<true> errTimer;
     
     /**
@@ -328,6 +333,12 @@ namespace lite {
             return error{"Internal Problem", description};
         }
     }
+
+#ifdef METACORE___LITE_HPP
 }
+#endif // METACORE___LITE_HPP
+#ifdef METACORE___META_HPP
+}
+#endif // METACORE___META_HPP
 
 #endif // METACORE___LITE_ERROR_HPP

@@ -19,8 +19,8 @@
     .\infoSystem.ps1 --version
     .\infoSystem.ps1 --license
     .\infoSystem.ps1 --help
-    .\infoSystem.ps1 --help lite\micros.h
-    .\infoSystem.ps1 --help clite/UnitTest.h
+    .\infoSystem.ps1 --help cgen\micros.h
+    .\infoSystem.ps1 --help cgen/UnitTest.h
 #>
 
 param(
@@ -33,7 +33,7 @@ param(
 )
 
 # ===================== Global Settings =====================
-$script:Version = "0.1.8"
+$script:Version = "0.1.9"
 $script:LicenseFile = Join-Path -Path $PSScriptRoot -ChildPath "_docs/lic.txt"
 $script:DocRoot = "_docs/textDoc"
 $script:briefFile = "_docs/brief.txt"
@@ -88,8 +88,8 @@ Options:
                               _docs/textDoc/<path_without_extension>.txt
 
 Examples:
-    .\infoSystem.ps1 --help lite/micros.hpp
-    .\infoSystem.ps1 --help clite/UnitTest.h
+    .\infoSystem.ps1 --help cgen/micros.hpp
+    .\infoSystem.ps1 --help cgen/UnitTest.h
 
 Note:
     - The documentation root folder is '_docs/textDoc' relative to the script location.

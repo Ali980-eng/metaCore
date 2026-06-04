@@ -26,8 +26,13 @@
 #ifndef METACORE___LITE_RANDOM_HPP
 #define METACORE___LITE_RANDOM_HPP
 
-namespace lite
-{
+#ifdef METACORE___META_HPP
+namespace meta {
+#endif // METACORE___META_HPP
+#ifdef METACORE___LITE_HPP
+namespace lite {
+#endif // METACORE___LITE_HPP
+
     // GRN: generate random number
     /// @brief Generates a random integer within the specified range using Mersenne Twister algorithm.
     /// @param start The lower bound of the range (inclusive).
@@ -42,7 +47,7 @@ namespace lite
         return dis(gen);
     }
 
-    #ifdef OPENUDT___CXXSTRING_CXXSTRING_FUNCTIONS_HPP
+    #ifdef OPENUDT___STRING_STRING_FUNCTIONS_HPP
     // SES: shift encryption simplex
     /// @brief Encrypts a string by shifting all characters by a randomly generated key.
     /// @param input The input string to be encrypted.
@@ -75,7 +80,7 @@ namespace lite
         }
         return result;
     }
-    #endif // OPENUDT___CXXSTRING_CXXSTRING_FUNCTIONS_HPP
+    #endif // OPENUDT___STRING_STRING_FUNCTIONS_HPP
     
     // GRC: generate random char
     /// @brief Generates a random printable ASCII character.
@@ -142,5 +147,12 @@ namespace lite
     /// @return A 3D vector containing random characters in the range of printable ASCII characters
     std::vector<std::vector<std::vector<char>>> GRC3DV() noexcept { return vector_cast<char, int>(GRV(94, 94, 94, 32, 126)); }
     #endif // OPENUDT___VECTOR_VECTORFUNCTIONS_HPP
+
+#ifdef METACORE___LITE_HPP
 }
+#endif // METACORE___LITE_HPP
+#ifdef METACORE___META_HPP
+}
+#endif // METACORE___META_HPP
+
 #endif // METACORE___LITE_RANDOM_HPP

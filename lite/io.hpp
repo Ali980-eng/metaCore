@@ -44,8 +44,13 @@
 #ifndef METACORE___LITE_IO_HPP
 #define METACORE___LITE_IO_HPP
 
-namespace lite
-{
+#ifdef METACORE___META_HPP
+namespace meta {
+#endif // METACORE___META_HPP
+#ifdef METACORE___LITE_HPP
+namespace lite {
+#endif // METACORE___LITE_HPP
+
     namespace io
     {
 
@@ -673,6 +678,12 @@ namespace lite
             if(result) print(data);
         }
     }
+
+#ifdef METACORE___LITE_HPP
 }
+#endif // METACORE___LITE_HPP
+#ifdef METACORE___META_HPP
+}
+#endif // METACORE___META_HPP
 
 #endif // METACORE___LITE_IO_HPP

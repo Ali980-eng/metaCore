@@ -21,8 +21,13 @@
 #ifndef METACORE___LITE_TYPE_HPP
 #define METACORE___LITE_TYPE_HPP
 
-namespace lite
-{
+#ifdef METACORE___META_HPP
+namespace meta {
+#endif // METACORE___META_HPP
+#ifdef METACORE___LITE_HPP
+namespace lite {
+#endif // METACORE___LITE_HPP
+
     /// @brief Get the type name as a string.
     /// @tparam T The type to get the name of.
     /// @return The name of the type as a string.
@@ -401,5 +406,11 @@ namespace lite
     /// @param value The boolean value to convert.
     /// @return The string representation of the boolean value.
     inline std::string boolean_msg(bool value) noexcept { return value ? "true" : "false"; }
+#ifdef METACORE___LITE_HPP
 }
+#endif // METACORE___LITE_HPP
+#ifdef METACORE___META_HPP
+}
+#endif // METACORE___META_HPP
+
 #endif // METACORE___LITE_TYPE_HPP

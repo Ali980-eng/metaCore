@@ -24,8 +24,13 @@
 #ifndef METACORE___LITE_WARNING_HPP
 #define METACORE___LITE_WARNING_HPP
 
-namespace lite
-{
+#ifdef METACORE___META_HPP
+namespace meta {
+#endif // METACORE___META_HPP
+#ifdef METACORE___LITE_HPP
+namespace lite {
+#endif // METACORE___LITE_HPP
+
     benchmark::code_timer<true> warning_time;
 
     class warning
@@ -382,6 +387,12 @@ namespace lite
             return warning{"Internal Problem", description};
         }
     }
+
+#ifdef METACORE___LITE_HPP
 }
+#endif // METACORE___LITE_HPP
+#ifdef METACORE___META_HPP
+}
+#endif // METACORE___META_HPP
 
 #endif // METACORE___LITE_WARNING_HPP

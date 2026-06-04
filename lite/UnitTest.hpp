@@ -69,8 +69,13 @@
 #ifndef METACORE___LITE_UNITTEST_HPP
 #define METACORE___LITE_UNITTEST_HPP
 
-namespace lite
-{
+#ifdef METACORE___META_HPP
+namespace meta {
+#endif // METACORE___META_HPP
+#ifdef METACORE___LITE_HPP
+namespace lite {
+#endif // METACORE___LITE_HPP
+
     /**
      * @class TEST
      * @brief Represents a single test case with metadata and result tracking.
@@ -817,6 +822,12 @@ namespace lite
             reset_function_count();
         }
     }
+
+#ifdef METACORE___LITE_HPP
 }
+#endif // METACORE___LITE_HPP
+#ifdef METACORE___META_HPP
+}
+#endif // METACORE___META_HPP
 
 #endif // METACORE___LITE_UNITTEST_HPP

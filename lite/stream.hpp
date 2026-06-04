@@ -38,8 +38,13 @@
 #ifndef METACORE___LITE_STREAM_HPP
 #define METACORE___LITE_STREAM_HPP
 
-namespace lite
-{    
+#ifdef METACORE___META_HPP
+namespace meta {
+#endif // METACORE___META_HPP
+#ifdef METACORE___LITE_HPP
+namespace lite {
+#endif // METACORE___LITE_HPP
+
     /**
      * @class vstream
      * @brief A class that provides stream-like operations for a vector of type T.
@@ -229,9 +234,7 @@ namespace lite
         ~vstream() = default;
     };
 
-    namespace function
-    {
-        #ifdef METACORE___LITE_BENCHMARK_HPP
+    #ifdef METACORE___LITE_BENCHMARK_HPP
         /**
          * @brief A template class for benchmarking function execution time.
          *       The benchmark_stream class allows users to measure the execution time
@@ -429,9 +432,9 @@ namespace lite
                 io::println("Max time: " + std::to_string(max_time) + s);
             }
         };
-        #endif // METACORE___LITE_BENCHMARK_HPP
+    #endif // METACORE___LITE_BENCHMARK_HPP
 
-        #ifdef METACORE___LITE_UNITTEST_HPP
+    #ifdef METACORE___LITE_UNITTEST_HPP
         /**
          * @brief A class that aggregates boolean test results with exception handling.
          */
@@ -711,8 +714,10 @@ namespace lite
                 }
             }
         };
-        #endif // METACORE___LITE_UNITTEST_HPP
-        
+    #endif // METACORE___LITE_UNITTEST_HPP
+
+    namespace function
+    {   
         /**
          * @brief A template class that wraps a function object and provides
          *        safe execution with built-in error handling.
@@ -1161,5 +1166,12 @@ namespace lite
             void run_test(const T2 &value2, const T3 &value3) { handler(value2, value3); }
         };
     }
+
+#ifdef METACORE___LITE_HPP
 }
+#endif // METACORE___LITE_HPP
+#ifdef METACORE___META_HPP
+}
+#endif // METACORE___META_HPP
+
 #endif // METACORE___LITE_STREAM_HPP

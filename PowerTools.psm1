@@ -1,4 +1,4 @@
-Import-Module .\PowerTools\PowerBuild.psm1
-Import-Module .\PowerTools\PowerCount.psm1
-Import-Module .\PowerTools\PowerDoc.psm1
-Import-Module .\PowerTools\PowerTest.psm1
+Import-Module .\powerTools\powerBuild.psm1
+Import-Module .\powerTools\powerCount.psm1
+Import-Module .\powerTools\powerDoc.psm1
+Import-Module .\powerTools\powerTest.psm1
