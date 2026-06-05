@@ -163,11 +163,15 @@
 
 #ifndef cobject_data_micros
 
+    #ifdef __cplusplus
+    extern "C" {
+    #endif // __cplusplus
+
     #ifdef cio_micros
 
-        #define cnl '\n'
+        #define nl '\n'
 
-        #define ctab '\t'
+        #define tab '\t'
 
         #define cprint(output) \
             printf(output)
@@ -332,7 +336,7 @@
         #define cstr(name, sizeValue) \
             char name[sizeValue]
 
-        static size_t length(const cstrptr value)
+        static inline size_t length(const cstrptr value)
         {
             return (value != NULL) ? strlen(value) : 0;
         }
@@ -444,7 +448,22 @@
         }
 
     #endif // cstring_micros
+    
+    #ifdef __cplusplus
+    }
+        
+        #include <string>
 
+        #define object class
+        
+        #define object class
+
+        typedef std::string str;
+
+        #define meta_lambda(capture_clause, parameters, return_type, script) \
+            [capture_clause] parameters -> return_type { script }
+
+    #endif // __cplusplus
 #endif // cobject_data_micros
 
 #endif // METACORE___CORE_CMICROS_H

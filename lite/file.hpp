@@ -18,13 +18,15 @@
 #include <unordered_map>
 
 #pragma once
-#ifndef METACORE___ADVA_FILE_HPP
-#define METACORE___ADVA_FILE_HPP
+#ifndef METACORE___LITE_FILE_HPP
+#define METACORE___LITE_FILE_HPP
 
-#ifdef METACORE___ADVA_HPP
-namespace adva
-{
-#endif // METACORE___ADVA_HPP
+#ifdef METACORE___META_HPP
+namespace meta {
+#endif // METACORE___META_HPP
+#ifdef METACORE___LITE_HPP
+namespace lite {
+#endif // METACORE___LITE_HPP
 
     /// @brief A simple text file manager class for creating, reading, appending, checking existence, and removing text files in a specified directory.
     class file
@@ -300,8 +302,11 @@ namespace adva
             file.close();
         }
     }
-#ifdef METACORE___ADVA_HPP
+#ifdef METACORE___LITE_HPP
 }
-#endif // METACORE___ADVA_HPP
+#endif // METACORE___LITE_HPP
+#ifdef METACORE___META_HPP
+}
+#endif // METACORE___META_HPP
 
 #endif // METACORE___LITE_FILE_HPP
