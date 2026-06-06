@@ -36,8 +36,8 @@
 #include "reset_bit.h"
 #include "set_bit.h"
 
-#ifndef METACORE___CLITE_BITUTILITYS_cbool_8_H
-#define METACORE___CLITE_BITUTILITYS_cbool_8_H
+#ifndef METACORE___CGEN_BITUTILITYS_cbool_8_H
+#define METACORE___CGEN_BITUTILITYS_cbool_8_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -112,4 +112,4 @@ static inline bool isEmpty(cbool_8 current) {
 }
 #endif
 
-#endif // METACORE___CLITE_BITUTILITYS_cbool_8_H
+#endif // METACORE___CGEN_BITUTILITYS_cbool_8_H

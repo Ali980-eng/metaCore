@@ -11,10 +11,13 @@
  * @see Lite/UnitTest.hpp for related testing functions and structures.
  */
 
-// std headers
-#include <string>
-#include <iostream>
-#include <source_location>
+#if defined(__cpp_modules) && (__cplusplus >= 202302L)
+    import std;
+#else
+    #include <string>
+    #include <iostream>
+    #include <source_location>
+#endif
 
 // local headers
 #include "io.hpp"

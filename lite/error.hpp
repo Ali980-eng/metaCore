@@ -31,11 +31,15 @@
  * - operator<<()             : Stream output for error objects
  */
 
-#include <string>
-#include <iostream>
-#include <cstdlib>
-#include <source_location>
-#include "benchmark.hpp"
+#if defined(__cpp_modules) && (__cplusplus >= 202302L)
+    import std;
+#else
+    #include <string>
+    #include <iostream>
+    #include <cstdlib>
+    #include <source_location>
+    #include "benchmark.hpp"
+#endif
 
 #pragma once
 #ifndef METACORE___LITE_ERROR_HPP

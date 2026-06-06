@@ -26,18 +26,22 @@
  * it's a part of the lite library, specifically within the lite module, and is intended for benchmarking code performance in C++23.
  */
 
-// std headers
-#include <chrono>
-#include <thread>
-#include <vector>
-#include <functional>
-#include <string>
-#include <stdexcept>
-#include <exception>
-#include <windows.h>
-#include <psapi.h>
-#include <memory>
-#include <algorithm>
+#if defined(__cpp_modules) && (__cplusplus >= 202302L)
+    import std;
+#else
+    // std headers
+    #include <chrono>
+    #include <thread>
+    #include <vector>
+    #include <functional>
+    #include <string>
+    #include <stdexcept>
+    #include <exception>
+    #include <windows.h>
+    #include <psapi.h>
+    #include <memory>
+    #include <algorithm>
+#endif
 
 #pragma once
 #ifndef METACORE___LITE_BENCHMARK_HPP

@@ -28,8 +28,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#ifndef METACORE___CLITE_BITUTILITYS_TOGGLE_BIT_H
-#define METACORE___CLITE_BITUTILITYS_TOGGLE_BIT_H
+#ifndef METACORE___CGEN_BITUTILITYS_TOGGLE_BIT_H
+#define METACORE___CGEN_BITUTILITYS_TOGGLE_BIT_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -163,18 +163,8 @@ static inline long toggle_long_bit(long num, uint8_t position) {
     return (long)toggle_64bit((int64_t)num, position);
 }
 
-#define toggle_bit(num, position) _Generic((num), \
-    uint8_t: toggle_u8bit(num, position),         \
-    uint16_t: toggle_u16bit(num, position),       \
-    uint32_t: toggle_u32bit(num, position),       \
-    uint64_t: toggle_u64bit(num, position),       \
-    int8_t: toggle_8bit(num, position),           \
-    int16_t: toggle_16bit(num, position),         \
-    int32_t: toggle_32bit(num, position),         \
-    int64_t: toggle_64bit(num, position))
-
 #ifdef __cplusplus
 }
 #endif
 
-#endif // METACORE___CLITE_BITUTILITYS_TOGGLE_BIT_H
+#endif // METACORE___CGEN_BITUTILITYS_TOGGLE_BIT_H

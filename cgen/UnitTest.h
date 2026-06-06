@@ -20,8 +20,15 @@
 #include <math.h>
 #include <stdbool.h>
 
-#ifndef METACORE___CORE_UNITTEST_H
-#define METACORE___CORE_UNITTEST_H
+#ifndef METACORE___META_CGEN_UNITTEST_H
+#define METACORE___META_CGEN_UNITTEST_H
+
+#ifdef __cplusplus
+    #ifdef METACORE___META_HPP
+    namespace meta {
+    namespace cgen {
+    #endif // METACORE___META_HPP
+#endif
 
 size_t ctestCounter = 0;
 
@@ -208,16 +215,6 @@ static inline bool basic_test_double(double real, double expected, bool details,
     return 100 * (fabs(expected - real) / fabs(expected)) <= resolution;
 }
 
-#define basic_test(real, expected, details, seplen, sepch) _Generic((real), \
-    bool: basic_test_bool(real, expected, details, seplen, sepch),          \
-    char: basic_test_char(real, expected, details, seplen, sepch),          \
-    short: basic_test_short(real, expected, details, seplen, sepch),        \
-    int: basic_test_int(real, expected, details, seplen, sepch),            \
-    long: basic_test_long(real, expected, details, seplen, sepch),          \
-    size_t: basic_test_size(real, expected, details, seplen, sepch),        \
-    float: basic_test_float(real, expected, details, seplen, sepch),        \
-    double: basic_test_double(real, expected, details, seplen, sepch))
-
 /**
  * @brief Tests strings values for equality.
  * @param real The actual const char ptr or(string) value obtained from the test.
@@ -325,16 +322,6 @@ static CTEST string_ctest(const cstrptr real, const cstrptr expected, cstrptr na
     }
     return creatNew(newVal, name, description, true);
 }
-
-#define ctest(real, expected, name, description) _Generic((real), \
-    bool: ctest_bool(real, expected, name, description),          \
-    char: ctest_char(real, expected, name, description),          \
-    short: ctest_short(real, expected, name, description),        \
-    int: ctest_int(real, expected, name, description),            \
-    long: ctest_long(real, expected, name, description),          \
-    size_t: ctest_size(real, expected, name, description),        \
-    float: ctest_float(real, expected, 0.01f, name, description),        \
-    double: ctest_double(real, expected, 0.01, name, description))
 
 #endif // METACORE___CLITE_MICROS_H
 
@@ -468,16 +455,6 @@ static inline test_stream addTestSize(test_stream current, size_t real, size_t e
     return current;
 }
 
-#define addTest(current, real, expected, details) _Generic((real), \
-    bool: addTestBool(current, real, expected, details),           \
-    char: addTestChar(current, real, expected, details),           \
-    short: addTestShort(current, real, expected, details),         \
-    int: addTestInt(current, real, expected, details),             \
-    long: addTestLong(current, real, expected, details),           \
-    size_t: addTestSize(current, real, expected, details),         \
-    float: addTestFloat(current, real, expected, details),         \
-    double: addTestDouble(current, real, expected, details))
-
 /**
  * @brief Calculates the average success rate (ASR) of tests.
  * @param ts The test_stream structure containing test statistics.
@@ -520,4 +497,10 @@ static inline void print_test_summary(test_stream testResults) {
     printf("Average failed rate: %.2f%%\n", AFR(testResults));
 }
 
-#endif // METACORE___CORE_UNITTEST_H
+#ifdef __cplusplus
+    #ifdef METACORE___META_HPP
+    }}
+    #endif // METACORE___META_HPP
+#endif
+
+#endif // METACORE___META_CGEN_UNITTEST_H

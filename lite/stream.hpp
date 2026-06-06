@@ -19,16 +19,21 @@
  */
 
 // std headers
-#include <iostream>
-#include <cmath>
-#include <vector>
-#include <functional>
-#include <stdexcept>
-#include <queue>
-#include <type_traits>
-#include <string>
-#include <cerrno>
-#include <stack>
+
+#if defined(__cpp_modules) && (__cplusplus >= 202302L)
+    import std;
+#else
+    #include <iostream>
+    #include <cmath>
+    #include <vector>
+    #include <functional>
+    #include <stdexcept>
+    #include <queue>
+    #include <type_traits>
+    #include <string>
+    #include <cerrno>
+    #include <stack>
+#endif
 
 #include "io.hpp"
 #include "benchmark.hpp"

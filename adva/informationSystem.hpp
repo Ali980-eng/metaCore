@@ -1,12 +1,21 @@
-#include <unordered_map>
-#include <string>
-#include <iostream>
-#include "lite/micros.hpp"
+
+#if defined(__cpp_modules) && (__cplusplus >= 202302L)
+    import std;
+#else
+    #include <unordered_map>
+    #include <string>
+    #include <iostream>
+#endif
+
+#include "cgen/micros.h"
 
 #pragma once
 #ifndef METACORE___ADVA_INFORMATIONSYSTEM_HPP
 #define METACORE___ADVA_INFORMATIONSYSTEM_HPP
 
+#ifdef METACORE___META_HPP
+namespace meta {
+#endif // METACORE___META_HPP
 #ifdef METACORE___ADVA_HPP
 namespace adva
 {
@@ -103,5 +112,8 @@ namespace adva
 #ifdef METACORE___ADVA_HPP
 }
 #endif // METACORE___ADVA_HPP
+#ifdef METACORE___META_HPP
+}
+#endif // METACORE___META_HPP
 
 #endif // METACORE___ADVA_INFORMATIONSYSTEM_HPP

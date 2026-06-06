@@ -56,7 +56,6 @@
 #include "lite/error.hpp"
 #include "lite/exception.hpp"
 #include "lite/io.hpp"
-#include "lite/micros.hpp"
 #include "lite/random.hpp"
 #include "lite/stream.hpp"
 #include "lite/type.hpp"

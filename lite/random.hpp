@@ -17,10 +17,13 @@
  * @date 2025 / 9 / 25
  */
 
-// std headers
-#include <vector>
-#include <string>
-#include <random>
+#if defined(__cpp_modules) && (__cplusplus >= 202302L)
+    import std;
+#else
+    #include <vector>
+    #include <string>
+    #include <random>
+#endif
 
 #pragma once
 #ifndef METACORE___LITE_RANDOM_HPP

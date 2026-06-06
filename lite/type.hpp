@@ -15,7 +15,12 @@
  */
 
 // std headers
-#include <string>
+#if defined(__cpp_modules) && (__cplusplus >= 202302L)
+    import std;
+#else
+    #include <string>
+#endif
+
 
 #pragma once
 #ifndef METACORE___LITE_TYPE_HPP

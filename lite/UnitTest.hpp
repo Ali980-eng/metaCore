@@ -60,10 +60,14 @@
  * @note Requires C++23 or later for full compatibility.
  */
 
-#include <iostream>
-#include <vector>
-#include <string>
-#include <memory>
+#if defined(__cpp_modules) && (__cplusplus >= 202302L)
+    import std;
+#else
+    #include <iostream>
+    #include <vector>
+    #include <string>
+    #include <memory>
+#endif
 
 #pragma once
 #ifndef METACORE___LITE_UNITTEST_HPP

@@ -13,14 +13,15 @@
  */
 
 
-#ifndef METACORE___CORE_H
-#define METACORE___CORE_H
+#ifndef METACORE___CGEN_H
+#define METACORE___CGEN_H
 
-#include "cgen/micros.h"
 #include "cgen/IOUtilitys.h"
 #include "cgen/UnitTest.h"
 #include "cgen/warning.h"
 #include "cgen/error.h"
+#include "cgen/bitUtilitys.h"
+#include "cgen/micros.h"
 #include <windows.h>
 
 /** @brief Main system structure for environment management */
@@ -246,4 +247,4 @@ static inline void free_clite_system64(clite_system64* self) {
 /** @brief Global system variable for environment */
 static clite_system64 clite_ecosystem = {NULL, 0, NULL, 0, {NULL, NULL, NULL, NULL, 0}, false};
 
-#endif // METACORE___CORE_H
+#endif // METACORE___CGEN_H

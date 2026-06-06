@@ -1,10 +1,3 @@
-#include <stdexcept>
-#include <string>
-
-#pragma once
-#ifndef METACORE___LITE_EXCEPTION_HPP
-#define METACORE___LITE_EXCEPTION_HPP
-
 /**
  * @file exception.hpp
  * @brief Comprehensive exception classes for the lite library.
@@ -32,6 +25,17 @@
  *
  * @see exception_factory namespace for helper functions
  */
+
+#if defined(__cpp_modules) && (__cplusplus >= 202302L)
+    import std;
+#else
+    #include <stdexcept>
+    #include <string>
+#endif
+
+#pragma once
+#ifndef METACORE___LITE_EXCEPTION_HPP
+#define METACORE___LITE_EXCEPTION_HPP
 
 #ifdef METACORE___META_HPP
 namespace meta {

@@ -28,17 +28,21 @@
  * @note This library is designed for C++23 and is part of the metaCore library, specifically within the CXXLite module, and is intended for simplifying I/O operations in C++.
  */
 
-// std headers
-#include <iostream>
-#include <string>
-#include <vector>
-#include <limits>
-#include <algorithm>
-#include <functional>
-#include <type_traits>
-#include <climits>
-#include <stdexcept>
-#include "micros.hpp"
+#if defined(__cpp_modules) && (__cplusplus >= 202302L)
+    import std;
+#else
+    #include <iostream>
+    #include <string>
+    #include <vector>
+    #include <limits>
+    #include <algorithm>
+    #include <functional>
+    #include <type_traits>
+    #include <climits>
+    #include <stdexcept>
+#endif
+
+#include "cgen/micros.h"
 
 #pragma once
 #ifndef METACORE___LITE_IO_HPP

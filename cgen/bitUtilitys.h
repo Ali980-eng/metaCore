@@ -1,5 +1,5 @@
-#ifndef METACORE___CORE_BITUTILITYS_H
-#define METACORE___CORE_BITUTILITYS_H
+#ifndef METACORE___META_CGEN_BITUTILITYS_H
+#define METACORE___META_CGEN_BITUTILITYS_H
 
 #include "bitUtilitys/count_bit.h"
 #include "bitUtilitys/get_bit.h"
@@ -10,4 +10,4 @@
 #include "bitUtilitys/xchg_bit.h"
 #include "bitUtilitys/binaryFormat.h"
 
-#endif // METACORE___CORE_BITUTILITYS_H
+#endif // METACORE___META_CGEN_BITUTILITYS_H

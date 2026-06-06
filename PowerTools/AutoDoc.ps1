@@ -43,7 +43,7 @@ function Get-LanguageFromExtension {
 }
 
 # Document a single file
-function Document-File {
+function DocumentFile {
     param(
         [string]$FilePath,
         [string]$OutputFormat,
@@ -156,7 +156,7 @@ if (-not (Test-Path $Path)) {
 $item = Get-Item $Path
 if (-not $item.PSIsContainer) {
     # Single file
-    Document-File -FilePath $item.FullName -OutputFormat $OutputFormat -OutputDir $OutputDir -Force $Force
+    DocumentFile -FilePath $item.FullName -OutputFormat $OutputFormat -OutputDir $OutputDir -Force $Force
 } else {
     # Folder
     $getParams = @{ Path = $item.FullName; File = $true }

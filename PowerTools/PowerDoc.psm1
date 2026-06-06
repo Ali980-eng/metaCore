@@ -85,7 +85,7 @@ function Invoke-AutoDoc {
     }
 
     # ---------- Helper: Document a single file ----------
-    function Document-File {
+    function DocumentFile {
         param(
             [string]$FilePath,
             [string]$OutputFormat,

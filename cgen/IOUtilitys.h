@@ -18,8 +18,15 @@
 #include <math.h>
 #include <stdbool.h>
 
-#ifndef METACORE___CORE_IOUTILITYS_H
-#define METACORE___CORE_IOUTILITYS_H
+#ifndef METACORE___META_CGEN_IOUTILITYS_H
+#define METACORE___META_CGEN_IOUTILITYS_H
+
+#ifdef __cplusplus
+    #ifdef METACORE___META_HPP
+    namespace meta {
+    namespace cgen {
+    #endif // METACORE___META_HPP
+#endif
 
 /// @brief Prints a newline character.
 static inline void PNL() { printf("\n"); }
@@ -301,7 +308,7 @@ static inline void print_test_size(size_t real, size_t expected, unsigned int se
  * @param resolution The acceptable percentage difference between the real and expected values for the test to be considered successful.
  * @details This function calculates the percentage difference between the real and expected float values and determines if the test succeeded based on whether this difference is within the specified resolution.
  * It then prints the test result, the real value, and the expected value, with separators for better readability.
- * If the provided resolution is unreasonably high (greater than or equal to 5.
+ * If the provided resolution is unreasonably high (greater than or equal to 5.0), a warning is printed and the resolution is reset to 0.01 to ensure meaningful test results.
  */
 static inline void print_test_float(float real, float expected, unsigned int seplen,
                 char sepch, float resolution)
@@ -367,26 +374,10 @@ static inline void print_test_string(const char *real, const char *expected,
     separator(seplen, sepch);
 }
 
-#define print_test(real, expected, seplen, sepch) _Generic((real), \
-    bool: print_test_bool(real, expected, seplen, sepch),          \
-    char: print_test_char(real, expected, seplen, sepch),          \
-    short: print_test_short(real, expected, seplen, sepch),        \
-    int: print_test_int(real, expected, seplen, sepch),            \
-    long: print_test_long(real, expected, seplen, sepch),          \
-    size_t: print_test_size(real, expected, seplen, sepch),        \
-    float: print_test_float(real, expected, seplen, sepch),        \
-    double: print_test_double(real, expected, seplen, sepch),      \
-    const char*: print_test_string(real, expected, seplen, sepch))
+#ifdef __cplusplus
+    #ifdef METACORE___META_HPP
+    }}
+    #endif // METACORE___META_HPP
+#endif
 
-#ifdef OPENUDT___CUDT_STRING_STRINGTYPE_H
-static inline void print_test_cstring(cstring real, cstring expected, unsigned int seplen, char sepch)
-{
-    printf("The test result:\n");
-    separator(seplen, sepch);
-    printf("The real value is: %s\n", real.data);
-    printf("The expected value is: %s\n", expected.data);
-    separator(seplen, sepch);
-}
-#endif // OPENUDT___CUDT_STRING_STRINGTYPE_H
-
-#endif // METACORE___CORE_IOUTILITYS_H
+#endif // METACORE___META_CGEN_IOUTILITYS_H

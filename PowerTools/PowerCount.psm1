@@ -83,7 +83,7 @@ function CountCodeLines {
             }
             # Handle folder
             elseif ((Get-Item $targetPath) -is [System.IO.DirectoryInfo]) {
-                $directory = Get-Item $targetPath
+                # $directory = Get-Item $targetPath
                 $files = Get-ChildItem -Path $targetPath -Recurse -File | Where-Object { $Extensions.Contains($_.Extension) }
 
                 foreach ($file in $files) {
@@ -424,10 +424,10 @@ function Get-FileSizeTotal {
     File extensions to count (example: @('.cpp', '.h', '.ps1'))
 
 .EXAMPLE
-    Count-SmartLines -Paths 'lite'
-    Count-SmartLines -Paths @('lite', 'clite')
+    CountSmartLines -Paths 'lite'
+    CountSmartLines -Paths @('lite', 'clite')
 #>
-function Count-SmartLines {
+function CountSmartLines {
     param(
         [Parameter(Mandatory=$true, ValueFromPipeline=$true)]
         [string[]]$Paths,
@@ -486,7 +486,7 @@ function Count-SmartLines {
         }
 
         # Count effective lines (excluding comments and blank lines)
-        function Count-EffectiveLines {
+        function CountEffectiveLines {
             param([string]$FilePath)
 
             try {
@@ -584,7 +584,7 @@ function Count-SmartLines {
                 }
             }
             elseif ((Get-Item $targetPath) -is [System.IO.DirectoryInfo]) {
-                $directory = Get-Item $targetPath
+                # $directory = Get-Item $targetPath
                 $files = Get-ChildItem -Path $targetPath -Recurse -File | 
                          Where-Object { $Extensions.Contains($_.Extension) }
 
@@ -641,7 +641,7 @@ function Count-SmartLines {
 # Create aliases for backward compatibility
 New-Alias -Name Quick-CountLines -Value Measure-CodeLines -Force
 New-Alias -Name Count-FilesByExtension -Value Measure-FilesByExtension -Force
-New-Alias -Name Smart-Count -Value Count-SmartLines -Force
+New-Alias -Name Smart-Count -Value CountSmartLines -Force
 
 # Export functions
-Export-ModuleMember -Function @('CountCodeLines', 'Measure-CodeLines', 'Measure-FilesByExtension', 'Get-FileSizeTotal', 'Count-SmartLines', 'Resolve-TargetPath') -Alias @('Quick-CountLines', 'Count-FilesByExtension', 'Smart-Count')
+Export-ModuleMember -Function @('CountCodeLines', 'Measure-CodeLines', 'Measure-FilesByExtension', 'Get-FileSizeTotal', 'CountSmartLines', 'Resolve-TargetPath') -Alias @('Quick-CountLines', 'Count-FilesByExtension', 'Smart-Count')

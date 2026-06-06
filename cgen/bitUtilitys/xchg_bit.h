@@ -28,8 +28,8 @@
 #include "set_bit.h"
 #include "reset_bit.h"
 
-#ifndef METACORE___CLITE_BITUTILITYS_XCHG_BIT_H
-#define METACORE___CLITE_BITUTILITYS_XCHG_BIT_H
+#ifndef METACORE___CGEN_BITUTILITYS_XCHG_BIT_H
+#define METACORE___CGEN_BITUTILITYS_XCHG_BIT_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -185,18 +185,8 @@ static inline int64_t xchg_64bit(int64_t value, uint8_t pos1, uint8_t pos2) {
     return (int64_t)xchg_u64bit((uint64_t) value, pos1, pos2);
 }
 
-#define xchg_bit(value, pos1, pos2) _Generic((value), \
-    uint8_t: xchg_u8bit(value, pos1, pos2),           \
-    uint16_t: xchg_u16bit(value, pos1, pos2),         \
-    uint32_t: xchg_u32bit(value, pos1, pos2),         \
-    uint64_t: xchg_u64bit(value, pos1, pos2),         \
-    int8_t: xchg_8bit(value, pos1, pos2),             \
-    int16_t: xchg_16bit(value, pos1, pos2),           \
-    int32_t: xchg_32bit(value, pos1, pos2),           \
-    int64_t: xchg_64bit(value, pos1, pos2))
-
 #ifdef __cplusplus
 }
 #endif
 
-#endif // METACORE___CLITE_BITUTILITYS_XCHG_BIT_H
+#endif // METACORE___CGEN_BITUTILITYS_XCHG_BIT_H
