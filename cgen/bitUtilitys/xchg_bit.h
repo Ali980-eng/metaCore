@@ -32,7 +32,10 @@
 #define METACORE___CGEN_BITUTILITYS_XCHG_BIT_H
 
 #ifdef __cplusplus
-extern "C" {
+    #ifdef METACORE___META_HPP
+    namespace meta {
+    namespace cgen {
+    #endif // METACORE___META_HPP
 #endif
 
 /// @brief Exchange (swap) two bit positions in an 8-bit unsigned integer
@@ -186,7 +189,10 @@ static inline int64_t xchg_64bit(int64_t value, uint8_t pos1, uint8_t pos2) {
 }
 
 #ifdef __cplusplus
-}
+    #ifdef METACORE___META_HPP
+    namespace meta {
+    namespace cgen {
+    #endif // METACORE___META_HPP
 #endif
 
 #endif // METACORE___CGEN_BITUTILITYS_XCHG_BIT_H

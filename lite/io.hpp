@@ -71,6 +71,36 @@ namespace lite {
         }
 
         /**
+         * @brief Prints a horizontal line using a specific character.
+         * @param length The number of characters in the line.
+         * @param ch The character to use (must be one of: ~, -, #, *, =).
+         */
+        void separator(short length, char ch = '-')
+        {
+            if (ch == '~' || ch == '-' || ch == '#' || ch == '*' || ch == '=')
+            {
+                for (int i = length; i >= 0; i--)
+                    std::cout << ch;
+                std::cout << nl;
+            }
+            else
+                throw std::invalid_argument("Invalid separator character.");
+        }
+
+        /**
+         * @brief Prints multiple separator lines.
+         * @param numsep The number of separator lines to print.
+         * @param length The number of characters in each separator line.
+         * @param ch The character to use for the separator lines (must be one of: ~, -, #, *, =).
+         * @details This function prints a specified number of separator lines, each consisting of a specific character repeated a certain number of times. The character used for the separator lines must be one of the following: ~, -, #, *, =. If an invalid character is provided, an exception is thrown.
+         */
+        void separators(short numsep, short length, char ch)
+        {
+            for (int i = 0; i < numsep; i++)
+                separator(length, ch);
+        }
+
+        /**
          * @brief Prints a value followed by a newline to standard output.
          * @tparam T Type of the value to print.
          * @param output The value to be printed.
@@ -569,36 +599,6 @@ namespace lite {
             for (size_t i = index; i < str.length(); i++)
                 std::cout << str[i] << ' ';
             std::cout << nl;
-        }
-
-        /**
-         * @brief Prints a horizontal line using a specific character.
-         * @param length The number of characters in the line.
-         * @param ch The character to use (must be one of: ~, -, #, *, =).
-         */
-        void separator(short length, char ch = '-')
-        {
-            if (ch == '~' || ch == '-' || ch == '#' || ch == '*' || ch == '=')
-            {
-                for (int i = length; i >= 0; i--)
-                    std::cout << ch;
-                std::cout << nl;
-            }
-            else
-                throw std::invalid_argument("Invalid separator character.");
-        }
-
-        /**
-         * @brief Prints multiple separator lines.
-         * @param numsep The number of separator lines to print.
-         * @param length The number of characters in each separator line.
-         * @param ch The character to use for the separator lines (must be one of: ~, -, #, *, =).
-         * @details This function prints a specified number of separator lines, each consisting of a specific character repeated a certain number of times. The character used for the separator lines must be one of the following: ~, -, #, *, =. If an invalid character is provided, an exception is thrown.
-         */
-        void separators(short numsep, short length, char ch)
-        {
-            for (int i = 0; i < numsep; i++)
-                separator(length, ch);
         }
 
         /**

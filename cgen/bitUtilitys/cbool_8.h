@@ -40,7 +40,10 @@
 #define METACORE___CGEN_BITUTILITYS_cbool_8_H
 
 #ifdef __cplusplus
-extern "C" {
+    #ifdef METACORE___META_HPP
+    namespace meta {
+    namespace cgen {
+    #endif // METACORE___META_HPP
 #endif
 
 /// @brief A structure representing an 8-bit cbool_8 value that can store multiple cbool_8 states
@@ -109,7 +112,9 @@ static inline bool isEmpty(cbool_8 current) {
 }
 
 #ifdef __cplusplus
-}
+    #ifdef METACORE___META_HPP
+}}
+    #endif // METACORE___META_HPP
 #endif
 
 #endif // METACORE___CGEN_BITUTILITYS_cbool_8_H

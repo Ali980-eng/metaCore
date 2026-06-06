@@ -19,7 +19,7 @@
  * - Test framework macros (INIT_TEST, MAIN_TEST, EXIT_TEST, TEST_0 through TEST_3)
  * - Assertion macro (ASSERT)
  * - Object/struct definition macro (cobject)
- * - Character constants (cnl, ctab)
+ * - Character constants (nl, ctab)
  * - String type alias (cstrptr)
  *
  * @functions (Standard Mode)
@@ -174,14 +174,14 @@
 
         #define cprintln(output) \
             printf(output);      \
-            printf(cnl)
+            printf(nl)
 
         #define cprint_if(condition, output) \
             if(condition) printf(output)
 
         #define cprintln_if(condition, output) \
             if(condition) printf(output);      \
-            printf(cnl)
+            printf(nl)
 
     #endif // cio_micros
 

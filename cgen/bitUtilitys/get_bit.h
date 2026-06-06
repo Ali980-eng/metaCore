@@ -43,7 +43,10 @@
 #define METACORE___CGEN_BITUTILITYS_GET_BIT_H
 
 #ifdef __cplusplus
-extern "C" {
+    #ifdef METACORE___META_HPP
+    namespace meta {
+    namespace cgen {
+    #endif // METACORE___META_HPP
 #endif
 
 /// @brief Get bit value at specified position from 8-bit number
@@ -175,7 +178,8 @@ static inline bool get_long_bit(long num, uint8_t position) {
 }
 
 #ifdef __cplusplus
-}
+    #ifdef METACORE___META_HPP
+}}
+    #endif // METACORE___META_HPP
 #endif
-
 #endif // METACORE___CGEN_BITUTILITYS_GET_BIT_H

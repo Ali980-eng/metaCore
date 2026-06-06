@@ -40,7 +40,10 @@
 #define METACORE___CGEN_BITUTILITYS_BINARYFORMAT_H
 
 #ifdef __cplusplus
-extern "C" {
+    #ifdef METACORE___META_HPP
+    namespace meta {
+    namespace cgen {
+    #endif // METACORE___META_HPP
 #endif
 
 /**
@@ -366,7 +369,9 @@ static inline void print_u64bit(uint64_t value, bool pnl) {
 }
 
 #ifdef __cplusplus
-}
+#ifdef METACORE___META_HPP
+}}
+#endif // METACORE___META_HPP
 #endif
 
 #endif // METACORE___CGEN_BITUTILITYS_BINARYFORMAT_H

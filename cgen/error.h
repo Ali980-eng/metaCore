@@ -45,9 +45,9 @@ static inline void printError(cerror err) {
     printf("------------\n");
 }
 
-static inline cerror wrong_indexing(cstrptr description) {
+static inline cerror indexing_error(cstrptr description) {
     cerror err;
-    err.name = "Wrong Indexing";
+    err.name = "Indexing Error";
     err.description = description;
     err.file = __FILE_NAME__;
     err.time = __TIME__;
@@ -55,9 +55,9 @@ static inline cerror wrong_indexing(cstrptr description) {
     return err;
 }
 
-static inline cerror wrong_declaration(cstrptr description) {
+static inline cerror declaration_error(cstrptr description) {
     cerror err;
-    err.name = "Wrong declaration";
+    err.name = "Declaration Error";
     err.description = description;
     err.file = __FILE_NAME__;
     err.time = __TIME__;
@@ -65,9 +65,9 @@ static inline cerror wrong_declaration(cstrptr description) {
     return err;
 }
 
-static inline cerror wrong_construction(cstrptr description) {
+static inline cerror construction_error(cstrptr description) {
     cerror err;
-    err.name = "Wrong Construction";
+    err.name = "Construction Error";
     err.description = description;
     err.file = __FILE_NAME__;
     err.time = __TIME__;
@@ -75,7 +75,7 @@ static inline cerror wrong_construction(cstrptr description) {
     return err;
 }
 
-static inline cerror bad_input(cstrptr description) {
+static inline cerror bad_input_error(cstrptr description) {
     cerror err;
     err.name = "Bad Input";
     err.description = description;
@@ -85,7 +85,7 @@ static inline cerror bad_input(cstrptr description) {
     return err;
 }
 
-static inline cerror undefined_behavior(cstrptr description) {
+static inline cerror undefined_behavior_error(cstrptr description) {
     cerror err;
     err.name = "Undefined Behavior";
     err.description = description;
@@ -95,7 +95,7 @@ static inline cerror undefined_behavior(cstrptr description) {
     return err;
 }
 
-static inline cerror invalid_argument(cstrptr description) {
+static inline cerror invalid_argument_error(cstrptr description) {
     cerror err;
     err.name = "Invalid Argument";
     err.description = description;
@@ -105,7 +105,7 @@ static inline cerror invalid_argument(cstrptr description) {
     return err;
 }
 
-static inline cerror OutOfRange(cstrptr description) {
+static inline cerror OutOfRange_error(cstrptr description) {
     cerror err;
     err.name = "Out Of Range";
     err.description = description;
@@ -115,7 +115,7 @@ static inline cerror OutOfRange(cstrptr description) {
     return err;
 }
 
-static inline cerror internal_problem(cstrptr description) {
+static inline cerror internal_problem_error(cstrptr description) {
     cerror err;
     err.name = "Internal Problem";
     err.description = description;

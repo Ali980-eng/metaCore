@@ -38,8 +38,9 @@
     #include <iostream>
     #include <cstdlib>
     #include <source_location>
-    #include "benchmark.hpp"
 #endif
+
+#include "benchmark.hpp"
 
 #pragma once
 #ifndef METACORE___LITE_ERROR_HPP
