@@ -69,6 +69,8 @@
     #include <memory>
 #endif
 
+#include "cgen/micros/structure.h"
+
 #pragma once
 #ifndef METACORE___LITE_UNITTEST_HPP
 #define METACORE___LITE_UNITTEST_HPP
@@ -87,11 +89,11 @@ namespace lite {
      * The TEST class encapsulates a test case with optional name, description,
      * and boolean result. It provides comprehensive operators for logical operations.
      */
-    class TEST
+    object TEST
     {
     private:
-        std::string name;
-        std::string description;
+        str name;
+        str description;
         bool result;
     public:
         /**
@@ -113,7 +115,7 @@ namespace lite {
          * @brief Constructor with test name only.
          * @param name The name/identifier of the test
          */
-        TEST(const std::string& name) noexcept { 
+        TEST(const str& name) noexcept { 
             this->name = name;
             description = "no description";
             result = false;
@@ -124,7 +126,7 @@ namespace lite {
          * @param name The name/identifier of the test
          * @param description The detailed description of the test
          */
-        TEST(const std::string& name, const std::string& description) noexcept {
+        TEST(const str& name, const str& description) noexcept {
             this->name = name;
             this->description = description;
             result = false;
@@ -136,7 +138,7 @@ namespace lite {
          * @param description The detailed description of the test
          * @param result The boolean result of the test
          */
-        TEST(const std::string& name, const std::string& description, bool result) noexcept {
+        TEST(const str& name, const str& description, bool result) noexcept {
             this->name = name;
             this->description = description;
             this->result = result;
@@ -161,7 +163,7 @@ namespace lite {
          * @brief Set the test name.
          * @param name The new test name
          */
-        void set(const std::string& name) noexcept {
+        void set(const str& name) noexcept {
             this->name = name;
         }
 
@@ -178,7 +180,7 @@ namespace lite {
          * @param isName If true, returns the name; if false, returns the description
          * @return The requested string property
          */
-        std::string get(bool isName) noexcept {
+        str get(bool isName) noexcept {
             return isName ? name : description;
         }
 
@@ -351,7 +353,7 @@ namespace lite {
          * @param name The test name to look up
          * @return The test result if name matches, bool() otherwise with error message
          */
-        bool operator[](const std::string& name) noexcept {
+        bool operator[](const str& name) noexcept {
             if(name == this->name) return result;
             std::cerr << "Name Error: Unknown name." << std::endl;
             return bool();
@@ -387,7 +389,7 @@ namespace lite {
          * @return const char* A string message representing the test result.
          * @note This function is noexcept and guarantees not to throw exceptions.
          */
-        const std::string test_message(bool test_result) noexcept
+        const str test_message(bool test_result) noexcept
         {
             return test_result ? 
             "Success" : "Failed";
@@ -422,8 +424,8 @@ namespace lite {
         TEST basic(
             const T& realvalue,
             const T& expvalue,
-            const std::string& name,
-            const std::string& description) noexcept
+            const str& name,
+            const str& description) noexcept
         {
             index.basic++;
             return !(name.empty()) && !(description.empty()) ?
@@ -438,7 +440,7 @@ namespace lite {
 
         template <typename T>
         TEST range(T realvalue, T uplimit, T downlimit,
-            const std::string& name, const std::string& description) noexcept {
+            const str& name, const str& description) noexcept {
             return name.empty() && description.empty() ? 
             TEST{range(realvalue, uplimit, downlimit)} : 
             TEST{name, description, range(realvalue, uplimit, downlimit)};
@@ -480,8 +482,8 @@ namespace lite {
         TEST vector(
             const std::vector<T>& real_v,
             const std::vector<T>& expected_v,
-            const std::string& name,
-            const std::string& description) noexcept
+            const str& name,
+            const str& description) noexcept
         {
             index.vector++;
             if (real_v.size() != expected_v.size()) {
@@ -540,8 +542,8 @@ namespace lite {
         template <typename T>
         TEST vector_2d(const std::vector<std::vector<T>>& real_2dv,
                        const std::vector<std::vector<T>>& expected_2dv,
-                       const std::string& name,
-                       const std::string& description) noexcept
+                       const str& name,
+                       const str& description) noexcept
         {
             index.vector++;
             if (real_2dv.size() != expected_2dv.size()) {
@@ -611,7 +613,7 @@ namespace lite {
         template <typename T>
         TEST vector_3d(const std::vector<std::vector<std::vector<T>>>& real_3dv,
                        const std::vector<std::vector<std::vector<T>>>& expected_3dv,
-                       const std::string& name, const std::string& description) noexcept
+                       const str& name, const str& description) noexcept
         {
             if (real_3dv.size() != expected_3dv.size()) {
                 return !(name.empty()) && !(description.empty()) ? 
@@ -666,8 +668,8 @@ namespace lite {
          */
         template <typename T>
         TEST function(std::function<T()> fx, T expected,
-                    const std::string& name,
-                    const std::string& description) noexcept
+                    const str& name,
+                    const str& description) noexcept
         {
             index.function++;
             return !(name.empty()) && !(description.empty()) ? 
@@ -704,8 +706,8 @@ namespace lite {
          */
         template <typename T>
         TEST function(std::function<T(T)> fx, T value, T expected,
-                    const std::string& name,
-                    const std::string& description) noexcept
+                    const str& name,
+                    const str& description) noexcept
         {
             index.function++;
             return !(name.empty()) && !(description.empty()) ? 
@@ -744,7 +746,7 @@ namespace lite {
          */
         template <typename T1, typename T2>
         TEST function(std::function<T1(T2)> fx, T2 value, T1 expected,
-                    const std::string& name, const std::string& description) noexcept
+                    const str& name, const str& description) noexcept
         {
             index.function++;
             return !(name.empty()) && !(description.empty()) ? 
@@ -787,8 +789,8 @@ namespace lite {
          */
         template <typename T1, typename T2, typename T3>
         TEST function(std::function<T1(T2, T3)> fx, T1 expected,
-                    T2 value1, T3 value2, const std::string& name,
-                    const std::string& description) noexcept
+                    T2 value1, T3 value2, const str& name,
+                    const str& description) noexcept
         {
             index.function++;
             return !(name.empty()) && !(description.empty()) ? 

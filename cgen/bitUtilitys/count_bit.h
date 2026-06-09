@@ -34,10 +34,10 @@
 #define METACORE___CGEN_BITUTILITYS_COUNT_BIT_H
 
 #ifdef __cplusplus
-    #ifdef METACORE___META_HPP
-    namespace meta {
-    namespace cgen {
-    #endif // METACORE___META_HPP
+#ifdef METACORE___META_HPP
+namespace meta {
+namespace cgen {
+#endif // METACORE___META_HPP
 #endif
 
 /// @brief Count set (1) or unset (0) bits in an 8-bit value
@@ -157,9 +157,9 @@ static inline uint8_t count_long_bit(long num, bool ones) {
 }
 
 #ifdef __cplusplus
-    #ifdef METACORE___META_HPP
+#ifdef METACORE___META_HPP
 }}
-    #endif // METACORE___META_HPP
+#endif // METACORE___META_HPP
 #endif
 
 #endif // METACORE___CGEN_BITUTILITYS_COUNT_BIT_H

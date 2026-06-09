@@ -1,15 +1,24 @@
-#pragma once
-#ifndef UTYRT_H
-#define UTYRT_H
-#include "utirt.h"
-#include <stdio.h>
-
 /**
  * @file utirt.h
  * @author ali lafi
  * @version 1.0
  * @date 2026-05-03
  */
+
+#include "utirt.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdbool.h>
+
+#ifndef METACORE___CGEN_TERNARY_UTYRT_H
+#define METACORE___CGEN_TERNARY_UTYRT_H
+
+#ifdef __cplusplus
+#ifdef METACORE___META_HPP
+namespace meta {
+namespace cgen {
+#endif // METACORE___META_HPP
+#endif
 
 typedef uint16_t utyrt;
 
@@ -20,7 +29,7 @@ typedef uint16_t utyrt;
  * This function checks if the provided value exceeds the maximum or minimum limits of the utyrt data type.
  * If it does, an error message is printed and the function returns without modifying the currentValue
  */
-void set(utyrt *currentValue, utyrt value) {
+static inline void utyrt_set(utyrt *currentValue, utyrt value) {
     if(value >= 729 || value < 0) {
         printf("Value out of range. Must be between 0 and 728.\n");
         return;
@@ -36,7 +45,7 @@ void set(utyrt *currentValue, utyrt value) {
  * This function checks if the provided position is valid (0 to 5) and if the value exceeds the maximum or minimum limits of the utirt data type.
  * If any of these conditions are violated, an error message is printed and the function returns without
  */
-void set(utyrt *currentValue, utirt value, uint8_t position) {
+static inline void utyrt_set_(utyrt *currentValue, utirt value, uint8_t position) {
     if(position > 1) {
         printf("Position out of range. Must be 0 or 1.\n");
         return;
@@ -55,7 +64,7 @@ void set(utyrt *currentValue, utirt value, uint8_t position) {
  * This function sets all bits of the currentValue variable to zero, effectively resetting its value to zero.
  * This can be useful for clearing the value of a utyrt variable before assigning a new value or for initializing it to a known state.
  */
-void reset(utyrt *currentValue) {
+static inline void utyrt_reset(utyrt *currentValue) {
     *currentValue &= 0;
 }
 
@@ -65,7 +74,7 @@ void reset(utyrt *currentValue) {
  * @param inBits Whether to return the size in bits or bytes.
  * @return The size of the utyrt variable.
  */
-uint8_t size(utyrt *value, bool inBits) {
+static inline uint8_t utyrt_size(utyrt *value, bool inBits) {
     if(inBits) return 12;
     else return 2;
 }
@@ -75,8 +84,8 @@ uint8_t size(utyrt *value, bool inBits) {
  * @param value The utyrt variable to be converted.
  * @return A pointer to the array of trits.
  */
-utirt *toTrits(utyrt *value) {
-    static utirt *trits = new utirt[6];
+static utirt *utyrt2trits(utyrt *value) {
+    utirt *trits = (uint8_t*) malloc(6 * sizeof(utirt));
     for(int i = 0; i < 6; i++) {
         trits[i] = (*value >> (i * 5)) & 0x1F;
     }
@@ -89,7 +98,7 @@ utirt *toTrits(utyrt *value) {
  * @return The resulting utyrt variable.
  * This function takes an array of trits (utirt) and combines them into a single utyrt variable by left-shifting each trit value and performing a bitwise OR operation to accumulate the final utyrt value.
  */
-utyrt fromTrits(utirt trits[6]) {
+static inline utyrt utyrt_from_trits(utirt trits[6]) {
     utyrt value = 0;
     for(int i = 0; i < 6; i++) {
         if(trits[i] >= 27 || trits[i] < 0) {
@@ -108,9 +117,9 @@ utyrt fromTrits(utirt trits[6]) {
  * @return A utyrt variable resulting from the AND operation applied to the corresponding trits of the input utyrt variables.
  * This function extracts the trits from each input utyrt variable, applies the AND operation to each pair of corresponding trits, and then combines the resulting trits back into a single utyrt variable using the fromTrits function.
  */
-utyrt And(utyrt *a, utyrt *b) {
-    utirt *tempA = toTrits(a);
-    utirt *tempB = toTrits(b);
+static utyrt utyrt_and(utyrt *a, utyrt *b) {
+    utirt *tempA = utyrt2trits(a);
+    utirt *tempB = utyrt2trits(b);
     utyrt result = 0;
     for(int i = 0; i < 6; i++) {
         result |= And(tempA[i], tempB[i]) << (i * 5);
@@ -124,9 +133,9 @@ utyrt And(utyrt *a, utyrt *b) {
  * @param b The second utyrt variable.
  * @return A utyrt variable resulting from the OR operation applied to the corresponding trits of the input utyrt variables.
  */
-utyrt Or(utyrt *a, utyrt *b) {
-    utirt *tempA = toTrits(a);
-    utirt *tempB = toTrits(b);
+static utyrt utyrt_or(utyrt *a, utyrt *b) {
+    utirt *tempA = utyrt2trits(a);
+    utirt *tempB = utyrt2trits(b);
     utyrt result = 0;
     for(int i = 0; i < 6; i++) {
         result |= (tempA[i] > tempB[i] ? tempA[i] : tempB[i]) << (i * 5);
@@ -140,9 +149,9 @@ utyrt Or(utyrt *a, utyrt *b) {
  * @param b The second utyrt variable.
  * @return A utyrt variable resulting from the XOR operation applied to the corresponding trits of the input utyrt variables.
  */
-utyrt Xor(utyrt *a, utyrt *b) {
-    utirt *tempA = toTrits(a);
-    utirt *tempB = toTrits(b);
+static utyrt utyrt_xor(utyrt *a, utyrt *b) {
+    utirt *tempA = utyrt2trits(a);
+    utirt *tempB = utyrt2trits(b);
     utyrt result = 0;
     for(int i = 0; i < 6; i++) {
         result |= ((tempA[i] > tempB[i] ? tempA[i] : tempB[i]) - (tempA[i] > tempB[i] ? tempB[i] : tempA[i])) << (i * 5);
@@ -155,8 +164,8 @@ utyrt Xor(utyrt *a, utyrt *b) {
  * @param value The utyrt variable to be negated.
  * @return A utyrt variable resulting from the NOT operation applied to the corresponding trits
  */
-utyrt Not(utyrt *value) {
-    utirt *temp = toTrits(value);
+static utyrt utyrt_not(utyrt *value) {
+    utirt *temp = utyrt2trits(value);
     utyrt result = 0;
     for(int i = 0; i < 6; i++) {
         result |= (26 - temp[i]) << (i * 5);
@@ -170,8 +179,8 @@ utyrt Not(utyrt *value) {
  * @param b The second utyrt variable.
  * @return A utyrt variable resulting from the NOR operation applied to the corresponding trits of the input utyrt variables.
  */
-utyrt Nor(utyrt *a, utyrt *b) {
-    return Not(Or(a, b));
+static inline utyrt utyrt_nor(utyrt *a, utyrt *b) {
+    return utyrt_not(Or(a, b));
 }
 
 /**
@@ -180,8 +189,8 @@ utyrt Nor(utyrt *a, utyrt *b) {
  * @param b The second utyrt variable.
  * @return A utyrt variable resulting from the NAND operation applied to the corresponding trits of the input utyrt variables.
  */
-utyrt Nand(utyrt *a, utyrt *b) {
-    return Not(And(a, b));
+static inline utyrt utyrt_nand(utyrt *a, utyrt *b) {
+    return utyrt_not(utyrt_and(a, b));
 }
 
 /**
@@ -190,8 +199,8 @@ utyrt Nand(utyrt *a, utyrt *b) {
  * @param b The second utyrt variable.
  * @return A utyrt variable resulting from the XNOR operation applied to the corresponding tr
  */
-utyrt Xnor(utyrt *a, utyrt *b) {
-    return Not(Xor(a, b));
+static inline utyrt utyrt_xnor(utyrt *a, utyrt *b) {
+    return utyrt_not(utyrt_xor(a, b));
 }
 
 /**
@@ -200,7 +209,7 @@ utyrt Xnor(utyrt *a, utyrt *b) {
  * @param positions The number of positions to shift the value to the left.
  * @return A utyrt variable resulting from the left shift operation applied to the input utyrt variable.
  */
-utyrt ShiftLeft(utyrt *value, uint8_t positions) {
+static inline utyrt utyrt_shift_left(utyrt *value, uint8_t positions) {
     if(positions >= 12) {
         printf("Shift positions out of range. Must be between 0 and 11.\n");
         return 0;
@@ -214,7 +223,7 @@ utyrt ShiftLeft(utyrt *value, uint8_t positions) {
  * @param positions The number of positions to shift the value to the right.
  * @return A utyrt variable resulting from the right shift operation applied to the input utyrt variable.
  */
-utyrt ShiftRight(utyrt *value, uint8_t positions) {
+static inline utyrt utyrt_shift_right(utyrt *value, uint8_t positions) {
     if(positions >= 12) {
         printf("Shift positions out of range. Must be between 0 and 11.\n");
         return 0;
@@ -222,4 +231,10 @@ utyrt ShiftRight(utyrt *value, uint8_t positions) {
     return *value >> (positions * 5);
 }
 
-#endif // UTYRT_H
+#ifdef __cplusplus
+#ifdef METACORE___META_HPP
+}}
+#endif // METACORE___META_HPP
+#endif
+
+#endif // METACORE___CGEN_TERNARY_UTYRT_H

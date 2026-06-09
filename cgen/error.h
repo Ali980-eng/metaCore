@@ -1,24 +1,24 @@
 #include "micros.h"
 
-#ifndef METACORE___META_CGEN_ERROR_H
-#define METACORE___META_CGEN_ERROR_H
+#ifndef METACORE___CGEN_ERROR_H
+#define METACORE___CGEN_ERROR_H
 
 #ifdef __cplusplus
-    #ifdef METACORE___META_HPP
-    namespace meta {
-    namespace cgen {
-    #endif // METACORE___META_HPP
+#ifdef METACORE___META_HPP
+namespace meta {
+namespace cgen {
+#endif // METACORE___META_HPP
 #endif
 
-cobject(cerror,
+cobject {
     cstrptr name;
     cstrptr description;
     cstrptr file;
     cstrptr time;
     size_t line;
-);
+} cerror;
 
-static inline cerror cerror_init() {
+static inline cerror errInit() {
     cerror err;
     err.name = NULL;
     err.description = NULL;
@@ -28,7 +28,7 @@ static inline cerror cerror_init() {
     return err;
 }
 
-static inline void printError(cerror err) {
+static inline void errPrint(cerror err) {
     printf("\n");
     printf("------------\n");
     printf("<<< ERROR >>>\n");
@@ -45,7 +45,7 @@ static inline void printError(cerror err) {
     printf("------------\n");
 }
 
-static inline cerror indexing_error(cstrptr description) {
+static inline cerror errIndexing(cstrptr description) {
     cerror err;
     err.name = "Indexing Error";
     err.description = description;
@@ -55,7 +55,7 @@ static inline cerror indexing_error(cstrptr description) {
     return err;
 }
 
-static inline cerror declaration_error(cstrptr description) {
+static inline cerror errDeclaration(cstrptr description) {
     cerror err;
     err.name = "Declaration Error";
     err.description = description;
@@ -65,7 +65,7 @@ static inline cerror declaration_error(cstrptr description) {
     return err;
 }
 
-static inline cerror construction_error(cstrptr description) {
+static inline cerror errConstruction(cstrptr description) {
     cerror err;
     err.name = "Construction Error";
     err.description = description;
@@ -75,7 +75,7 @@ static inline cerror construction_error(cstrptr description) {
     return err;
 }
 
-static inline cerror bad_input_error(cstrptr description) {
+static inline cerror errBadInput(cstrptr description) {
     cerror err;
     err.name = "Bad Input";
     err.description = description;
@@ -85,7 +85,7 @@ static inline cerror bad_input_error(cstrptr description) {
     return err;
 }
 
-static inline cerror undefined_behavior_error(cstrptr description) {
+static inline cerror errUndefinedBehavior(cstrptr description) {
     cerror err;
     err.name = "Undefined Behavior";
     err.description = description;
@@ -95,7 +95,7 @@ static inline cerror undefined_behavior_error(cstrptr description) {
     return err;
 }
 
-static inline cerror invalid_argument_error(cstrptr description) {
+static inline cerror errInvalidArgument(cstrptr description) {
     cerror err;
     err.name = "Invalid Argument";
     err.description = description;
@@ -105,7 +105,7 @@ static inline cerror invalid_argument_error(cstrptr description) {
     return err;
 }
 
-static inline cerror OutOfRange_error(cstrptr description) {
+static inline cerror errOutOfRange(cstrptr description) {
     cerror err;
     err.name = "Out Of Range";
     err.description = description;
@@ -115,7 +115,7 @@ static inline cerror OutOfRange_error(cstrptr description) {
     return err;
 }
 
-static inline cerror internal_problem_error(cstrptr description) {
+static inline cerror errInternalProblem(cstrptr description) {
     cerror err;
     err.name = "Internal Problem";
     err.description = description;
@@ -125,7 +125,7 @@ static inline cerror internal_problem_error(cstrptr description) {
     return err;
 }
 
-static void free_cerror(cerror* self) {
+static void errFree(cerror* self) {
     free(self->name);
     free(self->description);
     free(self->file);
@@ -133,9 +133,9 @@ static void free_cerror(cerror* self) {
 }
 
 #ifdef __cplusplus
-    #ifdef METACORE___META_HPP
-    }}
-    #endif // METACORE___META_HPP
+#ifdef METACORE___META_HPP
+}}
+#endif // METACORE___META_HPP
 #endif
 
-#endif // METACORE___META_CGEN_ERROR_H
+#endif // METACORE___CGEN_ERROR_H

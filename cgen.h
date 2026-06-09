@@ -22,17 +22,18 @@
 #include "cgen/error.h"
 #include "cgen/bitUtilitys.h"
 #include "cgen/micros.h"
+#include "cgen/ternary.h"
 #include <windows.h>
 
 /** @brief Main system structure for environment management */
-cobject(clite_system64,
+cobject {
     CTEST* csys_test; // Array of tests
     size_t csys_tnum; // Number of tests
     cwarning* csys_w; // Array of warnings
     size_t csys_wnum; // Number of warnings
     cerror csys_e;    // Current error
     bool retVal;      // Return value
-);
+} clite_system64;
 
 /** @brief Default warning message */
 static const char wm_msg[] = "meta clite ecosystem warning";
@@ -52,7 +53,7 @@ static inline clite_system64 clite_system64_init() {
     system.csys_tnum = 0;
     system.csys_w = NULL;
     system.csys_wnum = 0;
-    system.csys_e = cerror_init();
+    system.csys_e = errInit();
     system.retVal = false;
     return system;
 }
@@ -74,7 +75,7 @@ static inline clite_system64 add(clite_system64 self, CTEST ct) {
     }
     
     if (self.csys_test == NULL) {
-        self.csys_e = cerror_init();
+        self.csys_e = errInit();
         self.csys_e.name = (char*)"Memory Allocation Error";
         self.csys_e.description = (char*)"Failed to allocate memory for test";
         self.csys_e.file = __FILE__;
@@ -145,7 +146,7 @@ static inline clite_system64 catch_warning(clite_system64 self, cwarning cwar) {
     }
     
     if (self.csys_w == NULL) {
-        self.csys_e = cerror_init();
+        self.csys_e = errInit();
         self.csys_e.name = (char*)"Memory Allocation Error";
         self.csys_e.description = (char*)"Failed to allocate memory for warning";
         return self;

@@ -33,6 +33,8 @@
     #include <string>
 #endif
 
+#include "cgen/micros/structure.h"
+
 #pragma once
 #ifndef METACORE___LITE_EXCEPTION_HPP
 #define METACORE___LITE_EXCEPTION_HPP
@@ -54,14 +56,14 @@ namespace lite {
     class exception : public std::exception
     {
     protected:
-        std::string message_;  ///< Error message describing the exception
+        str message_;  ///< Error message describing the exception
 
     public:
         /**
          * @brief Constructs a exception with an optional message.
          * @param message The error message (default: empty string)
          */
-        explicit exception(const std::string& message = "")
+        explicit exception(const str& message = "")
             : message_(message) {}
 
         /**
@@ -82,7 +84,7 @@ namespace lite {
          * @brief Gets the error message as a string object.
          * @return Reference to the error message string
          */
-        const std::string& get_message() const noexcept
+        const str& get_message() const noexcept
         {
             return message_;
         }
@@ -102,7 +104,7 @@ namespace lite {
          * @brief Constructs an internal_exception with an optional message.
          * @param message The error message (default: "Internal library error")
          */
-        explicit internal_exception(const std::string& message = "Internal library error")
+        explicit internal_exception(const str& message = "Internal library error")
             : exception(message) {}
 
         /**
@@ -132,7 +134,7 @@ namespace lite {
          * @param index The problematic index (default: 0)
          * @param valid_size The maximum valid size (default: 0)
          */
-        explicit OutOfRange(const std::string& message = "Out of range",
+        explicit OutOfRange(const str& message = "Out of range",
                           size_t index = 0, size_t valid_size = 0)
             : exception(message), index_(index), valid_size_(valid_size) {}
 
@@ -168,7 +170,7 @@ namespace lite {
          * @brief Constructs an undefined_behavior exception with an optional message.
          * @param message The error message (default: "Undefined behavior detected")
          */
-        explicit undefined_behavior(const std::string& message = "Undefined behavior detected")
+        explicit undefined_behavior(const str& message = "Undefined behavior detected")
             : exception(message) {}
 
         /**
@@ -196,7 +198,7 @@ namespace lite {
          * @param message The error message (default: "Invalid index")
          * @param invalid_index The problematic index value (default: -1)
          */
-        explicit wrong_indexing(const std::string& message = "Invalid index",
+        explicit wrong_indexing(const str& message = "Invalid index",
                                int invalid_index = -1)
             : exception(message), invalid_index_(invalid_index) {}
 
@@ -226,7 +228,7 @@ namespace lite {
          * @brief Constructs a wrong_declaration exception with an optional message.
          * @param message The error message (default: "Incorrect declaration")
          */
-        explicit wrong_declaration(const std::string& message = "Incorrect declaration")
+        explicit wrong_declaration(const str& message = "Incorrect declaration")
             : exception(message) {}
 
         /**
@@ -249,7 +251,7 @@ namespace lite {
          * @brief Constructs a wrong_construction exception with an optional message.
          * @param message The error message (default: "Invalid construction")
          */
-        explicit wrong_construction(const std::string& message = "Invalid construction")
+        explicit wrong_construction(const str& message = "Invalid construction")
             : exception(message) {}
 
         /**
@@ -268,7 +270,7 @@ namespace lite {
     class wrong_input : public exception
     {
     private:
-        std::string input_value_; ///< The problematic input value
+        str input_value_; ///< The problematic input value
 
     public:
         /**
@@ -276,8 +278,8 @@ namespace lite {
          * @param message The error message (default: "Invalid input")
          * @param input_value The problematic input (default: empty string)
          */
-        explicit wrong_input(const std::string& message = "Invalid input",
-                            const std::string& input_value = "")
+        explicit wrong_input(const str& message = "Invalid input",
+                            const str& input_value = "")
             : exception(message), input_value_(input_value) {}
 
         /**
@@ -289,7 +291,7 @@ namespace lite {
          * @brief Gets the invalid input value that caused the exception.
          * @return Reference to the problematic input string
          */
-        const std::string& get_input_value() const noexcept
+        const str& get_input_value() const noexcept
         {
             return input_value_;
         }
@@ -351,7 +353,7 @@ namespace lite {
          * @param input The invalid input value
          * @return wrong_input exception object with formatted message
          */
-        inline wrong_input invalid_input(const std::string& input) noexcept
+        inline wrong_input invalid_input(const str& input) noexcept
         {
             return wrong_input("Invalid input: " + input, input);
         }

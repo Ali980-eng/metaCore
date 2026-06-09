@@ -20,19 +20,19 @@
 #include <math.h>
 #include <stdbool.h>
 
-#ifndef METACORE___META_CGEN_UNITTEST_H
-#define METACORE___META_CGEN_UNITTEST_H
+#ifndef METACORE___CGEN_UNITTEST_H
+#define METACORE___CGEN_UNITTEST_H
 
 #ifdef __cplusplus
-    #ifdef METACORE___META_HPP
-    namespace meta {
-    namespace cgen {
-    #endif // METACORE___META_HPP
+#ifdef METACORE___META_HPP
+namespace meta {
+namespace cgen {
+#endif // METACORE___META_HPP
 #endif
 
 size_t ctestCounter = 0;
 
-typedef struct {
+cobject {
     char* name;
     char* description;
     size_t num;
@@ -250,8 +250,6 @@ static bool string_test(const char *real, const char *expected, bool details, un
     return true;
 }
 
-#ifdef METACORE___CLITE_MICROS_H
-
 static inline CTEST ctest_bool(bool real, bool expected, cstrptr name, cstrptr description)
 {
     CTEST newVal;
@@ -323,8 +321,6 @@ static CTEST string_ctest(const cstrptr real, const cstrptr expected, cstrptr na
     return creatNew(newVal, name, description, true);
 }
 
-#endif // METACORE___CLITE_MICROS_H
-
 #ifdef OPENUDT___CUDT_CSTRING_H
 static inline bool string_test(cstring real, cstring expected, bool details, unsigned int seplen, char sepch)
 {
@@ -333,8 +329,7 @@ static inline bool string_test(cstring real, cstring expected, bool details, uns
 }
 #endif // OPENUDT___CUDT_CSTRING_H
 
-typedef struct 
-{
+cobject {
     bool details;
     unsigned int seplen;
     char sepch;
@@ -498,9 +493,9 @@ static inline void print_test_summary(test_stream testResults) {
 }
 
 #ifdef __cplusplus
-    #ifdef METACORE___META_HPP
-    }}
-    #endif // METACORE___META_HPP
+#ifdef METACORE___META_HPP
+}}
+#endif // METACORE___META_HPP
 #endif
 
-#endif // METACORE___META_CGEN_UNITTEST_H
+#endif // METACORE___CGEN_UNITTEST_H

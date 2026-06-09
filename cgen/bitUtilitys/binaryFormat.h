@@ -40,10 +40,10 @@
 #define METACORE___CGEN_BITUTILITYS_BINARYFORMAT_H
 
 #ifdef __cplusplus
-    #ifdef METACORE___META_HPP
-    namespace meta {
-    namespace cgen {
-    #endif // METACORE___META_HPP
+#ifdef METACORE___META_HPP
+namespace meta {
+namespace cgen {
+#endif // METACORE___META_HPP
 #endif
 
 /**

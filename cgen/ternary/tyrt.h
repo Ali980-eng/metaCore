@@ -1,15 +1,24 @@
-#pragma once
-#ifndef TYRT_H
-#define TYRT_H
-#include "tirt.h"
-#include <stdio.h>
-
 /**
  * @file tyrt.h
  * @author ali lafi
  * @version 1.0
  * @date 2026-05-03
  */
+
+#include "tirt.h"
+#include <stdio.h>
+#include <stdint.h>
+#include <stdbool.h>
+
+#ifndef METACORE___CGEN_TERNARY_TYRT_H
+#define METACORE___CGEN_TERNARY_TYRT_H
+
+#ifdef __cplusplus
+#ifdef METACORE___META_HPP
+namespace meta {
+namespace cgen {
+#endif // METACORE___META_HPP
+#endif
 
 typedef int16_t tyrt;
 
@@ -21,7 +30,7 @@ typedef int16_t tyrt;
  * If it does, an error message is printed and the function returns without modifying the currentValue.
  * Otherwise, currentValue is updated with the new value.
  */
-void set(tyrt *currentValue, tyrt value) {
+static inline void tyrt_set(tyrt *currentValue, tyrt value) {
     if(value > MAX_VALUE_TYRT || value < MIN_VALUE_TYRT) {
         printf("Overflow/Underflow Error: the value exceeded the limits of the data type.");
         return;
@@ -38,7 +47,7 @@ void set(tyrt *currentValue, tyrt value) {
  * If any of these conditions are violated, an error message is printed and the function returns without modifying the currentValue.
  * Otherwise, the specified value is set at the given position in the currentValue variable.
  */
-void set(tyrt *currentValue, tirt value, uint8_t position) {
+static inline void tyrt_set_tirt(tyrt *currentValue, tirt value, uint8_t position) {
     if(position > 1) {
         printf("Position Error: the position exceeded the limits of the data type.");
         return;
@@ -59,7 +68,7 @@ void set(tyrt *currentValue, tirt value, uint8_t position) {
  * If it does, an error message is printed and the function returns without modifying the currentValue.
  * Otherwise, currentValue is updated with the new value.
  */
-void set(tyrt *currentValue, int16_t value) {
+static inline void tyrt_set_16(tyrt *currentValue, int16_t value) {
     if(value > MAX_VALUE_TYRT || value < MIN_VALUE_TYRT) {
         printf("Overflow/Underflow Error: the value exceeded the limits of the data type.");
         return;
@@ -73,7 +82,7 @@ void set(tyrt *currentValue, int16_t value) {
  * @param inBits A boolean flag indicating whether to return the size in bits (true) or bytes (false).
  * @return size of the tyrt data type, which is 12 bits (1.5 bytes) when inBits is true, and 2 bytes when inBits is false.
  */
-uint8_t size(tyrt *value, bool inBits) {
+static inline uint8_t tyrt_size(tyrt *value, bool inBits) {
     if(inBits) return 12;
     else return 2;
 }
@@ -87,8 +96,8 @@ uint8_t size(tyrt *value, bool inBits) {
  * This function extracts the trits from the input tyrt value by right-shifting the value and masking it with 0xFF to obtain the individual trit values.
  * The resulting array of tirt values can be used for further logical operations or manipulations as needed.
  */
-tirt *toTrits(tyrt value) {
-    static tirt *trits = new tirt[6];
+static tirt *tyrt2trits(tyrt value) {
+    tirt *trits = (int8_t*) malloc(6 * sizeof(tirt));
     for(int i = 0; i < 2; i++) {
         trits[i] = (value >> (i * 8)) & 0xFF;
     }
@@ -104,7 +113,7 @@ tirt *toTrits(tyrt value) {
  * The function combines the trits by left-shifting each trit value and performing a bitwise OR operation to accumulate the final tyrt value.
  * This allows for the reconstruction of the original tyrt value from its trit representation, enabling further logical operations or manipulations as needed.
  */
-tyrt fromTrits(tirt *trits) {
+static inline tyrt tyrt_from_trits(tirt *trits) {
     tyrt value = 0;
     for(int i = 0; i < 2; i++) {
         value |= (trits[i] & 0xFF) << (i * 8);
@@ -118,16 +127,18 @@ tyrt fromTrits(tirt *trits) {
  * @param b The second tyrt value.
  * @return A tyrt value resulting from the AND operation applied to the corresponding trits of the input tyrt values.
  */
-tyrt And(tyrt a, tyrt b) {
-    tirt *tritsA = new tirt[6];
-    tirt *tritsB = new tirt[6];
-    tirt *resultTrits = new tirt[6];
+static tyrt tyrt_and(tyrt a, tyrt b) {
+    tirt *tritsA = (int8_t*) malloc(6 * sizeof(tirt));
+    tirt *tritsB = (int8_t*) malloc(6 * sizeof(tirt));
+    tirt *resultTrits = (int8_t*) malloc(6 * sizeof(tirt));
     for(int i = 0; i < 2; i++) {
         tritsA[i] = (a >> (i * 8)) & 0xFF;
         tritsB[i] = (b >> (i * 8)) & 0xFF;
-        resultTrits[i] = And(tritsA[i], tritsB[i]);
+        resultTrits[i] = tirt_and(tritsA[i], tritsB[i]);
     }
-    return fromTrits(resultTrits);
+    free(tritsA);
+    free(tritsB);
+    return tyrt_from_trits(resultTrits);
 }
 
 /**
@@ -138,16 +149,18 @@ tyrt And(tyrt a, tyrt b) {
  * The function extracts the trits from each input tyrt value, applies the OR operation to each pair of corresponding trits, and then combines the resulting trits back into a single tyrt value using the fromTrits function.
  * This allows for the logical OR operation to be performed on the individual trits of the input tyrt values, yielding a new tyrt value that represents the result of the OR operation.
  */
-tyrt Or(tyrt a, tyrt b) {
-    tirt *tritsA = new tirt[6];
-    tirt *tritsB = new tirt[6];
-    tirt *resultTrits = new tirt[6];
+static tyrt tyrt_or(tyrt a, tyrt b) {
+    tirt *tritsA = (int8_t*) malloc(6 * sizeof(tirt));
+    tirt *tritsB = (int8_t*) malloc(6 * sizeof(tirt));
+    tirt *resultTrits = (int8_t*) malloc(6 * sizeof(tirt));
     for(int i = 0; i < 2; i++) {
         tritsA[i] = (a >> (i * 8)) & 0xFF;
         tritsB[i] = (b >> (i * 8)) & 0xFF;
-        resultTrits[i] = Or(tritsA[i], tritsB[i]);
+        resultTrits[i] = tirt_or(tritsA[i], tritsB[i]);
     }
-    return fromTrits(resultTrits);
+    free(tritsA);
+    free(tritsB);
+    return tyrt_from_trits(resultTrits);
 }
 
 /**
@@ -158,16 +171,18 @@ tyrt Or(tyrt a, tyrt b) {
  * The function extracts the trits from each input tyrt value, applies the XOR operation to each pair of corresponding trits, and then combines the resulting trits back into a single tyrt value using the fromTrits function.
  * This allows for the logical XOR operation to be performed on the individual trits of the input tyrt values, yielding a new tyrt value that represents the result of the XOR operation.
  */
-tyrt Xor(tyrt a, tyrt b) {
-    tirt *tritsA = new tirt[6];
-    tirt *tritsB = new tirt[6];
-    tirt *resultTrits = new tirt[6];
+static tyrt tyrt_xor(tyrt a, tyrt b) {
+    tirt *tritsA = (int8_t*) malloc(6 * sizeof(tirt));
+    tirt *tritsB = (int8_t*) malloc(6 * sizeof(tirt));
+    tirt *resultTrits = (int8_t*) malloc(6 * sizeof(tirt));
     for(int i = 0; i < 2; i++) {
         tritsA[i] = (a >> (i * 8)) & 0xFF;
         tritsB[i] = (b >> (i * 8)) & 0xFF;
-        resultTrits[i] = Xor(tritsA[i], tritsB[i]);
+        resultTrits[i] = tirt_xor(tritsA[i], tritsB[i]);
     }
-    return fromTrits(resultTrits);
+    free(tritsA);
+    free(tritsB);
+    return tyrt_from_trits(resultTrits);
 }
 
 /**
@@ -177,14 +192,15 @@ tyrt Xor(tyrt a, tyrt b) {
  * The function extracts the trits from the input tyrt value, applies the NOT operation to each trit, and then combines the resulting trits back into a single tyrt value using the fromTrits function.
  * This allows for the logical NOT operation to be performed on the individual trits of the input tyrt value, yielding a new tyrt value that represents the result of the NOT operation.
  */
-tyrt Not(tyrt a) {
-    tirt *tritsA = new tirt[6];
-    tirt *resultTrits = new tirt[6];
+static tyrt tyrt_not(tyrt a) {
+    tirt *tritsA = (int8_t*) malloc(6 * sizeof(tirt));
+    tirt *resultTrits = (int8_t*) malloc(6 * sizeof(tirt));
     for(int i = 0; i < 2; i++) {
         tritsA[i] = (a >> (i * 8)) & 0xFF;
-        resultTrits[i] = Not(tritsA[i]);
+        resultTrits[i] = tirt_not(tritsA[i]);
     }
-    return fromTrits(resultTrits);
+    free(tritsA);
+    return tyrt_from_trits(resultTrits);
 }
 
 /**
@@ -193,8 +209,8 @@ tyrt Not(tyrt a) {
  * @param b The second tyrt value.
  * @return A tyrt value resulting from the NOR operation applied to the corresponding trits of the input tyrt values.
  */
-tyrt Nor(tyrt a, tyrt b) {
-    return Not(Or(a, b));
+static tyrt tyrt_nor(tyrt a, tyrt b) {
+    return tyrt_not(or(a, b));
 }
 
 /**
@@ -203,8 +219,8 @@ tyrt Nor(tyrt a, tyrt b) {
  * @param b The second tyrt value.
  * @return A tyrt value resulting from the NAND operation applied to the corresponding trits of the input tyrt values.
  */
-tyrt Nand(tyrt a, tyrt b) {
-    return Not(And(a, b));
+static tyrt tyrt_nand(tyrt a, tyrt b) {
+    return tyrt_not(tyrt_and(a, b));
 }
 
 /**
@@ -213,8 +229,14 @@ tyrt Nand(tyrt a, tyrt b) {
  * @param b The second tyrt value.
  * @return A tyrt value resulting from the XNOR operation applied to the corresponding trits of the input tyrt values.
  */
-tyrt Xnor(tyrt a, tyrt b) {
-    return Not(Xor(a, b));
+static tyrt tyrt_xnor(tyrt a, tyrt b) {
+    return tyrt_not(xor(a, b));
 }
 
-#endif // TYRT_H
+#ifdef __cplusplus
+    #ifdef METACORE___META_HPP
+    }}
+    #endif // METACORE___META_HPP
+#endif
+
+#endif // METACORE___CGEN_TERNARY_TYRT_H

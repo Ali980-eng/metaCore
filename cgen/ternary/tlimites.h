@@ -1,14 +1,37 @@
-#pragma once
-#ifndef TLIMITES_H
-#define TLIMITES_H
-#include <stdint.h>
-
 /**
  * @file tlimites.h
  * @author ali lafi
  * @version 1.0
  * @date 2026-05-03
  */
+
+#include <stdint.h>
+
+#ifndef METACORE___CGEN_TERNARY_TLIMITES_H
+#define METACORE___CGEN_TERNARY_TLIMITES_H
+
+#ifdef __cplusplus
+#ifdef METACORE___META_HPP
+namespace meta {
+namespace cgen {
+#endif // METACORE___META_HPP
+#endif
+
+const uint8_t nullValue = 0;
+// for Balanced Ternary Logic
+const uint8_t true_b = 2;
+const uint8_t unknown_b = 1;
+const uint8_t false_b = -1;
+// for Unbalanced Ternary Logic
+const uint8_t true_u = 3;
+const uint8_t unknown_u = 2;
+const uint8_t false_u = 1;
+
+#ifdef __cplusplus
+#ifdef METACORE___META_HPP
+}}
+#endif // METACORE___META_HPP
+#endif
 
 #define MAX_VALUE_TIRT 1
 #define MIN_VALUE_TIRT -1
@@ -23,15 +46,4 @@
 #define MAX_VALUE_B27 13
 #define MIN_VALUE_B27 -13
 
-
-const uint8_t nullValue = 0;
-// for Balanced Ternary Logic
-const uint8_t true_b = 2;
-const uint8_t unknown_b = 1;
-const uint8_t false_b = -1;
-// for Unbalanced Ternary Logic
-const uint8_t true_u = 3;
-const uint8_t unknown_u = 2;
-const uint8_t false_u = 1;
-
-#endif // TLIMITES_H
+#endif // METACORE___CGEN_TERNARY_TLIMITES_H

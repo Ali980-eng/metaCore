@@ -17,8 +17,7 @@
 namespace meta {
 #endif // METACORE___META_HPP
 #ifdef METACORE___ADVA_HPP
-namespace adva
-{
+namespace adva {
 #endif // METACORE___ADVA_HPP
 
     using std::unordered_map;

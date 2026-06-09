@@ -42,7 +42,8 @@
     #include <stdexcept>
 #endif
 
-#include "cgen/micros.h"
+#include "cgen/micros/io.h"
+#include "cgen/micros/structure.h"
 
 #pragma once
 #ifndef METACORE___LITE_IO_HPP
@@ -62,11 +63,11 @@ namespace lite {
          * @brief Prints a number of newline characters.
          * @param num Number of new lines to print (default = 2).
          */
-        void NewLines(short num = 1)
+        void NewLines(size_t num = 1)
         {
             if (SHRT_MAX <= num)
                 throw std::out_of_range("num is bigger than SHRT_MAX");
-            for (short i = 0; i < num; i++)
+            for (size_t i = 0; i < num; i++)
                 std::cout << nl;
         }
 
@@ -75,11 +76,11 @@ namespace lite {
          * @param length The number of characters in the line.
          * @param ch The character to use (must be one of: ~, -, #, *, =).
          */
-        void separator(short length, char ch = '-')
+        void separator(size_t length, char ch = '-')
         {
             if (ch == '~' || ch == '-' || ch == '#' || ch == '*' || ch == '=')
             {
-                for (int i = length; i >= 0; i--)
+                for (size_t i = length; i >= 0; i--)
                     std::cout << ch;
                 std::cout << nl;
             }
@@ -94,9 +95,9 @@ namespace lite {
          * @param ch The character to use for the separator lines (must be one of: ~, -, #, *, =).
          * @details This function prints a specified number of separator lines, each consisting of a specific character repeated a certain number of times. The character used for the separator lines must be one of the following: ~, -, #, *, =. If an invalid character is provided, an exception is thrown.
          */
-        void separators(short numsep, short length, char ch)
+        void separators(size_t numsep, size_t length, char ch)
         {
-            for (int i = 0; i < numsep; i++)
+            for (size_t i = 0; i < numsep; i++)
                 separator(length, ch);
         }
 
@@ -159,7 +160,7 @@ namespace lite {
          * @return T The user input.
          */
         template <typename T>
-        T input(const std::string &output)
+        T input(const str &output)
         {
             T var;
             std::cout << output << std::endl;
@@ -172,14 +173,14 @@ namespace lite {
          * @tparam T Type of the input variable.
          * @param output The prompt message to display.
          * @param size The number of elements in the vector.
-         * @return std::vector<T> The user input vector.
+         * @return vec<T> The user input vector.
          */
         template <typename T>
-        std::vector<T> input_vector(const std::string &output, size_t size)
+        vec<T> input_vector(const str &output, size_t size)
         {
             if (size <= 0)
                 throw std::invalid_argument("Size must be greater than zero");
-            std::vector<T> vec;
+            vec<T> vec;
             T var;
             std::cout << output << std::endl;
             for (size_t i = 0; i < size; i++)
@@ -200,16 +201,16 @@ namespace lite {
          * @throws std::invalid_argument if rows or cols is less than or equal to zero
          */
         template <typename T>
-        std::vector<std::vector<T>> input_vector_2d(const std::string &output, size_t rows, size_t cols)
+        vec<vec<T>> input_vector_2d(const str &output, size_t rows, size_t cols)
         {
             if (rows <= 0 || cols <= 0)
                 throw std::invalid_argument("Rows and columns must be greater than zero");
-            std::vector<std::vector<T>> vec2d;
+            vec<vec<T>> vec2d;
             T var;
             std::cout << output << std::endl;
             for (size_t i = 0; i < rows; i++)
             {
-                std::vector<T> row;
+                vec<T> row;
                 for (size_t j = 0; j < cols; j++)
                 {
                     std::cin >> var;
@@ -231,19 +232,19 @@ namespace lite {
          * @throws std::invalid_argument if any dimension is less than or equal to zero.
          */
         template <typename T>
-        std::vector<std::vector<std::vector<T>>> input_vector_3d(const std::string &output, size_t x, size_t y, size_t z)
+        vec<vec<vec<T>>> input_vector_3d(const str &output, size_t x, size_t y, size_t z)
         {
             if (x <= 0 || y <= 0 || z <= 0)
                 throw std::invalid_argument("Dimensions must be greater than zero");
-            std::vector<std::vector<std::vector<T>>> vec3d;
+            vec<vec<vec<T>>> vec3d;
             T var;
             std::cout << output << std::endl;
             for (size_t i = 0; i < x; i++)
             {
-                std::vector<std::vector<T>> layer;
+                vec<vec<T>> layer;
                 for (size_t j = 0; j < y; j++)
                 {
-                    std::vector<T> row;
+                    vec<T> row;
                     for (size_t k = 0; k < z; k++)
                     {
                         std::cin >> var;
@@ -292,8 +293,8 @@ namespace lite {
             << nl;
         }
 
-        void print_test(const std::string& name,
-            const std::string& description,
+        void print_test(const str& name,
+            const str& description,
             bool result, size_t testNum,
             size_t whiteSpace = 2,
             size_t seplen = 25,
@@ -319,7 +320,7 @@ namespace lite {
          * @param vec The vector to print.
          */
         template <typename T>
-        void print(const std::vector<T> &vec)
+        void print(const vec<T> &_vec)
         {
             if (vec.empty())
                 throw std::invalid_argument("The vector is empty");
@@ -340,7 +341,7 @@ namespace lite {
         }
 
         /**
-         * @brief Prints the contents of a std::vector to the standard output in a formatted manner.
+         * @brief Prints the contents of a vec to the standard output in a formatted manner.
          *
          * This function outputs the elements of the given vector enclosed in square brackets and separated by commas.
          * If the vector is empty, it prints "[]".
@@ -350,7 +351,7 @@ namespace lite {
          * @note The function is marked noexcept and does not throw exceptions.
          */
         template <typename T>
-        inline void println(const std::vector<T> &output) noexcept
+        inline void println(const vec<T> &output) noexcept
         {
             if (output.empty())
             {
@@ -370,7 +371,7 @@ namespace lite {
         /**
          * @brief Prints a 2D vector to the standard output in a formatted manner.
          *
-         * This function outputs the contents of a two-dimensional std::vector to std::cout,
+         * This function outputs the contents of a two-dimensional vec to std::cout,
          * formatting it as nested lists (e.g., [[1, 2], [3, 4]]). If the input vector is empty,
          * it prints "[]".
          *
@@ -378,7 +379,7 @@ namespace lite {
          * @param output The 2D vector to be printed.
          */
         template <typename T>
-        inline void print(const std::vector<std::vector<T>> &output) noexcept
+        inline void print(const vec<vec<T>> &output) noexcept
         {
             if (output.empty())
             {
@@ -405,7 +406,7 @@ namespace lite {
         /**
          * @brief Prints a 2D vector to the standard output in a formatted manner.
          *
-         * This function outputs the contents of a two-dimensional std::vector to std::cout,
+         * This function outputs the contents of a two-dimensional vec to std::cout,
          * formatting it as nested lists (e.g., [[1, 2], [3, 4]]). If the input vector is empty,
          * it prints "[]".
          *
@@ -413,7 +414,7 @@ namespace lite {
          * @param output The 2D vector to be printed.
          */
         template <typename T>
-        inline void println(const std::vector<std::vector<T>> &output) noexcept
+        inline void println(const vec<vec<T>> &output) noexcept
         {
             if (output.empty())
             {
@@ -439,20 +440,20 @@ namespace lite {
 
         /**
          * @brief Prints a 3D vector to the standard output in a formatted manner.
-         * This function outputs the contents of a three-dimensional std::vector to std::cout,
+         * This function outputs the contents of a three-dimensional vec to std::cout,
          * formatting it as nested lists (e.g., [[[1, 2], [3, 4]], [[5, 6], [7, 8]]]). If the input vector is empty,
          * it prints "[]".
          * @param output The 3D vector to be printed.
          * @tparam T The type of the elements stored in the innermost vectors.
          * @note The function is marked noexcept and does not throw exceptions.
          * @example
-         * std::vector<std::vector<std::vector<int>>> vec3d = {
+         * vec<vec<vec<int>>> vec3d = {
          *     {{1, 2}, {3, 4}},
          *     {{5, 6}, {7, 8}}
          * };
          */
         template <typename T>
-        inline void print(const std::vector<std::vector<std::vector<T>>> &output) noexcept
+        inline void print(const vec<vec<vec<T>>> &output) noexcept
         {
             if (output.empty())
             {
@@ -485,20 +486,20 @@ namespace lite {
 
         /**
          * @brief Prints a 3D vector to the standard output in a formatted manner.
-         * This function outputs the contents of a three-dimensional std::vector to std::cout,
+         * This function outputs the contents of a three-dimensional vec to std::cout,
          * formatting it as nested lists (e.g., [[[1, 2], [3, 4]], [[5, 6], [7, 8]]]). If the input vector is empty,\
          * it prints "[]".
          * @param output The 3D vector to be printed.
          * @tparam T The type of the elements stored in the innermost vectors.
          * @note The function is marked noexcept and does not throw exceptions.
          * @example
-         * std::vector<std::vector<std::vector<int>>> vec3d = {
+         * vec<vec<vec<int>>> vec3d = {
          *     {{1, 2}, {3, 4}},
          *     {{5, 6}, {7, 8}}
          * };
          */
         template <typename T>
-        inline void println(const std::vector<std::vector<std::vector<T>>> &output) noexcept
+        inline void println(const vec<vec<vec<T>>> &output) noexcept
         {
             if (output.empty())
             {
@@ -536,7 +537,7 @@ namespace lite {
          * @param vec The vector to test and print.
          */
         template <typename T>
-        void print_test(long testNum, const std::vector<T> &vec)
+        void print_test(long testNum, const vec<T> &_vec)
         {
             if (vec.empty())
                 throw std::invalid_argument("The vector is empty");
@@ -551,13 +552,13 @@ namespace lite {
          * @param vec The 2D vector to test and print.
          * @note This function throws an exception if the input vector is empty.
          * @example
-         * std::vector<std::vector<int>> vec2d = {
+         * vec<vec<int>> vec2d = {
          *    {1, 2},
          *    {3, 4}
          * };
          */
         template <typename T>
-        void print_test(long testNum, const std::vector<std::vector<T>> &vec)
+        void print_test(long testNum, const vec<vec<T>> &_vec)
         {
             if (vec.empty())
                 throw std::invalid_argument("The vector is empty");
@@ -572,13 +573,13 @@ namespace lite {
          * @param vec The 3D vector to test and print.
          * @note This function throws an exception if the input vector is empty.
          * @example
-         * std::vector<std::vector<std::vector<int>>> vec3d = {
+         * vec<vec<vec<int>>> vec3d = {
          *    {{1, 2}, {3, 4}},
          *    {{5, 6}, {7, 8}}
          * };
          */
         template <typename T>
-        void print_test(long testNum, const std::vector<std::vector<std::vector<T>>> &vec)
+        void print_test(long testNum, const vec<vec<vec<T>>> &_vec)
         {
             if (vec.empty())
                 throw std::invalid_argument("The vector is empty");
@@ -592,12 +593,12 @@ namespace lite {
          * @param str The string to print.
          * @param index Starting index (default = 0). If out of range, starts from 0.
          */
-        void print_char_str(const std::string &str, size_t index) noexcept
+        void print_char_str(const str &_str, size_t index) noexcept
         {
-            if (index < 0 || index >= str.length())
+            if (index < 0 || index >= _str.length())
                 index = 0;
-            for (size_t i = index; i < str.length(); i++)
-                std::cout << str[i] << ' ';
+            for (size_t i = index; i < _str.length(); i++)
+                std::cout << _str[i] << ' ';
             std::cout << nl;
         }
 
@@ -605,7 +606,7 @@ namespace lite {
          * @brief Prints a decorated category title.
          * @param category The category title to print.
          */
-        void print_category(const std::string &category)
+        void print_category(const str &category)
         {
             separator(2 * category.length());
             Tabs(category.length() / 10);
@@ -640,7 +641,7 @@ namespace lite {
          *     Settings
          * ====================
          */
-        void print_category(const std::string &category_s, int tabs_num, int seplen, char sepch)
+        void print_category(const str &category_s, int tabs_num, int seplen, char sepch)
         {
             separator(seplen, sepch);
             Tabs(tabs_num);

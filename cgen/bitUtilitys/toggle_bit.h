@@ -32,10 +32,10 @@
 #define METACORE___CGEN_BITUTILITYS_TOGGLE_BIT_H
 
 #ifdef __cplusplus
-    #ifdef METACORE___META_HPP
-    namespace meta {
-    namespace cgen {
-    #endif // METACORE___META_HPP
+#ifdef METACORE___META_HPP
+namespace meta {
+namespace cgen {
+#endif // METACORE___META_HPP
 #endif
 
 /// @brief Toggle (flip) bit at specified position in 8-bit number
@@ -167,9 +167,9 @@ static inline long toggle_long_bit(long num, uint8_t position) {
 }
 
 #ifdef __cplusplus
-    #ifdef METACORE___META_HPP
+#ifdef METACORE___META_HPP
 }}
-    #endif // METACORE___META_HPP
+#endif // METACORE___META_HPP
 #endif
 
 #endif // METACORE___CGEN_BITUTILITYS_TOGGLE_BIT_H

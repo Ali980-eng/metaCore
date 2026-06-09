@@ -41,6 +41,7 @@
 #endif
 
 #include "benchmark.hpp"
+#include "cgen/micros/structure.h"
 
 #pragma once
 #ifndef METACORE___LITE_ERROR_HPP
@@ -62,8 +63,8 @@ namespace lite {
      */
     class error {
         private:
-        std::string name;
-        std::string description;
+        str name;
+        str description;
         std::source_location errLocation;
         float event;
 
@@ -82,7 +83,7 @@ namespace lite {
          * @brief Constructor that creates an error with a name.
          * @param name The name/type of the error.
          */
-        error(const std::string& name) noexcept {
+        error(const str& name) noexcept {
             this->name = name;
             errLocation = std::source_location::current();
             event = errTimer.get_duration();
@@ -93,7 +94,7 @@ namespace lite {
          * @param name The name/type of the error.
          * @param description A detailed description of the error.
          */
-        error(const std::string& name, const std::string& description) noexcept {
+        error(const str& name, const str& description) noexcept {
             this->name = name;
             this->description = description;
             errLocation = std::source_location::current();
@@ -124,7 +125,7 @@ namespace lite {
 
         constexpr float get_time() const noexcept { return event; }
 
-        std::string get_file() const noexcept { return errLocation.file_name(); }
+        str get_file() const noexcept { return errLocation.file_name(); }
 
         constexpr size_t get_line() noexcept { return (size_t) errLocation.line(); }
 
@@ -134,25 +135,25 @@ namespace lite {
          * @brief Generates a formatted string representation of the error.
          * @return A formatted string containing error name, description, and time.
          */
-        std::string printingFormat() noexcept {
-            std::string result;
+        str printingFormat() noexcept {
+            str result;
             if(!name.empty()) { 
-                result += std::string("error name: " + 
+                result += str("error name: " + 
                     name + "\n");
             }
             else {
                 result += "error name: Unknown \n";
             }
             if(!description.empty()) {
-                result += std::string("error description: " + 
+                result += str("error description: " + 
                     description + "\n");
             }
             else {
                 result += "error description: nothing \n";
             }
-            result += std::string("Error File: " + get_file());
-            result += std::string("Error Line: " + std::to_string(get_line()));
-            result += std::string("Error Time: " + std::to_string(event) + " ms.\n");
+            result += str("Error File: " + get_file());
+            result += str("Error Line: " + std::to_string(get_line()));
+            result += str("Error Time: " + std::to_string(event) + " ms.\n");
             return result;
         }
 
@@ -182,18 +183,18 @@ namespace lite {
      */
     std::ostream& operator<<(std::ostream& os, const error& e) noexcept {
         if(!e.name.empty()) { 
-            os << std::string("error name: " + e.name + "\n");
+            os << str("error name: " + e.name + "\n");
         }
         else {
             os << "error name: Unknown \n";
         }
         if(!e.description.empty()) {
-            os << std::string("error description: " + e.description + "\n");
+            os << str("error description: " + e.description + "\n");
         }
         else {
             os << "error description: nothing \n";
         }
-        os << std::string("Error Time: " + std::to_string(e.event) + " ms.\n");
+        os << str("Error Time: " + std::to_string(e.event) + " ms.\n");
         return os;
     }
 
@@ -215,7 +216,7 @@ namespace lite {
          * @param description The error description.
          * @return An error object with the type "Wrong Indexing" and provided description.
          */
-        error wrong_indexing(const std::string &description) noexcept {
+        error wrong_indexing(const str &description) noexcept {
             return error{"Wrong Indexing", description};
         }
 
@@ -232,7 +233,7 @@ namespace lite {
          * @param description The error description.
          * @return An error object with the type "Wrong declaration" and provided description.
          */
-        error wrong_declaration(const std::string &description) noexcept {
+        error wrong_declaration(const str &description) noexcept {
             return error{"Wrong declaration", description};
         }
 
@@ -249,7 +250,7 @@ namespace lite {
          * @param description The error description.
          * @return An error object with the type "Wrong Construction" and provided description.
          */
-        error wrong_construction(const std::string &description) noexcept {
+        error wrong_construction(const str &description) noexcept {
             return error{"Wrong Construction", description};
         }
 
@@ -266,7 +267,7 @@ namespace lite {
          * @param description The error description.
          * @return An error object with the type "Bad Input" and provided description.
          */
-        error bad_input(const std::string &description) noexcept {
+        error bad_input(const str &description) noexcept {
             return error{"Bad Input", description};
         }
 
@@ -283,7 +284,7 @@ namespace lite {
          * @param description The error description.
          * @return An error object with the type "Undefined Behavior" and provided description.
          */
-        error undefined_behavior(const std::string &description) noexcept {
+        error undefined_behavior(const str &description) noexcept {
             return error{"Undefined Behavior", description};
         }
         
@@ -300,7 +301,7 @@ namespace lite {
          * @param description The error description.
          * @return An error object with the type "Invalid Argument" and provided description.
          */
-        error invalid_argument(const std::string &description) noexcept {
+        error invalid_argument(const str &description) noexcept {
             return error{"Invalid Argument", description};
         }
         
@@ -317,7 +318,7 @@ namespace lite {
          * @param description The error description.
          * @return An error object with the type "Out Of Range" and provided description.
          */
-        error OutOfRange(const std::string &description) noexcept {
+        error OutOfRange(const str &description) noexcept {
             return error{"Out Of Range", description};
         }
 
@@ -334,7 +335,7 @@ namespace lite {
          * @param description The error description.
          * @return An error object with the type "Internal Problem" and provided description.
          */
-        error internal_problem(const std::string &description) noexcept {
+        error internal_problem(const str &description) noexcept {
             return error{"Internal Problem", description};
         }
     }

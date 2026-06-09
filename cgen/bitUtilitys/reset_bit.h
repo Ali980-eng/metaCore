@@ -32,10 +32,10 @@
 #define METACORE___CGEN_BITUTILITYS_RESET_BIT_H
 
 #ifdef __cplusplus
-    #ifdef METACORE___META_HPP
-    namespace meta {
-    namespace cgen {
-    #endif // METACORE___META_HPP
+#ifdef METACORE___META_HPP
+namespace meta {
+namespace cgen {
+#endif // METACORE___META_HPP
 #endif
 
 /// @brief Reset (clear) bit at specified position to 0 in 8-bit number
@@ -167,9 +167,9 @@ static inline long reset_long_bit(long num, uint8_t position) {
 }
 
 #ifdef __cplusplus
-    #ifdef METACORE___META_HPP
+#ifdef METACORE___META_HPP
 }}
-    #endif // METACORE___META_HPP
+#endif // METACORE___META_HPP
 #endif
 
 #endif // METACORE___CGEN_BITUTILITYS_RESET_BIT_H

@@ -1,26 +1,25 @@
 #include "micros.h"
 
-#ifndef METACORE___META_CGEN_WARNING_H
-#define METACORE___META_CGEN_WARNING_H
+#ifndef METACORE___CGEN_WARNING_H
+#define METACORE___CGEN_WARNING_H
 
 #ifdef __cplusplus
-    #ifdef METACORE___META_HPP
-    namespace meta {
-    namespace cgen {
-    #endif // METACORE___META_HPP
+#ifdef METACORE___META_HPP
+namespace meta {
+namespace cgen {
+#endif // METACORE___META_HPP
 #endif
-
 
 size_t cwarningCounter = 0;
 
-cobject(cwarning,
+cobject {
     cstrptr name;
     cstrptr description;
     cstrptr file;
     cstrptr time;
     size_t line;
     size_t number;
-);
+} cwarning;
 
 static inline cwarning cwarning_init() {
     cwarning w;
@@ -156,9 +155,9 @@ static void free_cwarning(cwarning* self) {
 }
 
 #ifdef __cplusplus
-    #ifdef METACORE___META_HPP
-    }}
-    #endif // METACORE___META_HPP
+#ifdef METACORE___META_HPP
+}}
+#endif // METACORE___META_HPP
 #endif
 
-#endif // METACORE___META_CGEN_WARNING_H
+#endif // METACORE___CGEN_WARNING_H

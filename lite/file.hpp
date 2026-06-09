@@ -20,6 +20,8 @@
     #include <unordered_map>
 #endif
 
+#include "cgen/micros/structure.h"
+
 #pragma once
 #ifndef METACORE___LITE_FILE_HPP
 #define METACORE___LITE_FILE_HPP
@@ -46,7 +48,7 @@ namespace lite {
          * @brief Constructs a txtfile_manager for managing text files in a specified directory.
          * @param dirPath The path to the directory where text files will be managed.
          */
-        file(const std::string &dirPath) noexcept
+        file(const str &dirPath) noexcept
         {
             directory = dirPath;
             if (!std::filesystem::exists(directory))
@@ -58,7 +60,7 @@ namespace lite {
          * @param dirPath The new path to the directory where text files will be managed.
          * @details This method changes the directory where text files are managed. If the new directory does not exist, it will be created. If the directory cannot be created (e.g., due to permissions issues), an exception may be thrown by the underlying filesystem library, which should be handled by the caller if necessary.
          */
-        inline void change_directory(const std::string &dirPath) noexcept
+        inline void change_directory(const str &dirPath) noexcept
         {
             directory = dirPath;
             if (!std::filesystem::exists(directory))
@@ -71,7 +73,7 @@ namespace lite {
          * @details This method creates a new directory at the specified path if it does not already exist. If the directory already exists, this method does nothing. If the directory cannot be created (e.g., due to permissions issues), an exception may be thrown by the underlying filesystem library, which should be handled by the caller if necessary.
          * @note This method uses the C++17 `<filesystem>` library, which provides a convenient way to work with directories and files. It is important to ensure that the C++17 standard is enabled in your project to use this functionality.
          */
-        inline void make_directory(const std::string &dirPath) noexcept
+        inline void make_directory(const str &dirPath) noexcept
         {
             std::filesystem::create_directories(dirPath);
         }
@@ -82,7 +84,7 @@ namespace lite {
          * @throws std::runtime_error If the file cannot be created.
          * @details This method creates a new text file with the specified name in the managed directory. If the file already exists, it will be overwritten. If the file cannot be created (e.g., due to permissions issues), a runtime error is thrown with an appropriate message.
          */
-        void create(const std::string &filename)
+        void create(const str &filename)
         {
             std::ofstream file(directory / filename);
             if (!file.is_open())
@@ -97,7 +99,7 @@ namespace lite {
          * @throws std::runtime_error If the file cannot be opened for appending.
          * @details This method appends the specified content to an existing text file. If the file does not exist, it will be created. If the file cannot be opened for appending (e.g., due to permissions issues), a runtime error is thrown with an appropriate message.
          */
-        void append(const std::string &filename, const std::string &content)
+        void append(const str &filename, const str &content)
         {
             std::ofstream file(directory / filename, std::ios::app);
             if (!file.is_open())
@@ -113,12 +115,12 @@ namespace lite {
          * @throws std::runtime_error If the file cannot be opened for reading.
          * @details This method reads the contents of the specified text file and returns it as a string. If the file cannot be opened for reading (e.g., if it does not exist or due to permissions issues), a runtime error is thrown with an appropriate message.
          */
-        std::string read(const std::string &filename)
+        str read(const str &filename)
         {
             std::ifstream file(directory / filename);
             if (!file.is_open())
                 throw std::runtime_error("Failed to open file for reading: " + filename);
-            std::string content, line;
+            str content, line;
             while (std::getline(file, line))
                 content += line + '\n';
             file.close();
@@ -131,7 +133,7 @@ namespace lite {
          * @return True if the file exists, false otherwise.
          * @details This method checks if a text file with the specified name exists in the managed directory. It returns true if the file exists and false otherwise.
          */
-        inline bool exists(const std::string &filename) noexcept
+        inline bool exists(const str &filename) noexcept
         {
             return std::filesystem::exists(directory / filename);
         }
@@ -142,7 +144,7 @@ namespace lite {
          * @throws std::runtime_error If the file cannot be removed.
          * @details This method removes the specified text file from the managed directory. If the file does not exist, a runtime error is thrown with an appropriate message.
          */
-        inline void remove(const std::string &filename)
+        inline void remove(const str &filename)
         {
             if (!std::filesystem::remove(directory / filename))
                 throw std::runtime_error("Failed to remove file (maybe it doesn't exist): " + filename);
@@ -160,7 +162,7 @@ namespace lite {
          * @param fileName The name of the file to initialize.
          * @details Creates or opens a file and adds the include directive for "SDT.h" at the beginning.
          */
-        void set(const std::string &fileName)
+        void set(const str &fileName)
         {
             std::fstream file(fileName, std::ios::in |
                                             std::ios::out |
@@ -182,8 +184,8 @@ namespace lite {
          * @param data The char data to save.
          * @details Appends a formatted cchar() declaration with the variable name and data to the file.
          */
-        void save(const std::string &fileName,
-                const std::string &varName,
+        void save(const str &fileName,
+                const str &varName,
                 char data) noexcept
         {
             std::fstream file(fileName, std::ios::in |
@@ -197,7 +199,7 @@ namespace lite {
                                         std::ios::app);
             }
             file << "cchar(" << varName << ", \'"
-                << std::string(1, data) << "\')\n";
+                << str(1, data) << "\')\n";
             file.close();
         }
 
@@ -208,7 +210,7 @@ namespace lite {
          * @param data The short data to save.
          * @details Appends a formatted cshort() declaration with the variable name and data to the file.
          */
-        void save(const std::string &fileName, const std::string &varName, short data) noexcept
+        void save(const str &fileName, const str &varName, short data) noexcept
         {
             std::fstream file(fileName, std::ios::in |
                                             std::ios::out |
@@ -232,7 +234,7 @@ namespace lite {
          * @param data The int data to save.
          * @details Appends a formatted cint() declaration with the variable name and data to the file.
          */
-        void save(const std::string &fileName, const std::string &varName, int data) noexcept
+        void save(const str &fileName, const str &varName, int data) noexcept
         {
             std::fstream file(fileName, std::ios::in |
                                             std::ios::out |
@@ -255,7 +257,7 @@ namespace lite {
          * @param data The float data to save.
          * @details Appends a formatted cfloat() declaration with the variable name and data to the file.
          */
-        void save(const std::string &fileName, const std::string &varName, float data) noexcept
+        void save(const str &fileName, const str &varName, float data) noexcept
         {
             std::fstream file(fileName, std::ios::in |
                                             std::ios::out |
@@ -279,7 +281,7 @@ namespace lite {
          * @param data The double data to save.
          * @details Appends a formatted cdouble() declaration with the variable name and data to the file.
          */
-        void save(const std::string &fileName, const std::string &varName, double data) noexcept
+        void save(const str &fileName, const str &varName, double data) noexcept
         {
             std::fstream file(fileName, std::ios::in | std::ios::out | std::ios::app);
             if (!file.is_open())
@@ -297,7 +299,7 @@ namespace lite {
          * @param fileName The name of the file to clear.
          * @details Truncates the file, removing all existing content.
          */
-        void clear(const std::string &fileName) noexcept
+        void clear(const str &fileName) noexcept
         {
             std::fstream file(fileName, std::ios::out | std::ios::trunc);
             if (!file.is_open())

@@ -36,14 +36,14 @@
 #include "reset_bit.h"
 #include "set_bit.h"
 
-#ifndef METACORE___CGEN_BITUTILITYS_cbool_8_H
-#define METACORE___CGEN_BITUTILITYS_cbool_8_H
+#ifndef METACORE___CGEN_BITUTILITYS_CBOOL_8_H
+#define METACORE___CGEN_BITUTILITYS_CBOOL_8_H
 
 #ifdef __cplusplus
-    #ifdef METACORE___META_HPP
-    namespace meta {
-    namespace cgen {
-    #endif // METACORE___META_HPP
+#ifdef METACORE___META_HPP
+namespace meta {
+namespace cgen {
+#endif // METACORE___META_HPP
 #endif
 
 /// @brief A structure representing an 8-bit cbool_8 value that can store multiple cbool_8 states
@@ -58,8 +58,7 @@ typedef struct { uint8_t value; } cbool_8;
 /// @param value The cbool_8 value to set
 /// @return A new cbool_8 structure with the specified bit modified
 static inline cbool_8 set(cbool_8 current, bool value) {
-    return value ? (cbool_8){set_u8bit(current.value, 0)} 
-                 : (cbool_8){reset_u8bit(current.value, 0)};
+    return value ? (cbool_8){set_u8bit(current.value, 0)} : (cbool_8){reset_u8bit(current.value, 0)};
 }
 
 /// @brief Retrieve the cbool_8 value at position 0
@@ -112,9 +111,9 @@ static inline bool isEmpty(cbool_8 current) {
 }
 
 #ifdef __cplusplus
-    #ifdef METACORE___META_HPP
+#ifdef METACORE___META_HPP
 }}
-    #endif // METACORE___META_HPP
+#endif // METACORE___META_HPP
 #endif
 
-#endif // METACORE___CGEN_BITUTILITYS_cbool_8_H
+#endif // METACORE___CGEN_BITUTILITYS_CBOOL_8_H

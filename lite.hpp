@@ -55,6 +55,7 @@
 #include "lite/benchmark.hpp"
 #include "lite/error.hpp"
 #include "lite/exception.hpp"
+#include "lite/file.hpp"
 #include "lite/io.hpp"
 #include "lite/random.hpp"
 #include "lite/stream.hpp"

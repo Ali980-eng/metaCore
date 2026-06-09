@@ -5,23 +5,23 @@
  * It includes the `code_timer` class, which can be used in two modes:
  * RAII mode (in_structure = true): Automatically starts timing upon construction and stops timing upon destruction, printing the duration in milliseconds.
  * Manual mode (in_structure = false): Requires explicit calls to start_time() and stop_time(), with get_duration() to retrieve the result.
- * Additionally, it provides several overloaded execution_time functions to measure the execution time of parameterless functions, single-argument functions, and two-argument functions with different types.
- * The library also includes functions to simulate various time complexities (O(1), O(log n), O(n), O(n log n), O(n^2), O(n^3)) and a function to estimate the time complexity of an algorithm based on measured execution time.
- * Finally, it offers functions to calculate the size of an object in bytes and to measure additional memory usage caused by executing functions.
+ * Additionally, it provides several overloaded execution_time _functions to measure the execution time of parameterless _functions, single-argument _functions, and two-argument _functions with different types.
+ * The library also includes _functions to simulate various time complexities (O(1), O(log n), O(n), O(n log n), O(n^2), O(n^3)) and a _function to estimate the time complexity of an algorithm based on measured execution time.
+ * Finally, it offers _functions to calculate the size of an object in bytes and to measure additional memory usage caused by executing _functions.
  * Overall, this library is designed to help developers easily measure and analyze the performance of their code in terms of execution time and memory usage.
  * @author developed by: Ali Lafi.
  * @date 2025 / 9 / 25
  * @details This library is designed to help developers easily measure and analyze the performance of their code in terms of execution time and memory usage.
  * It provides a simple interface for timing code execution and estimating time complexity, making it a useful tool for benchmarking and optimizing C++ code.
- * The `code_timer` class can be used in both RAII and manual modes, allowing for flexible timing of code blocks or specific function calls.
- * The additional functions for simulating time complexities and measuring memory usage further enhance its utility for performance analysis. Overall,
+ * The `code_timer` class can be used in both RAII and manual modes, allowing for flexible timing of code blocks or specific _function calls.
+ * The additional _functions for simulating time complexities and measuring memory usage further enhance its utility for performance analysis. Overall,
  * - code_timer: A class for timing code execution, with both RAII and manual modes.
- * - execution_time: Overloaded functions to measure execution time of various types of callables.
- * - big_O1, logn, big_On, logn_n, big_On2, big_On3: Functions to simulate different time complexities.
- * - execution_type: A function to estimate the time complexity of an algorithm based on measured execution time.
- * - mata_data: A function to return the size of an object in bytes.
- * - heap_data: Overloaded functions to calculate the heap memory used by vectors and strings.
- * - function_data and function__data: Functions to measure additional memory usage caused by executing callables.
+ * - execution_time: Overloaded _functions to measure execution time of various types of callables.
+ * - big_O1, logn, big_On, logn_n, big_On2, big_On3: _functions to simulate different time complexities.
+ * - execution_type: A _function to estimate the time complexity of an algorithm based on measured execution time.
+ * - mata_data: A _function to return the size of an object in bytes.
+ * - heap_data: Overloaded _functions to calculate the heap memory used by vectors and strings.
+ * - _function_data and _function__data: _functions to measure additional memory usage caused by executing callables.
  * @note This library is designed for benchmarking code performance in C++23 and is part of
  * it's a part of the lite library, specifically within the lite module, and is intended for benchmarking code performance in C++23.
  */
@@ -42,6 +42,8 @@
     #include <memory>
     #include <algorithm>
 #endif
+
+#include "cgen/micros/structure.h"
 
 #pragma once
 #ifndef METACORE___LITE_BENCHMARK_HPP
@@ -149,14 +151,14 @@ namespace lite {
         };
 
         /**
-         * @brief Measure the execution time of a parameterless function.
+         * @brief Measure the execution time of a parameterless _function.
          *
-         * This function takes a callable object (e.g., lambda, functor, function pointer)
+         * This _function takes a callable object (e.g., lambda, _functor, _function pointer)
          * with no parameters, executes it once, and measures the duration of its execution
          * using @ref code_timer in manual mode.
          *
-         * @tparam T Return type of the function.
-         * @param func A std::function<T()> representing the callable to measure.
+         * @tparam T Return type of the _function.
+         * @param _func A func<T()> representing the callable to measure.
          * @return Execution time in seconds as a floating-point value.
          *
          * @note The measured duration is in seconds. Multiply by 1000.0f if milliseconds
@@ -171,25 +173,25 @@ namespace lite {
          * @endcode
          */
         template <typename T>
-        float execution_time(std::function<T()> func)
+        float execution_time(func<T()> _func)
         {
             code_timer<false> timer;
             timer.start_time();
-            func();
+            _func();
             timer.stop_time();
             return timer.get_duration();
         }
 
         /**
-         * @brief Measure the execution time of a single-argument function.
+         * @brief Measure the execution time of a single-argument _function.
          *
          * This overload takes a callable object that accepts a single argument,
          * executes it once with the provided value, and measures the duration
          * of its execution using @ref code_timer in manual mode.
          *
-         * @tparam T The type of both the argument and return value of the function.
-         * @param func A std::function<T(T)> representing the callable to measure.
-         * @param arg The argument to pass to the function.
+         * @tparam T The type of both the argument and return value of the _function.
+         * @param _func A func<T(T)> representing the callable to measure.
+         * @param arg The argument to pass to the _function.
          * @return Execution time in seconds as a floating-point value.
          *
          * @note The measured duration is in seconds. Multiply by 1000.0f if milliseconds
@@ -205,26 +207,26 @@ namespace lite {
          * @endcode
          */
         template <typename T>
-        float execution_time(std::function<T(T)> func, T arg)
+        float execution_time(func<T(T)> _func, T arg)
         {
             code_timer<false> timer;
             timer.start_time();
-            func(arg);
+            _func(arg);
             timer.stop_time();
             return timer.get_duration();
         }
 
         /**
-         * @brief Measure the execution time of a function taking two arguments of the same type.
+         * @brief Measure the execution time of a _function taking two arguments of the same type.
          *
          * Executes the provided callable with two arguments of type @p T2 and
          * measures its execution duration using @ref code_timer in manual mode.
          *
-         * @tparam T1 Return type of the function.
-         * @tparam T2 Argument type of the function (both arguments are the same type).
-         * @param func A std::function<T1(T2, T2)> representing the callable to measure.
-         * @param arg1 First argument to pass to the function.
-         * @param arg2 Second argument to pass to the function.
+         * @tparam T1 Return type of the _function.
+         * @tparam T2 Argument type of the _function (both arguments are the same type).
+         * @param _func A func<T1(T2, T2)> representing the callable to measure.
+         * @param arg1 First argument to pass to the _function.
+         * @param arg2 Second argument to pass to the _function.
          * @return Execution time in seconds as a floating-point value.
          *
          * @example
@@ -237,25 +239,25 @@ namespace lite {
          * @endcode
          */
         template <typename T1, typename T2>
-        float execution_time(std::function<T1(T2, T2)> func, T2 arg1, T2 arg2)
+        float execution_time(func<T1(T2, T2)> _func, T2 arg1, T2 arg2)
         {
             code_timer<false> timer;
             timer.start_time();
-            func(arg1, arg2);
+            _func(arg1, arg2);
             timer.stop_time();
             return timer.get_duration();
         }
 
         /**
-         * @brief Measure the execution time of a single-argument function.
+         * @brief Measure the execution time of a single-argument _function.
          *
          * Executes the provided callable with one argument of type @p T2 and
          * measures its execution duration using @ref code_timer in manual mode.
          *
-         * @tparam T1 Return type of the function.
-         * @tparam T2 Argument type of the function.
-         * @param func A std::function<T1(T2)> representing the callable to measure.
-         * @param arg Argument to pass to the function.
+         * @tparam T1 Return type of the _function.
+         * @tparam T2 Argument type of the _function.
+         * @param _func A func<T1(T2)> representing the callable to measure.
+         * @param arg Argument to pass to the _function.
          * @return Execution time in seconds as a floating-point value.
          *
          * @example
@@ -268,32 +270,32 @@ namespace lite {
          * @endcode
          */
         template <typename T1, typename T2>
-        float execution__time(std::function<T1(T2)> func, T2 arg)
+        float execution__time(func<T1(T2)> _func, T2 arg)
         {
             code_timer<false> timer;
             timer.start_time();
-            func(arg);
+            _func(arg);
             timer.stop_time();
             return timer.get_duration();
         }
 
         /**
-         * @brief Measure the execution time of a two-argument function with different types.
+         * @brief Measure the execution time of a two-argument _function with different types.
          *
          * Executes the provided callable with arguments of types @p T2 and @p T3,
          * and measures its execution duration using @ref code_timer in manual mode.
          *
-         * @tparam T1 Return type of the function.
+         * @tparam T1 Return type of the _function.
          * @tparam T2 Type of the first argument.
          * @tparam T3 Type of the second argument.
-         * @param func A std::function<T1(T2, T3)> representing the callable to measure.
-         * @param arg1 First argument to pass to the function.
-         * @param arg2 Second argument to pass to the function.
+         * @param _func A func<T1(T2, T3)> representing the callable to measure.
+         * @param arg1 First argument to pass to the _function.
+         * @param arg2 Second argument to pass to the _function.
          * @return Execution time in seconds as a floating-point value.
          *
          * @example
          * @code
-         * auto duration = execution__time<std::string, int, double>(
+         * auto duration = execution__time<str, int, double>(
          *     [](int a, double b) {
          *         return std::to_string(a + static_cast<int>(b));
          *     },
@@ -304,19 +306,19 @@ namespace lite {
          * @endcode
          */
         template <typename T1, typename T2, typename T3>
-        float execution__time(std::function<T1(T2, T3)> func, T2 arg1, T3 arg2)
+        float execution__time(func<T1(T2, T3)> _func, T2 arg1, T3 arg2)
         {
             code_timer<false> timer;
             timer.start_time();
-            func(arg1, arg2);
+            _func(arg1, arg2);
             timer.stop_time();
             return timer.get_duration();
         }
 
         /**
-         * @brief A collection of simple functions to simulate various time complexities.
+         * @brief A collection of simple _functions to simulate various time complexities.
          *
-         * These functions are used internally to compare execution durations and
+         * These _functions are used internally to compare execution durations and
          * determine the likely time complexity of an algorithm.
          */
         /** Constant time complexity O(1). */
@@ -373,12 +375,12 @@ namespace lite {
         /**
          * @brief Estimate the time complexity of an algorithm based on measured execution time.
          *
-         * This function compares the provided execution time against predefined
+         * This _function compares the provided execution time against predefined
          * time benchmarks for standard complexities: O(1), O(log n), O(n), O(n log n),
          * O(n^2), O(n^3), and higher exponential or factorial complexities.
          *
          * @param time Measured execution time in seconds.
-         * @param num Input size used in the benchmark functions.
+         * @param num Input size used in the benchmark _functions.
          * @param logbase Base for logarithmic calculations (default: 10).
          * @return A string representing the estimated time complexity.
          *
@@ -386,18 +388,18 @@ namespace lite {
          * @code
          * float t = 0.0023f;  // measured execution time
          * int n = 1000;       // input size
-         * std::string complexity = execution_type(t, n);
+         * str complexity = execution_type(t, n);
          * std::cout << "Estimated complexity: " << complexity << "\n";
          * @endcode
          */
-        std::string execution_type(float time, int num, int logbase = 10) noexcept
+        str execution_type(float time, int num, int logbase = 10) noexcept
         {
-            std::function<void()> O1 = big_O1;
-            std::function<void(size_t, int)> log_n = logn;
-            std::function<void(size_t)> On = big_On;
-            std::function<void(size_t, int)> log_n_n = logn_n;
-            std::function<void(size_t)> On2 = big_On2;
-            std::function<void(size_t)> On3 = big_On3;
+            func<void()> O1 = big_O1;
+            func<void(size_t, int)> log_n = logn;
+            func<void(size_t)> On = big_On;
+            func<void(size_t, int)> log_n_n = logn_n;
+            func<void(size_t)> On2 = big_On2;
+            func<void(size_t)> On3 = big_On3;
             if (time < execution_time<void>(O1))
                 return "O(1)";
             else if (time < execution__time<void, size_t, int>(log_n, static_cast<size_t>(num), logbase))
@@ -417,7 +419,7 @@ namespace lite {
         /**
          * @brief Returns the size of an object in bytes.
          *
-         * This function calculates the compile-time size of any object
+         * This _function calculates the compile-time size of any object
          * using sizeof.
          *
          * @tparam T Type of the object.
@@ -428,7 +430,7 @@ namespace lite {
          *       not dynamically allocated data (heap).
          */
         template <typename T>
-        constexpr size_t mata_data(T &object) noexcept { return sizeof(object); }
+        constexpr size_t mata_data(T & _object) noexcept { return sizeof(object); }
 
         /**
          * @brief Returns the heap memory used by a vector.
@@ -483,27 +485,27 @@ namespace lite {
         }
 
         /**
-         * @brief Returns the heap memory used by a std::string.
+         * @brief Returns the heap memory used by a str.
          *
          * Calculates the memory allocated on the heap based on the string's capacity.
          *
          * @param s Reference to the string.
          * @return Heap memory in bytes.
          */
-        size_t heap_data(const std::string &s) noexcept { return sizeof(char) * s.capacity(); }
+        size_t heap_data(const str &s) noexcept { return sizeof(char) * s.capacity(); }
 
         /**
-         * @brief Measures additional memory usage caused by executing a parameterless function.
+         * @brief Measures additional memory usage caused by executing a parameterless _function.
          *
-         * The function checks the process's working set before and after execution
+         * The _function checks the process's working set before and after execution
          * and returns the difference in memory usage.
          *
-         * @tparam T Return type of the function.
-         * @param f Function to execute.
+         * @tparam T Return type of the _function.
+         * @param f _function to execute.
          * @return Additional memory used in bytes (0 if no increase).
          */
         template <typename T>
-        size_t function_data(std::function<T()> f)
+        size_t function_data(func<T()> f)
         {
             PROCESS_MEMORY_COUNTERS info1, info2;
             GetProcessMemoryInfo(GetCurrentProcess(), &info1, sizeof(info1));
@@ -516,18 +518,18 @@ namespace lite {
         }
 
         /**
-         * @brief Measures additional memory usage caused by executing a single-argument function.
+         * @brief Measures additional memory usage caused by executing a single-argument _function.
          *
-         * The function checks the process's working set before and after execution
+         * The _function checks the process's working set before and after execution
          * and returns the difference in memory usage.
          *
-         * @tparam T Return type and argument type of the function.
-         * @param f Function to execute.
-         * @param input Argument to pass to the function.
+         * @tparam T Return type and argument type of the _function.
+         * @param f _function to execute.
+         * @param input Argument to pass to the _function.
          * @return Additional memory used in bytes (0 if no increase).
          */
         template <typename T>
-        size_t function_data(std::function<T(T)> f, T input)
+        size_t function_data(func<T(T)> f, T input)
         {
             PROCESS_MEMORY_COUNTERS info1, info2;
             GetProcessMemoryInfo(GetCurrentProcess(), &info1, sizeof(info1));
@@ -540,18 +542,18 @@ namespace lite {
         }
 
         /**
-         * @brief Measures additional memory usage caused by executing a single-argument function.
+         * @brief Measures additional memory usage caused by executing a single-argument _function.
          *
          * Overload with template parameters T1 and T2.
          *
-         * @tparam T1 Return type of the function.
-         * @tparam T2 Argument type of the function.
-         * @param f Function to execute.
-         * @param input Argument to pass to the function.
+         * @tparam T1 Return type of the _function.
+         * @tparam T2 Argument type of the _function.
+         * @param f _function to execute.
+         * @param input Argument to pass to the _function.
          * @return Additional memory used in bytes (0 if no increase).
          */
         template <typename T1, typename T2>
-        size_t function__data(std::function<T1(T2)> f, T2 input)
+        size_t function__data(func<T1(T2)> f, T2 input)
         {
             PROCESS_MEMORY_COUNTERS info1, info2;
             GetProcessMemoryInfo(GetCurrentProcess(), &info1, sizeof(info1));
@@ -564,21 +566,21 @@ namespace lite {
         }
 
         /**
-         * @brief Measures additional memory usage caused by executing a two-argument function.
+         * @brief Measures additional memory usage caused by executing a two-argument _function.
          *
-         * The function checks the process's working set before and after execution
+         * The _function checks the process's working set before and after execution
          * and returns the difference in memory usage.
          *
-         * @tparam T1 Return type of the function.
+         * @tparam T1 Return type of the _function.
          * @tparam T2 Type of the first argument.
          * @tparam T3 Type of the second argument.
-         * @param f Function to execute.
-         * @param input1 First argument to pass to the function.
-         * @param input2 Second argument to pass to the function.
+         * @param f _function to execute.
+         * @param input1 First argument to pass to the _function.
+         * @param input2 Second argument to pass to the _function.
          * @return Additional memory used in bytes (0 if no increase).
          */
         template <typename T1, typename T2, typename T3>
-        size_t function__data(std::function<T1(T2, T3)> f, T2 input1, T3 input2)
+        size_t function__data(func<T1(T2, T3)> f, T2 input1, T3 input2)
         {
             PROCESS_MEMORY_COUNTERS info1, info2;
             GetProcessMemoryInfo(GetCurrentProcess(), &info1, sizeof(info1));

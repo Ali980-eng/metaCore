@@ -18,14 +18,14 @@
 #include <math.h>
 #include <stdbool.h>
 
-#ifndef METACORE___META_CGEN_IOUTILITYS_H
-#define METACORE___META_CGEN_IOUTILITYS_H
+#ifndef METACORE___CGEN_IOUTILITYS_H
+#define METACORE___CGEN_IOUTILITYS_H
 
 #ifdef __cplusplus
-    #ifdef METACORE___META_HPP
-    namespace meta {
-    namespace cgen {
-    #endif // METACORE___META_HPP
+#ifdef METACORE___META_HPP
+namespace meta {
+namespace cgen {
+#endif // METACORE___META_HPP
 #endif
 
 /// @brief Prints a newline character.
@@ -375,9 +375,9 @@ static inline void print_test_string(const char *real, const char *expected,
 }
 
 #ifdef __cplusplus
-    #ifdef METACORE___META_HPP
-    }}
-    #endif // METACORE___META_HPP
+#ifdef METACORE___META_HPP
+}}
+#endif // METACORE___META_HPP
 #endif
 
-#endif // METACORE___META_CGEN_IOUTILITYS_H
+#endif // METACORE___CGEN_IOUTILITYS_H
